@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="google" content="notranslate">
 <meta name="theme-color" content="#0b0b0f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Karacikov">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Karacikov</title>
 <script>
   // Тема применяется до отрисовки, чтобы не было вспышки
@@ -380,6 +387,34 @@
   @keyframes toastIn{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
   .toast.out{opacity:0;transform:translate(-50%,8px)}
 
+  /* ---------- Верификация, рассылка, меню чата ---------- */
+  .vbadge{display:inline-block;vertical-align:-2px;margin-left:4px;width:15px;height:15px;flex:none}
+  .vbadge svg{width:100%;height:100%;display:block}
+  .pname .vbadge,.big .vbadge{width:20px;height:20px;vertical-align:-3px}
+  .muted-ic{display:inline-block;margin-left:5px;font-size:12px;opacity:.6}
+  .unread.off{background:var(--line2);color:var(--text)}
+  .conv-more{flex:none;border:0;background:transparent;color:var(--muted);width:38px;height:38px;border-radius:10px;cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s}
+  .conv-more:hover{background:var(--panel2);color:var(--text)}
+  .conv-more svg{width:20px;height:20px}
+  .quote{border-left:3px solid var(--line2);padding:6px 12px;margin:10px 0;color:var(--text);white-space:pre-wrap;line-height:1.45;font-size:14px}
+  .verif-ok{display:flex;align-items:center;gap:8px;font-size:14px}
+  .verif-ok .vbadge{width:22px;height:22px}
+  .verif-rej{color:var(--danger);font-size:14px;margin-bottom:10px}
+  #verifBody textarea{margin-top:10px}
+  #verifBody p{font-size:14px;line-height:1.5}
+  .req-card{padding:16px;border:1px solid var(--line);background:var(--panel);border-radius:16px;margin-bottom:10px;animation:fadeUp .25s var(--ease) both}
+  .req-card .top{display:flex;gap:12px;align-items:center}
+  .req-card .top .meta{flex:1;min-width:0}
+  .req-card .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
+  .req-card .acts input{flex:1;min-width:180px;padding:9px 12px;font-size:14px}
+  .tabcount{display:inline-block;min-width:18px;height:18px;padding:0 5px;margin-left:6px;border-radius:9px;background:var(--accent);color:var(--accent-ink);font:700 11px/18px Manrope;text-align:center}
+  .bc-mode{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+  .bc-mode label{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px}
+  .bc-mode input{accent-color:var(--accent);width:16px;height:16px}
+  .group-form label{display:block;font-size:13px;color:var(--muted);margin:12px 0 6px}
+  .group-form .toggle{margin-top:14px}
+  .setting-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--line);margin-top:14px}
+
   /* ---------- MOBILE ---------- */
   @media (max-width:760px){
     #app{grid-template-columns:1fr;grid-template-rows:auto 1fr auto}
@@ -481,6 +516,7 @@
             <div class="avatar sm" id="convAvatar"></div>
             <div style="min-width:0"><div class="name" id="convName"></div><div class="status" id="convSub"></div></div>
           </div>
+          <button class="conv-more" id="convMore" type="button" title="Меню чата"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg></button>
         </div>
         <div class="messages" id="messages"></div>
         <div class="edit-bar hidden" id="editBar">
@@ -563,6 +599,21 @@
         </div>
       </div>
 
+      <div class="box" id="notifBox">
+        <h3>Уведомления</h3>
+        <p class="muted" id="notifState" style="font-size:14px;line-height:1.5;margin-bottom:12px"></p>
+        <button class="btn sm" id="notifBtn" type="button">Включить уведомления</button>
+        <div class="setting-row">
+          <label class="toggle" style="flex:1"><input type="checkbox" id="soundToggle"><span class="sw"></span>
+            <span>Звук новых сообщений<span class="muted">Короткий тихий сигнал, пока сайт открыт</span></span></label>
+        </div>
+      </div>
+
+      <div class="box" id="verifBox">
+        <h3>Верификация</h3>
+        <div id="verifBody"><span class="muted">Загрузка…</span></div>
+      </div>
+
       <div class="box hidden" id="privacyBox">
         <h3>Приватность</h3>
         <label class="toggle"><input type="checkbox" id="hideStatus"><span class="sw"></span>
@@ -592,6 +643,8 @@
       <div class="atabs">
         <button type="button" class="active" data-atab="users">Пользователи</button>
         <button type="button" data-atab="convs">Переписки</button>
+        <button type="button" data-atab="verif">Верификация<span class="tabcount hidden" id="verifCount"></span></button>
+        <button type="button" data-atab="bcast">Рассылка</button>
         <button type="button" data-atab="log" id="logTab" class="hidden">Журнал</button>
       </div>
       <div id="atab-users">
@@ -610,6 +663,32 @@
         </div>
         <div class="section-label" id="convCount">Переписки</div>
         <div id="adminConvs"></div>
+      </div>
+      <div id="atab-verif" class="hidden">
+        <div class="seg" id="verifSeg">
+          <button type="button" data-vs="pending" class="active">Новые</button>
+          <button type="button" data-vs="approved">Одобренные</button>
+          <button type="button" data-vs="rejected">Отклонённые</button>
+        </div>
+        <div id="verifList" style="margin-top:14px"></div>
+      </div>
+      <div id="atab-bcast" class="hidden">
+        <div class="box">
+          <h3>Рассылка от имени Karacikov</h3>
+          <p class="admin-note" style="margin:0 0 12px">Сообщение придёт каждому получателю в чат с официальным аккаунтом «Karacikov» с синей галочкой. Ответить на него нельзя.</p>
+          <textarea id="bcText" rows="5" maxlength="4000" placeholder="Текст рассылки"></textarea>
+          <div class="counter"><span id="bcCount">0</span>/4000</div>
+          <div class="bc-mode">
+            <label><input type="radio" name="bcMode" value="all" checked> Всем пользователям</label>
+            <label><input type="radio" name="bcMode" value="some"> Выбранным</label>
+          </div>
+          <div id="bcPick" class="hidden">
+            <button class="btn sm ghost" id="bcPickBtn" type="button">Выбрать получателей</button>
+            <div class="chips" id="bcChips"></div>
+          </div>
+          <button class="btn" id="bcSend" type="button">Отправить рассылку</button>
+          <div class="msg" id="bcMsg"></div>
+        </div>
       </div>
       <div id="atab-log" class="hidden">
         <p class="admin-note">Кто из администрации открывал чужие переписки и удалял сообщения. Журнал видит только основатель.</p>
@@ -630,7 +709,7 @@ const LOGIN_DOMAIN = "karacikov.app";      // логин → служебный 
 const MAX_FILE = 50 * 1024 * 1024;         // 50 МБ — лимит бесплатного Supabase
 const MAX_CIRCLE_SEC = 60;
 const REACTIONS = ["👍","❤️","😂","😮","😢","🔥","👏","🙏"];
-const PCOLS = "id,username,display_name,bio,avatar_url,role,banned,created_at";
+const PCOLS = "id,username,display_name,bio,avatar_url,role,banned,created_at,verified,is_system";
 const MCOLS = "id,conversation_id,sender_id,body,kind,file_path,file_name,file_size,file_mime,created_at,edited_at,transcript";
 /* ============================================== */
 
@@ -695,8 +774,14 @@ function roleBadge(role){
   if (role === "admin") return el("span","role admin","Админ");
   return null;
 }
+function checkBadge(){
+  const s = el("span","vbadge"); s.title = "Подтверждённый аккаунт";
+  s.innerHTML = '<svg viewBox="0 0 24 24"><path fill="#3b9cff" d="M12 1.5l2.6 1.9 3.2-.1 1 3 2.6 1.9-1 3 1 3-2.6 1.9-1 3-3.2-.1L12 22.5l-2.6-1.9-3.2.1-1-3-2.6-1.9 1-3-1-3 2.6-1.9 1-3 3.2.1z"/><path d="M7.8 12.3l2.7 2.7 5.7-5.8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  return s;
+}
 function nameWithRole(p, cls){
   const n = el("div", cls || "name"); n.appendChild(document.createTextNode(shownName(p)));
+  if (p && p.verified) n.appendChild(checkBadge());
   const b = roleBadge(p && p.role); if (b) n.appendChild(b);
   return n;
 }
@@ -846,13 +931,20 @@ async function refreshMe(){
   const { data } = await sb.from("profiles").select(PCOLS).eq("id", me.id).maybeSingle();
   if (data){ me = data; people.set(me.id, me); applyMe(); }
 }
+function updateComposer(){
+  if (!me) return;
+  const sys = !!(openConv && !openConv.is_group && openConv.other_is_system);
+  const off = !!me.banned || sys;
+  $("#composer").classList.toggle("hidden", off);
+  $("#composerOff").classList.toggle("hidden", !off);
+  $("#composerOff").textContent = sys ? "Это официальный канал Karacikov — ответить на него нельзя" : "Вы заблокированы и не можете писать сообщения";
+}
 function applyMe(){
   renderProfile();
   $("#adminNav").classList.toggle("hidden", !isStaff());
   $("#privacyBox").classList.toggle("hidden", !isStaff());
   $("#banBar").classList.toggle("hidden", !me.banned);
-  $("#composer").classList.toggle("hidden", !!me.banned);
-  $("#composerOff").classList.toggle("hidden", !me.banned);
+  updateComposer();
   $("#newGroupBtn").classList.toggle("hidden", !!me.banned);
   if (!isStaff() && !$("#view-admin").classList.contains("hidden")) goView("chats");
 }
@@ -868,6 +960,9 @@ async function enterApp(user){
   await loadChats();
   subscribe();
   startPresence();
+  resyncPush(); refreshNotifUI(); loadVerif();
+  const qc = new URLSearchParams(location.search).get("c");
+  if (qc){ try { history.replaceState(null, "", location.pathname); } catch(e){} openConvById(qc); }
 }
 function leaveApp(){
   if (channel){ sb.removeChannel(channel); channel = null; }
@@ -897,7 +992,7 @@ function goView(v){
   if (v === "search"){ runSearch(); if (!isTouch) setTimeout(() => $("#searchInput").focus(), 50); }
   if (v === "chats") loadChats();
   if (v === "admin") loadAdmin();
-  if (v === "profile") refreshMe();
+  if (v === "profile"){ refreshMe(); loadVerif(); refreshNotifUI(); }
 }
 document.querySelectorAll(".nav button").forEach(b => b.addEventListener("click", () => goView(b.dataset.view)));
 
@@ -974,7 +1069,7 @@ async function loadChats(){
 function chatTitle(c){ return c.is_group ? (c.title || "Группа") : (c.other_display_name || c.other_username || "Удалённый пользователь"); }
 function chatAvatar(c, size){
   const a = el("div","avatar" + (size ? " " + size : ""));
-  if (c.is_group) return avatar(a, c.title, c.title, null, true);
+  if (c.is_group) return avatar(a, c.title, c.title, c.conv_avatar_url, true);
   avatar(a, c.other_display_name, c.other_username, c.other_avatar_url);
   if (c.other_id){ a.dataset.uid = c.other_id; setOnlineDot(a, isOnline(c.other_id)); }
   return a;
@@ -982,7 +1077,7 @@ function chatAvatar(c, size){
 let firstListRender = true;
 function renderChatList(){
   const box = $("#chatList"); box.innerHTML = "";
-  const total = chats.reduce((s,c) => s + Number(c.unread||0), 0);
+  const total = chats.reduce((s,c) => s + (c.muted ? 0 : Number(c.unread||0)), 0);
   const badge = $("#unreadBadge"); badge.textContent = total > 99 ? "99+" : total; badge.classList.toggle("hidden", !total);
   document.title = total ? `(${total}) Karacikov` : "Karacikov";
   if (!chats.length){
@@ -996,7 +1091,9 @@ function renderChatList(){
     const meta = el("div","meta");
     const r1 = el("div","row1");
     const nm = el("div","name", chatTitle(c));
+    if (!c.is_group && c.other_verified) nm.appendChild(checkBadge());
     if (!c.is_group){ const b = roleBadge(c.other_role); if (b) nm.appendChild(b); }
+    if (c.muted) nm.appendChild(el("span","muted-ic","🔕"));
     r1.append(nm, el("div","time", fmtListTime(c.last_kind ? c.last_message_at : null)));
     const r2 = el("div","row2");
     let pv = "Нет сообщений";
@@ -1005,7 +1102,7 @@ function renderChatList(){
       pv = who + kindPreview(c.last_kind, c.last_body);
     } else if (c.is_group) pv = c.member_count + " " + plural(c.member_count, "участник","участника","участников");
     r2.appendChild(el("div","preview", pv));
-    if (Number(c.unread)) r2.appendChild(el("div","unread", c.unread));
+    if (Number(c.unread)) r2.appendChild(el("div","unread" + (c.muted ? " off" : ""), c.unread));
     meta.append(r1, r2); it.append(chatAvatar(c), meta);
     it.onclick = () => openChat(c);
     box.appendChild(it);
@@ -1015,10 +1112,13 @@ function renderChatList(){
 function renderConvHead(){
   const c = openConv; if (!c) return;
   const av = $("#convAvatar");
-  if (c.is_group){ avatar(av, c.title, c.title, null, true); delete av.dataset.uid; setOnlineDot(av, false); }
+  if (c.is_group){ avatar(av, c.title, c.title, c.conv_avatar_url, true); delete av.dataset.uid; setOnlineDot(av, false); }
   else { avatar(av, c.other_display_name, c.other_username, c.other_avatar_url); av.dataset.uid = c.other_id || ""; setOnlineDot(av, isOnline(c.other_id)); }
   const nm = $("#convName"); nm.textContent = chatTitle(c);
+  if (!c.is_group && c.other_verified) nm.appendChild(checkBadge());
   if (!c.is_group){ const b = roleBadge(c.other_role); if (b) nm.appendChild(b); }
+  if (c.muted) nm.appendChild(el("span","muted-ic","🔕"));
+  updateComposer();
   renderConvStatus();
 }
 let groupMemberIds = [];
@@ -1131,6 +1231,7 @@ function buildBubble(m, showAuthor){
   if (showAuthor){
     const p = people.get(m.sender_id);
     const who = el("span","who", shownName(p)); who.style.color = `hsl(${hue(p && p.username)} 70% ${document.documentElement.dataset.theme === "light" ? 38 : 72}%)`;
+    if (p && p.verified) who.appendChild(checkBadge());
     who.onclick = e => { e.stopPropagation(); userInfo(p); };
     b.appendChild(who);
   }
@@ -1601,6 +1702,7 @@ function subscribe(){
         }
         if (!mine) markRead();
       }
+      if (m.sender_id !== me.id) notifyIncoming(m);
       scheduleChats();
     })
     .on("postgres_changes", { event: "UPDATE", schema: "public", table: "messages" }, payload => {
@@ -1651,46 +1753,133 @@ async function userInfo(p){
     if (p.created_at) card.appendChild(el("div","pmeta","На сайте с " + new Date(p.created_at).toLocaleDateString("ru-RU",{day:"numeric",month:"long",year:"numeric"})));
     body.appendChild(card);
   }, foot => {
-    if (p.id !== me.id && !(openConv && !openConv.is_group && openConv.other_id === p.id && !$("#view-chats").classList.contains("hidden"))){
+    if (p.id !== me.id && !p.is_system && !(openConv && !openConv.is_group && openConv.other_id === p.id && !$("#view-chats").classList.contains("hidden"))){
       const b = el("button","btn","Написать"); b.type = "button"; b.onclick = () => { closeModal(); startChat(p, b); }; foot.appendChild(b);
     }
     const c = el("button","btn ghost","Закрыть"); c.type = "button"; c.onclick = () => closeModal(); foot.appendChild(c);
   });
 }
 
+async function setMuted(c, muted){
+  const { error } = await sb.from("conversation_members").update({ muted }).eq("conversation_id", c.conversation_id).eq("user_id", me.id);
+  if (error) return toast(ruError(error));
+  c.muted = muted;
+  const inList = chats.find(x => x.conversation_id === c.conversation_id); if (inList) inList.muted = muted;
+  renderChatList(); if (openConv && openConv.conversation_id === c.conversation_id) renderConvHead();
+  toast(muted ? "Уведомления этого чата выключены" : "Уведомления этого чата включены");
+}
+async function leaveGroupFlow(c){
+  const { error } = await sb.rpc("leave_group", { conv: c.conversation_id });
+  if (error) return toast(ruError(error));
+  closeModal(); if (openConv && openConv.conversation_id === c.conversation_id) closeConv();
+  loadChats(); toast("Вы вышли из группы");
+}
+
 async function groupInfo(c){
-  const { body, foot } = openModal(c.title || "Группа", body => body.appendChild(el("div","muted","Загрузка…")));
+  const { body, foot } = openModal("Группа", b => b.appendChild(el("div","muted","Загрузка…")));
   const members = await loadMembers(c.conversation_id);
   groupMemberIds = members.map(m => m.user_id);
   loadPresence(groupMemberIds);
   const isOwner = members.some(m => m.user_id === me.id && m.role === "owner");
+  const canAdd = isOwner || !c.only_owner_adds;
   body.innerHTML = "";
+
+  // --- шапка: фото, название, описание ---
+  let avUrl = c.conv_avatar_url || null;
+  const top = el("div","pcard");
+  const av = avatar(el("div","avatar lg"), c.title, c.title, avUrl, true);
+  top.appendChild(av);
   if (isOwner){
-    body.appendChild(el("div","section-label","Название"));
-    const row = el("div"); row.style.cssText = "display:flex;gap:8px;margin-bottom:16px";
-    const inp = el("input"); inp.value = c.title || ""; inp.maxLength = 60;
-    const save = el("button","btn sm","Сохранить"); save.type = "button";
-    save.onclick = async () => {
-      const { error } = await sb.rpc("rename_group", { conv: c.conversation_id, p_title: inp.value });
-      if (error) return toast(ruError(error));
-      toast("Название изменено"); await loadChats(); closeModal();
+    const acts = el("div","av-actions"); acts.style.justifyContent = "center";
+    const ch = el("button","btn sm ghost","Сменить фото"); ch.type = "button";
+    const rmv = el("button","btn sm ghost","Убрать фото"); rmv.type = "button"; rmv.classList.toggle("hidden", !avUrl);
+    const inp = el("input"); inp.type = "file"; inp.accept = "image/*"; inp.className = "hidden";
+    ch.onclick = () => inp.click();
+    inp.onchange = async () => {
+      const f = inp.files[0]; inp.value = ""; if (!f) return;
+      if (!f.type.startsWith("image/")) return toast("Выберите картинку");
+      ch.disabled = true; ch.textContent = "Загрузка…";
+      try{
+        const blob = await squareImage(f, 400);
+        const path = `${me.id}/group-${c.conversation_id}-${Date.now()}.jpg`;
+        const { error } = await sb.storage.from("avatars").upload(path, blob, { contentType: "image/jpeg", upsert: true });
+        if (error) throw error;
+        avUrl = sb.storage.from("avatars").getPublicUrl(path).data.publicUrl;
+        avatar(av, c.title, c.title, avUrl, true); rmv.classList.remove("hidden");
+        toast("Фото выбрано — нажмите «Сохранить»");
+      } catch(e){ toast("Не удалось загрузить фото"); }
+      ch.disabled = false; ch.textContent = "Сменить фото";
     };
-    row.append(inp, save); body.appendChild(row);
+    rmv.onclick = () => { avUrl = null; avatar(av, c.title, c.title, null, true); rmv.classList.add("hidden"); };
+    acts.append(ch, rmv, inp); top.appendChild(acts);
+  } else {
+    top.appendChild(el("div","pname", c.title || "Группа"));
+    top.appendChild(el("div","muted", members.length + " " + plural(members.length, "участник","участника","участников")));
+    if (c.description) top.appendChild(el("div","pbio", c.description));
   }
-  body.appendChild(el("div","section-label", `Участники · ${members.length}`));
+  body.appendChild(top);
+
+  // --- настройки (только создатель) ---
+  if (isOwner){
+    const form = el("div","group-form");
+    form.appendChild(el("label", null, "Название"));
+    const title = el("input"); title.maxLength = 60; title.value = c.title || ""; form.appendChild(title);
+    form.appendChild(el("label", null, "Описание"));
+    const desc = el("textarea"); desc.rows = 3; desc.maxLength = 300; desc.placeholder = "О чём эта группа"; desc.value = c.description || ""; form.appendChild(desc);
+    const tg = el("label","toggle"); const cb = el("input"); cb.type = "checkbox"; cb.checked = !!c.only_owner_adds;
+    const txt = el("span", null, "Добавлять участников может только создатель");
+    txt.appendChild(el("span","muted","Иначе приглашать могут все участники группы"));
+    tg.append(cb, el("span","sw"), txt); form.appendChild(tg);
+    const save = el("button","btn","Сохранить"); save.type = "button"; save.style.marginTop = "16px";
+    save.onclick = async () => {
+      if (!title.value.trim()){ title.focus(); return toast("Введите название"); }
+      save.disabled = true;
+      const { error } = await sb.rpc("update_group", { conv: c.conversation_id, p_title: title.value, p_description: desc.value, p_avatar_url: avUrl, p_only_owner_adds: cb.checked });
+      save.disabled = false;
+      if (error) return toast(ruError(error));
+      Object.assign(c, { title: title.value.trim(), description: desc.value.trim() || null, conv_avatar_url: avUrl, only_owner_adds: cb.checked });
+      toast("Настройки группы сохранены"); await loadChats(); if (openConv) renderConvHead();
+    };
+    form.appendChild(save);
+    body.appendChild(form);
+  }
+
+  // --- уведомления ---
+  const nrow = el("div","setting-row");
+  const ntg = el("label","toggle"); ntg.style.flex = "1";
+  const ncb = el("input"); ncb.type = "checkbox"; ncb.checked = !c.muted;
+  const ntx = el("span", null, "Уведомления"); ntx.appendChild(el("span","muted","Сообщать о новых сообщениях в этой группе"));
+  ntg.append(ncb, el("span","sw"), ntx); nrow.appendChild(ntg);
+  ncb.onchange = () => setMuted(c, !ncb.checked);
+  body.appendChild(nrow);
+
+  // --- участники ---
+  const head = el("div","row1"); head.style.margin = "18px 0 6px";
+  head.appendChild(el("div","section-label", `Участники · ${members.length}`));
+  if (canAdd){
+    const add = el("button","btn sm","+ Добавить"); add.type = "button";
+    add.onclick = () => pickUsers("Добавить в группу", new Set(members.map(m => m.user_id)), async ids => {
+      const { error } = await sb.rpc("add_group_members", { conv: c.conversation_id, p_members: ids });
+      if (error) return toast(ruError(error));
+      toast("Участники добавлены"); await loadChats(); groupInfo(chats.find(x => x.conversation_id === c.conversation_id) || c);
+    });
+    head.appendChild(add);
+  }
+  body.appendChild(head);
   members.sort((a,b) => (b.role === "owner") - (a.role === "owner"));
   for (const m of members){
     const p = m.profiles || { id: m.user_id, username: "?" };
     const r = el("div","member");
-    const av = avatarFor(p, "sm"); av.classList.add("clickable"); av.onclick = () => userInfo(p);
+    const mav = avatarFor(p, "sm"); mav.classList.add("clickable"); mav.onclick = () => userInfo(p);
     const meta = el("div","meta"); const n = nameWithRole(p); n.classList.add("clickable"); n.onclick = () => userInfo(p);
     if (m.role === "owner") n.appendChild(el("span","role owner","создатель"));
     const st = statusText(p.id);
     meta.append(n, el("div","time","@" + p.username + (p.id === me.id ? " · вы" : (st.text ? " · " + st.text : ""))));
-    r.append(av, meta);
+    r.append(mav, meta);
     if (isOwner && m.user_id !== me.id){
-      const rm = el("button","btn sm danger","Удалить"); rm.type = "button";
+      const rm = el("button","btn sm danger","Исключить"); rm.type = "button";
       rm.onclick = async () => {
+        if (rm.dataset.sure !== "1"){ rm.dataset.sure = "1"; rm.textContent = "Точно?"; setTimeout(() => { rm.dataset.sure = ""; rm.textContent = "Исключить"; }, 3000); return; }
         rm.disabled = true;
         const { error } = await sb.rpc("remove_group_member", { conv: c.conversation_id, target: m.user_id });
         if (error){ rm.disabled = false; return toast(ruError(error)); }
@@ -1700,23 +1889,58 @@ async function groupInfo(c){
     }
     body.appendChild(r);
   }
-  const add = el("button","btn","Добавить участников"); add.type = "button";
-  add.onclick = () => pickUsers("Добавить в группу", new Set(members.map(m => m.user_id)), async ids => {
-    const { error } = await sb.rpc("add_group_members", { conv: c.conversation_id, p_members: ids });
-    if (error) return toast(ruError(error));
-    toast("Участники добавлены"); await loadChats(); groupInfo(openConv || c);
-  });
+
+  // --- низ окна ---
   const leave = el("button","btn danger","Выйти из группы"); leave.type = "button";
-  leave.onclick = async () => {
-    if (leave.dataset.sure !== "1"){ leave.dataset.sure = "1"; leave.textContent = "Точно выйти?"; return; }
-    const { error } = await sb.rpc("leave_group", { conv: c.conversation_id });
-    if (error) return toast(ruError(error));
-    closeModal(); closeConv(); loadChats(); toast("Вы вышли из группы");
+  leave.onclick = () => {
+    if (leave.dataset.sure !== "1"){ leave.dataset.sure = "1"; leave.textContent = isOwner ? "Точно выйти? Создателем станет другой участник" : "Точно выйти?"; return; }
+    leaveGroupFlow(c);
   };
+  foot.appendChild(leave);
+  if (isOwner){
+    const del = el("button","btn danger","Удалить группу"); del.type = "button";
+    del.onclick = async () => {
+      if (del.dataset.sure !== "1"){ del.dataset.sure = "1"; del.textContent = "Удалить навсегда для всех?"; return; }
+      const { error } = await sb.rpc("delete_group", { conv: c.conversation_id });
+      if (error) return toast(ruError(error));
+      closeModal(); if (openConv && openConv.conversation_id === c.conversation_id) closeConv();
+      loadChats(); toast("Группа удалена");
+    };
+    foot.appendChild(del);
+  }
   const close = el("button","btn ghost","Закрыть"); close.type = "button"; close.onclick = () => closeModal();
-  foot.append(leave, add, close);
+  foot.appendChild(close);
   body.parentNode.appendChild(foot);
 }
+
+/* ---------- Меню «⋯» в шапке чата ---------- */
+function popMenu(anchor, items){
+  const old = $(".menu"); if (old) old.remove();
+  const menu = el("div","menu");
+  for (const it of items){
+    const b = el("button","item" + (it.danger ? " danger" : "")); b.type = "button";
+    b.textContent = it.text;
+    b.onclick = () => it.fn(b);
+    menu.appendChild(b);
+  }
+  document.body.appendChild(menu);
+  const r = anchor.getBoundingClientRect(), mw = menu.offsetWidth;
+  menu.style.left = Math.max(8, Math.min(r.right - mw, window.innerWidth - mw - 8)) + "px";
+  menu.style.top = (r.bottom + 6) + "px";
+}
+$("#convMore").onclick = e => {
+  e.stopPropagation();
+  const c = openConv; if (!c) return;
+  const items = [];
+  if (c.is_group) items.push({ text: "⚙️  Настройки группы", fn: () => { closeMenu(); groupInfo(c); } });
+  else items.push({ text: "👤  Профиль", fn: () => { closeMenu(); $("#convTitle").click(); } });
+  items.push({ text: c.muted ? "🔔  Включить уведомления" : "🔕  Выключить уведомления", fn: () => { closeMenu(); setMuted(c, !c.muted); } });
+  if (c.is_group) items.push({ text: "🚪  Выйти из группы", danger: true, fn: b => {
+    if (b.dataset.sure !== "1"){ b.dataset.sure = "1"; b.textContent = "Точно выйти?"; return; }
+    closeMenu(); leaveGroupFlow(c);
+  } });
+  popMenu(e.currentTarget, items);
+};
 
 /* ---------- Выбор пользователей (для групп) ---------- */
 function pickUsers(title, exclude, onDone, extraTop){
@@ -1729,7 +1953,7 @@ function pickUsers(title, exclude, onDone, extraTop){
   };
   const search = async q => {
     q = q.trim().replace(/[%_,()\\]/g, "");
-    let req = sb.from("profiles").select("id,username,display_name,avatar_url,role").neq("id", me.id).limit(40);
+    let req = sb.from("profiles").select("id,username,display_name,avatar_url,role,verified").neq("id", me.id).eq("is_system", false).limit(40);
     req = q ? req.or(`username.ilike.%${q}%,display_name.ilike.%${q}%`).order("username") : req.order("created_at",{ascending:false});
     const { data } = await req;
     resultsBox.innerHTML = "";
@@ -1751,7 +1975,7 @@ function pickUsers(title, exclude, onDone, extraTop){
   }, foot => {
     const c = el("button","btn ghost","Отмена"); c.type = "button"; c.onclick = () => closeModal();
     okBtn = el("button","btn", extraTop ? "Создать" : "Добавить"); okBtn.type = "button";
-    okBtn.onclick = async () => { okBtn.disabled = true; await onDone([...chosen.keys()]); okBtn.disabled = false; };
+    okBtn.onclick = async () => { okBtn.disabled = true; await onDone([...chosen.keys()], chosen); okBtn.disabled = false; };
     foot.append(c, okBtn);
   });
   refreshChips(); search("");
@@ -1782,7 +2006,7 @@ async function runSearch(){
   if (!me) return;
   const q = $("#searchInput").value.trim().replace(/[%_,()\\]/g, "");
   const seq = ++searchSeq;
-  let req = sb.from("profiles").select(PCOLS).neq("id", me.id).limit(30);
+  let req = sb.from("profiles").select(PCOLS).neq("id", me.id).eq("is_system", false).limit(30);
   req = q ? req.or(`username.ilike.%${q}%,display_name.ilike.%${q}%`).order("username") : req.order("created_at",{ascending:false});
   const { data, error } = await req;
   if (seq !== searchSeq) return;
@@ -1895,7 +2119,15 @@ $("#passForm").addEventListener("submit", async e => {
   if (error) return show(msg, ruError(error));
   $("#passForm").reset(); show(msg, "Пароль изменён", "ok");
 });
-$("#logoutBtn").onclick = () => sb.auth.signOut();
+$("#logoutBtn").onclick = async () => {
+  try {
+    const reg = "serviceWorker" in navigator && await navigator.serviceWorker.getRegistration();
+    const sub = reg && await reg.pushManager.getSubscription();
+    if (sub){ await sb.rpc("delete_push_subscription", { p_endpoint: sub.endpoint }); await sub.unsubscribe(); }
+  } catch(e){}
+  setPref("kc_push", false);
+  sb.auth.signOut();
+};
 
 /* ================== АДМИН-ПАНЕЛЬ ================== */
 let adminUsers = [];
@@ -1915,6 +2147,9 @@ async function loadAdmin(){
     .forEach(([k,l], i) => { const d = el("div","stat"); d.style.animationDelay = i * 25 + "ms"; d.append(el("div","v", String(s[k] ?? 0)), el("div","l", l)); box.appendChild(d); });
   adminUsers = us.data || [];
   renderAdminUsers();
+  sb.rpc("admin_list_verifications", { p_status: "pending" }).then(({ data }) => {
+    const n = (data || []).length, b = $("#verifCount"); b.textContent = n; b.classList.toggle("hidden", !n);
+  });
   loadPresence(adminUsers.map(u => u.id));
 }
 $("#adminSearch").addEventListener("input", renderAdminUsers);
@@ -1936,6 +2171,12 @@ function renderAdminUsers(){
     const cv = el("button","btn sm ghost","Переписки"); cv.type = "button";
     cv.onclick = () => { convFilterUser = u; showAdminTab("convs"); };
     acts.appendChild(cv);
+    if (u.is_system){ meta.lastChild.textContent = "@" + u.username + " · служебный аккаунт для рассылок"; card.append(av, meta, acts); box.appendChild(card); continue; }
+    if (u.role !== "founder" || me.role === "founder"){
+      acts.appendChild(u.verified
+        ? actBtn("Снять галочку", "ghost", () => sb.rpc("admin_set_verified", { target: u.id, v: false }), "Галочка снята", true)
+        : actBtn("Выдать галочку", "ghost", () => sb.rpc("admin_set_verified", { target: u.id, v: true }), "Галочка выдана"));
+    }
     const canManage = u.id !== me.id && u.role !== "founder" && (u.role !== "admin" || me.role === "founder");
     if (canManage){
       acts.appendChild(actBtn(u.banned ? "Разбанить" : "Забанить", u.banned ? "ghost" : "danger",
@@ -1969,9 +2210,10 @@ function actBtn(text, style, action, okText, confirmFirst){
 let convFilterUser = null, adminConvs = [];
 function showAdminTab(t){
   document.querySelectorAll(".atabs button").forEach(b => b.classList.toggle("active", b.dataset.atab === t));
-  ["users","convs","log"].forEach(n => { const node = $("#atab-" + n); node.classList.toggle("hidden", n !== t); if (n === t){ node.classList.remove("view-anim"); void node.offsetWidth; node.classList.add("view-anim"); } });
+  ["users","convs","verif","bcast","log"].forEach(n => { const node = $("#atab-" + n); node.classList.toggle("hidden", n !== t); if (n === t){ node.classList.remove("view-anim"); void node.offsetWidth; node.classList.add("view-anim"); } });
   if (t === "convs") loadAdminConvs();
   if (t === "log") loadAdminLog();
+  if (t === "verif") loadVerifList();
 }
 document.querySelectorAll(".atabs button").forEach(b => b.addEventListener("click", () => {
   if (b.dataset.atab === "convs") convFilterUser = null;
@@ -2058,12 +2300,262 @@ async function loadAdminLog(){
     const when = new Date(r.created_at).toLocaleString("ru-RU",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"});
     const what = el("div","what");
     what.appendChild(el("b", null, "@" + (r.admin_username || "?")));
-    what.appendChild(document.createTextNode(r.action === "delete" ? " удалил сообщение в чате " : " открыл переписку "));
-    what.appendChild(el("span","muted", r.members || "(чат удалён)"));
+    if (r.action === "broadcast"){
+      what.appendChild(document.createTextNode(" сделал рассылку: "));
+      what.appendChild(el("span","muted", r.details || ""));
+    } else {
+      what.appendChild(document.createTextNode(r.action === "delete" ? " удалил сообщение в чате " : " открыл переписку "));
+      what.appendChild(el("span","muted", r.members || "(чат удалён)"));
+    }
     row.append(el("div","when", when), what);
     box.appendChild(row);
   }
 }
+
+/* ================== УВЕДОМЛЕНИЯ ================== */
+const pushSupported = "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+let swReg = null;
+function getPref(k, d){ try { const v = localStorage.getItem(k); return v === null ? d : v === "1"; } catch(e){ return d; } }
+function setPref(k, v){ try { localStorage.setItem(k, v ? "1" : "0"); } catch(e){} }
+function isIOS(){ return /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1); }
+let soundOn = getPref("kc_sound", true);
+if ("serviceWorker" in navigator){
+  navigator.serviceWorker.register("sw.js").then(r => { swReg = r; refreshNotifUI(); }).catch(() => {});
+  navigator.serviceWorker.addEventListener("message", e => { if (e.data && e.data.openConv) openConvById(e.data.openConv); });
+}
+function b64ToU8(str){
+  const pad = "=".repeat((4 - str.length % 4) % 4);
+  const raw = atob((str + pad).replace(/-/g, "+").replace(/_/g, "/"));
+  return Uint8Array.from([...raw].map(ch => ch.charCodeAt(0)));
+}
+async function getVapid(){
+  let { data } = await sb.rpc("get_push_public_key");
+  if (!data){
+    await fetch(SUPABASE_URL + "/functions/v1/send-push", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" }).catch(() => {});
+    ({ data } = await sb.rpc("get_push_public_key"));
+  }
+  return data;
+}
+async function currentSub(){
+  try { const reg = swReg || await navigator.serviceWorker.getRegistration(); return reg ? await reg.pushManager.getSubscription() : null; }
+  catch(e){ return null; }
+}
+async function saveSub(sub){
+  const j = sub.toJSON();
+  const { error } = await sb.rpc("save_push_subscription", { p_endpoint: j.endpoint, p_p256dh: j.keys.p256dh, p_auth: j.keys.auth });
+  if (error) throw error;
+}
+async function enablePush(){
+  if (!pushSupported){
+    toast(isIOS() ? "На iPhone: «Поделиться» → «На экран Домой», затем откройте сайт с главного экрана" : "Этот браузер не поддерживает уведомления");
+    return;
+  }
+  const perm = await Notification.requestPermission();
+  if (perm !== "granted"){ toast("Уведомления не разрешены в браузере"); refreshNotifUI(); return; }
+  try{
+    const reg = swReg || await navigator.serviceWorker.ready;
+    const key = await getVapid(); if (!key) throw new Error("no key");
+    let sub = await reg.pushManager.getSubscription();
+    if (!sub) sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64ToU8(key) });
+    await saveSub(sub);
+    setPref("kc_push", true); toast("Уведомления включены");
+  } catch(e){ toast("Не удалось включить уведомления"); }
+  refreshNotifUI();
+}
+async function disablePush(){
+  const sub = await currentSub();
+  if (sub){ try { await sb.rpc("delete_push_subscription", { p_endpoint: sub.endpoint }); await sub.unsubscribe(); } catch(e){} }
+  setPref("kc_push", false); refreshNotifUI(); toast("Уведомления выключены");
+}
+async function resyncPush(){
+  if (!pushSupported || Notification.permission !== "granted" || !getPref("kc_push", false)) return;
+  try{
+    const reg = await navigator.serviceWorker.ready;
+    let sub = await reg.pushManager.getSubscription();
+    if (!sub){ const key = await getVapid(); sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64ToU8(key) }); }
+    await saveSub(sub);
+  } catch(e){}
+}
+async function pushActive(){
+  if (!pushSupported || Notification.permission !== "granted" || !getPref("kc_push", false)) return false;
+  return !!(await currentSub());
+}
+async function refreshNotifUI(){
+  const st = $("#notifState"), btn = $("#notifBtn"); if (!st) return;
+  $("#soundToggle").checked = soundOn;
+  if (!("Notification" in window) || !pushSupported){
+    st.textContent = isIOS()
+      ? "На iPhone уведомления работают, если добавить сайт на главный экран: «Поделиться» → «На экран Домой», затем открыть его оттуда."
+      : "Этот браузер не поддерживает уведомления.";
+    btn.classList.add("hidden"); return;
+  }
+  if (Notification.permission === "denied"){
+    st.textContent = "Уведомления запрещены для этого сайта. Разрешите их в настройках браузера (значок слева от адреса сайта).";
+    btn.classList.add("hidden"); return;
+  }
+  const on = await pushActive();
+  btn.classList.remove("hidden");
+  btn.textContent = on ? "Выключить уведомления" : "Включить уведомления";
+  btn.className = "btn sm" + (on ? " ghost" : "");
+  st.textContent = on
+    ? "Уведомления включены на этом устройстве — они придут, даже когда сайт закрыт."
+    : "Включите, чтобы узнавать о новых сообщениях, даже когда сайт закрыт.";
+}
+$("#notifBtn").onclick = async () => { $("#notifBtn").disabled = true; (await pushActive()) ? await disablePush() : await enablePush(); $("#notifBtn").disabled = false; };
+$("#soundToggle").onchange = e => { soundOn = e.target.checked; setPref("kc_sound", soundOn); if (soundOn) ping(); };
+
+let actx = null;
+function ping(){
+  if (!soundOn) return;
+  try{
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === "suspended") actx.resume();
+    const t = actx.currentTime, o = actx.createOscillator(), g = actx.createGain();
+    o.type = "sine"; o.frequency.setValueAtTime(740, t); o.frequency.exponentialRampToValueAtTime(1110, t + 0.12);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.09, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.35);
+    o.connect(g); g.connect(actx.destination); o.start(t); o.stop(t + 0.37);
+  } catch(e){}
+}
+async function notifyIncoming(m){
+  const c = chats.find(x => x.conversation_id === m.conversation_id);
+  if (c && c.muted) return;
+  if (!document.hidden && convOpenAndVisible(m.conversation_id)) return;
+  ping();
+  if (!document.hidden) return;                 // вкладка на экране — достаточно звука и счётчика
+  if (await pushActive()) return;                // уведомление покажет push
+  if ("Notification" in window && Notification.permission === "granted"){
+    const p = people.get(m.sender_id);
+    const title = c && c.is_group ? (c.title || "Группа") : shownName(p);
+    try{
+      const n = new Notification(title, { body: (c && c.is_group ? shownName(p) + ": " : "") + kindPreview(m.kind, m.body), tag: m.conversation_id, icon: "icon-192.png" });
+      n.onclick = () => { window.focus(); openConvById(m.conversation_id); n.close(); };
+    } catch(e){}
+  }
+}
+async function openConvById(id){
+  await loadChats();
+  const c = chats.find(x => x.conversation_id === id);
+  if (c) openChat(c);
+}
+
+/* ================== ВЕРИФИКАЦИЯ (кабинет) ================== */
+async function loadVerif(){
+  const box = $("#verifBody"); if (!box || !me) return;
+  $("#verifBox").classList.toggle("hidden", !!me.is_system);
+  const { data, error } = await sb.rpc("my_verification");
+  if (error){ box.textContent = "Не удалось загрузить"; return; }
+  const v = (data || [])[0] || {};
+  box.innerHTML = "";
+  if (v.verified){
+    const d = el("div","verif-ok"); d.append(checkBadge(), el("span", null, "Ваш аккаунт подтверждён — рядом с именем стоит синяя галочка."));
+    box.appendChild(d); return;
+  }
+  if (v.status === "pending"){
+    box.appendChild(el("p","muted","Заявка отправлена " + new Date(v.created_at).toLocaleDateString("ru-RU",{day:"numeric",month:"long"}) + " и ждёт решения администрации."));
+    box.appendChild(el("div","quote", v.reason));
+    const c = el("button","btn sm ghost","Отозвать заявку"); c.type = "button";
+    c.onclick = async () => { c.disabled = true; await sb.rpc("cancel_verification"); loadVerif(); };
+    box.appendChild(c); return;
+  }
+  if (v.status === "rejected") box.appendChild(el("p","verif-rej","Прошлая заявка отклонена" + (v.admin_comment ? ": " + v.admin_comment : ".") + " Можно подать новую."));
+  box.appendChild(el("p","muted","Синяя галочка показывает, что аккаунт официальный: например, преподаватель, староста, организация или известный человек. Расскажите, кто вы — администрация рассмотрит заявку."));
+  const ta = el("textarea"); ta.rows = 3; ta.maxLength = 1000; ta.placeholder = "Кто вы и почему аккаунт стоит подтвердить";
+  const b = el("button","btn","Подать заявку"); b.type = "button";
+  const msg = el("div","msg");
+  b.onclick = async () => {
+    const r = ta.value.trim();
+    if (r.length < 5) return show(msg, "Напишите хотя бы пару слов о себе");
+    b.disabled = true;
+    const { error } = await sb.rpc("request_verification", { p_reason: r });
+    b.disabled = false;
+    if (error) return show(msg, ruError(error));
+    toast("Заявка отправлена"); loadVerif();
+  };
+  box.append(ta, b, msg);
+}
+
+/* ================== АДМИН: ВЕРИФИКАЦИЯ ================== */
+let verifStatus = "pending";
+document.querySelectorAll("#verifSeg button").forEach(b => b.onclick = () => {
+  verifStatus = b.dataset.vs;
+  document.querySelectorAll("#verifSeg button").forEach(x => x.classList.toggle("active", x === b));
+  loadVerifList();
+});
+async function loadVerifList(){
+  const box = $("#verifList"); box.innerHTML = ""; box.appendChild(el("div","empty","Загрузка…"));
+  const { data, error } = await sb.rpc("admin_list_verifications", { p_status: verifStatus });
+  box.innerHTML = "";
+  if (error){ box.appendChild(el("div","empty", ruError(error))); return; }
+  if (verifStatus === "pending"){ const b = $("#verifCount"); b.textContent = data.length; b.classList.toggle("hidden", !data.length); }
+  if (!data.length){ box.appendChild(el("div","empty", verifStatus === "pending" ? "Новых заявок нет" : "Пусто")); return; }
+  data.forEach((r, i) => {
+    const card = el("div","req-card"); card.style.animationDelay = Math.min(i, 10) * 25 + "ms";
+    const top = el("div","top");
+    const p = { id: r.user_id, username: r.username, display_name: r.display_name, avatar_url: r.avatar_url, verified: r.verified };
+    const av = avatarFor(p); av.classList.add("clickable"); av.onclick = () => userInfo(p);
+    const meta = el("div","meta");
+    const n = nameWithRole(p); n.classList.add("clickable"); n.onclick = () => userInfo(p);
+    meta.append(n, el("div","time", "@" + r.username + " · " + new Date(r.created_at).toLocaleString("ru-RU",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})));
+    top.append(av, meta); card.appendChild(top);
+    card.appendChild(el("div","quote", r.reason));
+    if (r.status === "pending"){
+      const acts = el("div","acts");
+      const cm = el("input"); cm.placeholder = "Комментарий (необязательно, увидит пользователь)"; cm.maxLength = 300;
+      const ok = el("button","btn sm","Одобрить"); ok.type = "button";
+      const no = el("button","btn sm danger","Отказать"); no.type = "button";
+      const go = async approve => {
+        ok.disabled = no.disabled = true;
+        const { error } = await sb.rpc("admin_review_verification", { req_id: r.id, approve, p_comment: cm.value });
+        if (error){ ok.disabled = no.disabled = false; return toast(ruError(error)); }
+        toast(approve ? "Заявка одобрена — галочка выдана" : "Заявка отклонена");
+        fadeRemove(card); setTimeout(loadVerifList, 260);
+      };
+      ok.onclick = () => go(true); no.onclick = () => go(false);
+      acts.append(cm, ok, no); card.appendChild(acts);
+    } else {
+      const info = el("div","time", (r.status === "approved" ? "Одобрено" : "Отклонено") + (r.reviewer ? " · @" + r.reviewer : "") +
+        (r.reviewed_at ? " · " + new Date(r.reviewed_at).toLocaleDateString("ru-RU") : "") + (r.admin_comment ? " · «" + r.admin_comment + "»" : ""));
+      info.style.marginTop = "8px"; card.appendChild(info);
+    }
+    box.appendChild(card);
+  });
+}
+
+/* ================== АДМИН: РАССЫЛКА ================== */
+const bcTargets = new Map();
+$("#bcText").addEventListener("input", () => $("#bcCount").textContent = $("#bcText").value.length);
+document.querySelectorAll('input[name="bcMode"]').forEach(r => r.onchange = () => {
+  $("#bcPick").classList.toggle("hidden", bcMode() !== "some");
+});
+function bcMode(){ const r = document.querySelector('input[name="bcMode"]:checked'); return r ? r.value : "all"; }
+function renderBcChips(){
+  const box = $("#bcChips"); box.innerHTML = "";
+  for (const p of bcTargets.values()) box.appendChild(el("span","chip", shownName(p)));
+  if (!bcTargets.size) box.appendChild(el("span","muted","Никто не выбран"));
+}
+renderBcChips();
+$("#bcPickBtn").onclick = () => pickUsers("Получатели рассылки", new Set(), async (ids, chosen) => {
+  bcTargets.clear(); for (const [id, p] of chosen) bcTargets.set(id, p);
+  renderBcChips(); closeModal();
+});
+$("#bcSend").onclick = async () => {
+  const btn = $("#bcSend"), msg = $("#bcMsg"), text = $("#bcText").value.trim();
+  if (!text) return show(msg, "Введите текст рассылки");
+  const some = bcMode() === "some";
+  if (some && !bcTargets.size) return show(msg, "Выберите получателей");
+  if (btn.dataset.sure !== "1"){
+    btn.dataset.sure = "1";
+    btn.textContent = some ? `Отправить ${bcTargets.size} ${plural(bcTargets.size,"получателю","получателям","получателям")}?` : "Отправить всем пользователям?";
+    setTimeout(() => { btn.dataset.sure = ""; btn.textContent = "Отправить рассылку"; }, 4000);
+    return;
+  }
+  btn.disabled = true; show(msg, "Отправка…", "ok");
+  const { data, error } = await sb.rpc("admin_broadcast", { p_body: text, p_targets: some ? [...bcTargets.keys()] : null });
+  btn.disabled = false; btn.dataset.sure = ""; btn.textContent = "Отправить рассылку";
+  if (error) return show(msg, ruError(error));
+  show(msg, `Отправлено: ${data} ${plural(data,"получатель","получателя","получателей")}`, "ok");
+  $("#bcText").value = ""; $("#bcCount").textContent = "0";
+};
 
 /* ================== СТАРТ ================== */
 let currentUserId; // undefined до первого события
