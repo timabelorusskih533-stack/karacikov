@@ -2,95 +2,176 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Karacikov — вход</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="google" content="notranslate">
+<title>Karacikov</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0b0b0f; --panel:#14141b; --line:#26262f; --text:#f2f2f5; --muted:#8a8a99;
-    --accent:#e8ff5a; --danger:#ff6b6b; --ok:#5affb0;
+    --bg:#0b0b0f; --panel:#121218; --panel2:#17171f; --line:#24242e; --text:#f2f2f5; --muted:#8a8a99;
+    --accent:#e8ff5a; --accent-ink:#0b0b0f; --danger:#ff6b6b; --ok:#5affb0; --mine:#e8ff5a; --theirs:#1d1d27;
+    --safe-b:env(safe-area-inset-bottom,0px);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
-  body{background:var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;overflow-x:hidden}
+  body{background:var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;overflow:hidden}
+  button{font-family:inherit}
   .hidden{display:none!important}
+  .brand{font-family:Unbounded,sans-serif;font-weight:900;letter-spacing:.02em}
+  .brand span{color:var(--accent)}
+  input,textarea{font:500 15px Manrope,sans-serif;color:var(--text);background:#0e0e13;border:1px solid var(--line);
+    border-radius:11px;padding:12px 14px;outline:none;width:100%;transition:border-color .2s}
+  input:focus,textarea:focus{border-color:var(--accent)}
+  textarea{resize:none}
+  .btn{border:0;background:var(--accent);color:var(--accent-ink);font:700 14px Manrope,sans-serif;padding:12px 18px;
+    border-radius:11px;cursor:pointer;transition:filter .2s,transform .1s}
+  .btn:hover{filter:brightness(1.05)} .btn:active{transform:scale(.98)} .btn:disabled{opacity:.55;cursor:default}
+  .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+  .btn.ghost:hover{border-color:var(--muted)}
+  .btn.danger{background:transparent;color:var(--danger);border:1px solid #4a2a2e}
+  .muted{color:var(--muted)}
+  .msg{min-height:18px;font-size:13px;margin-top:10px}
+  .msg.err{color:var(--danger)} .msg.ok{color:var(--ok)}
 
   /* ---------- AUTH ---------- */
-  #auth{min-height:100vh;display:grid;place-items:center;padding:24px;position:relative}
+  #auth{height:100%;overflow:auto;display:grid;place-items:center;padding:24px}
   #auth::before{content:"";position:fixed;inset:0;pointer-events:none;
     background:radial-gradient(600px 400px at 15% 10%,rgba(232,255,90,.08),transparent 60%),
                radial-gradient(500px 500px at 90% 90%,rgba(120,120,255,.07),transparent 60%)}
   .card{position:relative;width:100%;max-width:400px;background:var(--panel);border:1px solid var(--line);
     border-radius:20px;padding:32px 28px 28px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
-  .brand{font-family:Unbounded,sans-serif;font-weight:900;font-size:22px;letter-spacing:.02em;margin-bottom:6px}
-  .brand span{color:var(--accent)}
+  .card .brand{font-size:22px;margin-bottom:6px}
   .sub{color:var(--muted);font-size:14px;margin-bottom:24px}
-  .tabs{display:grid;grid-template-columns:1fr 1fr;background:#0e0e13;border:1px solid var(--line);
-    border-radius:12px;padding:4px;margin-bottom:22px}
-  .tab{border:0;background:transparent;color:var(--muted);font:600 14px Manrope,sans-serif;padding:10px;
-    border-radius:9px;cursor:pointer;transition:.2s}
+  .tabs{display:grid;grid-template-columns:1fr 1fr;background:#0e0e13;border:1px solid var(--line);border-radius:12px;padding:4px;margin-bottom:22px}
+  .tab{border:0;background:transparent;color:var(--muted);font:600 14px Manrope,sans-serif;padding:10px;border-radius:9px;cursor:pointer}
   .tab.active{background:var(--text);color:#0b0b0f}
-  label{display:block;font-size:13px;color:var(--muted);margin:14px 0 6px;font-weight:500}
+  .card label{display:block;font-size:13px;color:var(--muted);margin:14px 0 6px;font-weight:500}
   .field{position:relative}
-  input[type=text],input[type=password]{width:100%;background:#0e0e13;border:1px solid var(--line);color:var(--text);
-    font:500 15px Manrope,sans-serif;padding:13px 14px;border-radius:11px;outline:none;transition:border-color .2s}
-  input:focus{border-color:var(--accent)}
-  .eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--muted);
-    cursor:pointer;font-size:12px;padding:6px 8px;font-family:Manrope,sans-serif}
-  .eye:hover{color:var(--text)}
-  .row{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:13px;color:var(--muted)}
-  .row input{accent-color:var(--accent);width:16px;height:16px}
-  .btn{width:100%;margin-top:22px;border:0;background:var(--accent);color:#0b0b0f;font:700 15px Manrope,sans-serif;
-    padding:14px;border-radius:12px;cursor:pointer;transition:transform .1s,filter .2s}
-  .btn:hover{filter:brightness(1.05)}
-  .btn:active{transform:scale(.99)}
-  .btn:disabled{opacity:.6;cursor:default}
-  .msg{min-height:20px;margin-top:14px;font-size:13px;text-align:center}
-  .msg.err{color:var(--danger)} .msg.ok{color:var(--ok)}
+  .eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--muted);cursor:pointer;font-size:12px;padding:6px 8px}
+  .card .btn{width:100%;margin-top:22px;padding:14px;font-size:15px}
+  .card .msg{text-align:center}
   .hint{font-size:12px;color:var(--muted);margin-top:6px}
   .switch{text-align:center;font-size:13px;color:var(--muted);margin-top:8px}
   .switch a{color:var(--text);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 
-  /* ---------- HOME ---------- */
-  #home{position:fixed;inset:0;display:grid;place-items:center;background:var(--bg)}
-  #home h1{font-family:Unbounded,sans-serif;font-weight:900;text-transform:uppercase;line-height:.9;
-    font-size:15.5vw;letter-spacing:-.03em;white-space:nowrap;user-select:none;
-    background:linear-gradient(180deg,#ffffff 0%,#9a9aa8 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
-    animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
-  @keyframes rise{from{opacity:0;transform:translateY(30px) scale(.98)}to{opacity:1;transform:none}}
-  .topbar{position:fixed;top:16px;right:16px;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted)}
-  .topbar b{color:var(--text);font-weight:600}
-  .logout{border:1px solid var(--line);background:var(--panel);color:var(--text);font:600 13px Manrope,sans-serif;
-    padding:8px 14px;border-radius:10px;cursor:pointer}
-  .logout:hover{border-color:var(--muted)}
+  /* ---------- APP SHELL ---------- */
+  #app{height:100%;display:grid;grid-template-columns:84px 1fr}
+  .nav{background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:18px 0;gap:8px}
+  .nav .brand{font-size:22px;margin-bottom:18px}
+  .nav button{position:relative;width:64px;border:0;background:transparent;color:var(--muted);cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 0;border-radius:14px;font:600 11px Manrope,sans-serif}
+  .nav button svg{width:22px;height:22px}
+  .nav button:hover{color:var(--text);background:var(--panel2)}
+  .nav button.active{color:var(--accent);background:var(--panel2)}
+  .badge{position:absolute;top:4px;right:10px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--accent);
+    color:var(--accent-ink);font:700 11px/18px Manrope,sans-serif;text-align:center}
+  .view{height:100%;overflow:hidden}
+
+  .avatar{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font:700 17px Unbounded,sans-serif;color:#0b0b0f}
+  .avatar.sm{width:36px;height:36px;font-size:14px}
+  .avatar.lg{width:88px;height:88px;font-size:34px}
+
+  /* ---------- CHATS ---------- */
+  #view-chats{display:grid;grid-template-columns:340px 1fr}
+  .list-pane{border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;background:var(--bg)}
+  .pane-head{padding:22px 20px 14px;display:flex;align-items:center;justify-content:space-between}
+  .pane-head h2{font:700 22px Unbounded,sans-serif}
+  .chat-list{flex:1;overflow:auto;padding:0 10px 10px}
+  .chat-item{display:flex;gap:12px;align-items:center;padding:11px 10px;border-radius:14px;cursor:pointer}
+  .chat-item:hover{background:var(--panel)}
+  .chat-item.active{background:var(--panel2)}
+  .chat-item .meta{flex:1;min-width:0}
+  .row1{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+  .name{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .time{font-size:12px;color:var(--muted);flex:none}
+  .row2{display:flex;justify-content:space-between;gap:8px;margin-top:3px}
+  .preview{font-size:13.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .unread{flex:none;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--accent);color:var(--accent-ink);font:700 12px/20px Manrope;text-align:center}
+  .empty{padding:40px 24px;text-align:center;color:var(--muted);font-size:14px;line-height:1.5}
+  .empty .btn{margin-top:14px}
+
+  .conv-pane{display:flex;flex-direction:column;min-height:0;background:
+    radial-gradient(700px 500px at 100% 0%,rgba(232,255,90,.035),transparent 60%),var(--bg)}
+  .conv-head{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--panel)}
+  .conv-head .name{font-size:16px}
+  .back{display:none;border:0;background:none;color:var(--text);cursor:pointer;padding:6px 8px 6px 0;font-size:22px;line-height:1}
+  .messages{flex:1;overflow:auto;padding:18px 20px;display:flex;flex-direction:column;gap:4px}
+  .day{align-self:center;font-size:12px;color:var(--muted);background:var(--panel);border:1px solid var(--line);padding:4px 12px;border-radius:20px;margin:12px 0 8px}
+  .bubble{max-width:min(560px,78%);padding:9px 13px 7px;border-radius:16px;font-size:15px;line-height:1.4;white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere}
+  .bubble .t{display:block;text-align:right;font-size:11px;margin-top:3px;opacity:.6}
+  .bubble.mine{align-self:flex-end;background:var(--mine);color:#111;border-bottom-right-radius:5px}
+  .bubble.theirs{align-self:flex-start;background:var(--theirs);border-bottom-left-radius:5px}
+  .bubble.pending{opacity:.6}
+  .composer{display:flex;gap:10px;align-items:flex-end;padding:12px 16px calc(12px + var(--safe-b));border-top:1px solid var(--line);background:var(--panel)}
+  .composer textarea{max-height:140px;min-height:46px;border-radius:14px}
+  .send{flex:none;width:46px;height:46px;border-radius:14px;border:0;background:var(--accent);color:var(--accent-ink);cursor:pointer;display:grid;place-items:center}
+  .send:disabled{opacity:.4;cursor:default}
+  .send svg{width:20px;height:20px}
+  .placeholder{flex:1;display:grid;place-items:center;text-align:center;color:var(--muted)}
+  .placeholder .brand{font-size:clamp(40px,7vw,96px);color:#1c1c24;margin-bottom:10px}
+
+  /* ---------- SEARCH / PROFILE ---------- */
+  .page{height:100%;overflow:auto;padding:22px clamp(16px,4vw,48px) 40px}
+  .page h2{font:700 22px Unbounded,sans-serif;margin-bottom:16px}
+  .page-inner{max-width:720px}
+  .search-box{position:relative;margin-bottom:18px}
+  .search-box input{padding-left:44px;font-size:16px;padding-top:14px;padding-bottom:14px}
+  .search-box svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted)}
+  .user-card{display:flex;gap:14px;align-items:center;padding:14px;border:1px solid var(--line);background:var(--panel);border-radius:16px;margin-bottom:10px}
+  .user-card .meta{flex:1;min-width:0}
+  .user-card .login{font-size:13px;color:var(--muted)}
+  .user-card .bio{font-size:13.5px;margin-top:4px;color:#c8c8d2;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+  .section-label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:6px 0 10px}
+
+  .profile-top{display:flex;gap:20px;align-items:center;padding:22px;border:1px solid var(--line);background:var(--panel);border-radius:20px;margin-bottom:16px}
+  .profile-top .big{font:700 22px Unbounded,sans-serif;word-break:break-word}
+  .profile-top .login{color:var(--muted);margin-top:4px}
+  .profile-top .since{color:var(--muted);font-size:13px;margin-top:6px}
+  .box{padding:22px;border:1px solid var(--line);background:var(--panel);border-radius:20px;margin-bottom:16px}
+  .box h3{font-size:16px;margin-bottom:14px}
+  .box label{display:block;font-size:13px;color:var(--muted);margin:12px 0 6px}
+  .box label:first-of-type{margin-top:0}
+  .counter{font-size:12px;color:var(--muted);text-align:right;margin-top:4px}
+  .box .btn{margin-top:16px}
+
+  /* ---------- MOBILE ---------- */
+  @media (max-width:760px){
+    #app{grid-template-columns:1fr;grid-template-rows:1fr auto}
+    .nav{order:2;flex-direction:row;justify-content:space-around;border-right:0;border-top:1px solid var(--line);padding:6px 0 calc(6px + var(--safe-b))}
+    .nav .brand{display:none}
+    .nav button{width:auto;flex:1}
+    #view-chats{grid-template-columns:1fr}
+    #view-chats.open .list-pane{display:none}
+    #view-chats:not(.open) .conv-pane{display:none}
+    .back{display:block}
+    #app.in-conv .nav{display:none}
+    #app.in-conv{grid-template-rows:1fr}
+    .bubble{max-width:85%}
+  }
 </style>
 </head>
 <body>
 
-<!-- ===== Страница авторизации ===== -->
-<section id="auth">
+<!-- ===================== АВТОРИЗАЦИЯ ===================== -->
+<section id="auth" class="hidden">
   <div class="card">
     <div class="brand">KARACIKOV<span>.</span></div>
     <p class="sub" id="subtitle">Войдите в свой аккаунт</p>
-
-    <div class="tabs" role="tablist">
+    <div class="tabs">
       <button class="tab active" data-mode="login" type="button">Вход</button>
       <button class="tab" data-mode="register" type="button">Регистрация</button>
     </div>
-
-    <form id="form" autocomplete="on" novalidate>
+    <form id="authForm" autocomplete="on" novalidate>
       <label for="login">Логин</label>
       <input type="text" id="login" autocomplete="username" placeholder="Например, ivan_k" maxlength="32">
       <div class="hint reg-only hidden">3–32 символа: латиница, цифры, «_», «.», «-»</div>
-
       <label for="pass">Пароль</label>
       <div class="field">
         <input type="password" id="pass" autocomplete="current-password" placeholder="Введите пароль">
         <button type="button" class="eye" data-for="pass">показать</button>
       </div>
-
       <div class="reg-only hidden">
         <label for="pass2">Повторите пароль</label>
         <div class="field">
@@ -99,128 +180,448 @@
         </div>
         <div class="hint">Минимум 6 символов</div>
       </div>
-
-      <button class="btn" id="submit" type="submit">Войти</button>
-      <div class="msg" id="msg"></div>
-      <div class="switch" id="switch">Нет аккаунта? <a data-go="register">Зарегистрироваться</a></div>
+      <button class="btn" id="authSubmit" type="submit">Войти</button>
+      <div class="msg" id="authMsg"></div>
+      <div class="switch" id="switch"></div>
     </form>
   </div>
 </section>
 
-<!-- ===== Главная (после входа) ===== -->
-<section id="home" class="hidden">
-  <div class="topbar">
-    <span>Вы вошли как <b id="who"></b></span>
-    <button class="logout" id="logout" type="button">Выйти</button>
+<!-- ===================== ПРИЛОЖЕНИЕ ===================== -->
+<section id="app" class="hidden">
+  <nav class="nav">
+    <div class="brand">K<span>.</span></div>
+    <button data-view="chats" class="active" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>
+      Чаты<span class="badge hidden" id="unreadBadge"></span>
+    </button>
+    <button data-view="search" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      Поиск
+    </button>
+    <button data-view="profile" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+      Кабинет
+    </button>
+  </nav>
+
+  <!-- Чаты -->
+  <div class="view" id="view-chats">
+    <div class="list-pane">
+      <div class="pane-head"><h2>Чаты</h2></div>
+      <div class="chat-list" id="chatList"></div>
+    </div>
+    <div class="conv-pane">
+      <div class="placeholder" id="convEmpty">
+        <div><div class="brand">KARACIKOV</div><div>Выберите чат или найдите собеседника в «Поиске»</div></div>
+      </div>
+      <div class="hidden" id="convBox" style="display:flex;flex-direction:column;flex:1;min-height:0">
+        <div class="conv-head">
+          <button class="back" id="backBtn" type="button" aria-label="Назад">←</button>
+          <div class="avatar sm" id="convAvatar"></div>
+          <div style="min-width:0"><div class="name" id="convName"></div><div class="time" id="convLogin"></div></div>
+        </div>
+        <div class="messages" id="messages"></div>
+        <form class="composer" id="composer">
+          <textarea id="msgInput" rows="1" placeholder="Сообщение…" maxlength="4000"></textarea>
+          <button class="send" id="sendBtn" type="submit" disabled aria-label="Отправить">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
   </div>
-  <h1>karacikov</h1>
+
+  <!-- Поиск -->
+  <div class="view hidden" id="view-search">
+    <div class="page"><div class="page-inner">
+      <h2>Поиск</h2>
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="text" id="searchInput" placeholder="Логин или имя пользователя" autocomplete="off">
+      </div>
+      <div class="section-label" id="searchLabel">Новые пользователи</div>
+      <div id="searchResults"></div>
+    </div></div>
+  </div>
+
+  <!-- Личный кабинет -->
+  <div class="view hidden" id="view-profile">
+    <div class="page"><div class="page-inner">
+      <h2>Личный кабинет</h2>
+      <div class="profile-top">
+        <div class="avatar lg" id="meAvatar"></div>
+        <div style="min-width:0">
+          <div class="big" id="meName"></div>
+          <div class="login" id="meLogin"></div>
+          <div class="since" id="meSince"></div>
+        </div>
+      </div>
+
+      <form class="box" id="profileForm">
+        <h3>Профиль</h3>
+        <label for="pfName">Имя (видят другие пользователи)</label>
+        <input id="pfName" maxlength="40" placeholder="Как вас называть">
+        <label for="pfBio">О себе</label>
+        <textarea id="pfBio" rows="3" maxlength="300" placeholder="Пара слов о себе"></textarea>
+        <div class="counter"><span id="bioCount">0</span>/300</div>
+        <button class="btn" type="submit">Сохранить</button>
+        <div class="msg" id="pfMsg"></div>
+      </form>
+
+      <form class="box" id="passForm">
+        <h3>Смена пароля</h3>
+        <label for="np1">Новый пароль</label>
+        <input type="password" id="np1" autocomplete="new-password" placeholder="Минимум 6 символов">
+        <label for="np2">Повторите пароль</label>
+        <input type="password" id="np2" autocomplete="new-password">
+        <button class="btn" type="submit">Сменить пароль</button>
+        <div class="msg" id="passMsg"></div>
+      </form>
+
+      <button class="btn danger" id="logoutBtn" type="button">Выйти из аккаунта</button>
+    </div></div>
+  </div>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-/* ================== НАСТРОЙКИ SUPABASE ==================
-   Вставьте сюда данные своего проекта:
-   Supabase → Project Settings → API (или Data API)            */
+/* ================== НАСТРОЙКИ SUPABASE ================== */
 const SUPABASE_URL = "https://cpdkkzkizftmuceydyqp.supabase.co";
 const SUPABASE_KEY = "sb_publishable_De1nR8_tXRlkV-7BQB17IA_JZ30nQAt";
-/* Логин превращается в служебный e-mail вида логин@домен.
-   Письма никуда не отправляются (подтверждение e-mail нужно выключить). */
-const LOGIN_DOMAIN = "karacikov.app";
+const LOGIN_DOMAIN = "karacikov.app";   // логин → служебный e-mail логин@домен
 /* ======================================================== */
 
-const configured = true;
-const sb = configured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const $ = s => document.querySelector(s);
 const toEmail = login => login.toLowerCase() + "@" + LOGIN_DOMAIN;
 
-/* ---------- Интерфейс ---------- */
-const $ = s => document.querySelector(s);
-let mode = "login";
+/* ---------- Утилиты ---------- */
+function el(tag, cls, text){ const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+function hue(s){ let h = 0; for (const c of s || "") h = (h * 31 + c.charCodeAt(0)) % 360; return h; }
+function avatar(node, name, login){
+  node.textContent = (name || login || "?").trim().charAt(0).toUpperCase();
+  node.style.background = `hsl(${hue(login)} 85% 72%)`;
+}
+function shownName(p){ return (p && (p.display_name || p.username)) || "Пользователь"; }
+function fmtTime(d){ return new Date(d).toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit"}); }
+function sameDay(a,b){ a=new Date(a); b=new Date(b); return a.toDateString() === b.toDateString(); }
+function fmtDay(d){
+  const now = new Date(), x = new Date(d), y = new Date(now); y.setDate(now.getDate()-1);
+  if (sameDay(x, now)) return "Сегодня";
+  if (sameDay(x, y)) return "Вчера";
+  return x.toLocaleDateString("ru-RU",{day:"numeric",month:"long", year: x.getFullYear()===now.getFullYear()?undefined:"numeric"});
+}
+function fmtListTime(d){
+  if (!d) return "";
+  const x = new Date(d), now = new Date();
+  if (sameDay(x, now)) return fmtTime(x);
+  if ((now - x) < 6*864e5) return x.toLocaleDateString("ru-RU",{weekday:"short"});
+  return x.toLocaleDateString("ru-RU",{day:"2-digit",month:"2-digit"});
+}
+function show(m, node, text, type="err"){ node.textContent = text; node.className = "msg " + type; }
 
+/* ================== АВТОРИЗАЦИЯ ================== */
+let mode = "login";
 function setMode(m){
   mode = m;
   document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.mode === m));
   document.querySelectorAll(".reg-only").forEach(e => e.classList.toggle("hidden", m !== "register"));
-  document.querySelectorAll(".login-only").forEach(e => e.classList.toggle("hidden", m !== "login"));
-  $("#submit").textContent = m === "login" ? "Войти" : "Создать аккаунт";
+  $("#authSubmit").textContent = m === "login" ? "Войти" : "Создать аккаунт";
   $("#subtitle").textContent = m === "login" ? "Войдите в свой аккаунт" : "Создайте новый аккаунт";
   $("#pass").autocomplete = m === "login" ? "current-password" : "new-password";
   $("#switch").innerHTML = m === "login"
     ? 'Нет аккаунта? <a data-go="register">Зарегистрироваться</a>'
     : 'Уже есть аккаунт? <a data-go="login">Войти</a>';
-  showMsg("");
+  show(0, $("#authMsg"), "");
 }
-function showMsg(t, type="err"){ const m = $("#msg"); m.textContent = t; m.className = "msg " + type; }
-
 document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => setMode(t.dataset.mode)));
 $("#switch").addEventListener("click", e => { if (e.target.dataset.go) setMode(e.target.dataset.go) });
 document.querySelectorAll(".eye").forEach(b => b.addEventListener("click", () => {
-  const i = document.getElementById(b.dataset.for);
-  const show = i.type === "password";
-  i.type = show ? "text" : "password";
-  b.textContent = show ? "скрыть" : "показать";
+  const i = document.getElementById(b.dataset.for), s = i.type === "password";
+  i.type = s ? "text" : "password"; b.textContent = s ? "скрыть" : "показать";
 }));
-
 function ruError(err){
   const m = (err && err.message || "").toLowerCase();
   if (m.includes("invalid login credentials")) return "Неверный логин или пароль";
   if (m.includes("already registered") || m.includes("already been registered")) return "Такой логин уже занят";
-  if (m.includes("email not confirmed")) return "В Supabase не выключено подтверждение e-mail";
+  if (m.includes("should be different")) return "Новый пароль совпадает со старым";
   if (m.includes("password")) return "Пароль слишком простой или короткий";
   if (m.includes("rate limit")) return "Слишком много попыток, подождите немного";
-  if (m.includes("fetch")) return "Нет связи с сервером";
+  if (m.includes("fetch") || m.includes("network")) return "Нет связи с сервером";
   return "Ошибка: " + (err && err.message || "неизвестная");
 }
-
-$("#form").addEventListener("submit", async e => {
+$("#authForm").addEventListener("submit", async e => {
   e.preventDefault();
-  if (!sb) return showMsg("Сайт ещё не подключён к базе: впишите SUPABASE_URL и SUPABASE_KEY");
-  const login = $("#login").value.trim();
-  const pass = $("#pass").value;
-  if (!login || !pass) return showMsg("Заполните логин и пароль");
-  if (!/^[a-zA-Z0-9_.\-]{3,32}$/.test(login)) return showMsg("Логин: 3–32 символа, латиница, цифры, _ . -");
-
-  const btn = $("#submit"); btn.disabled = true; showMsg("Подождите…", "ok");
+  const msg = $("#authMsg"), login = $("#login").value.trim(), pass = $("#pass").value;
+  if (!login || !pass) return show(0, msg, "Заполните логин и пароль");
+  if (!/^[a-zA-Z0-9_.\-]{3,32}$/.test(login)) return show(0, msg, "Логин: 3–32 символа, латиница, цифры, _ . -");
+  const btn = $("#authSubmit"); btn.disabled = true; show(0, msg, "Подождите…", "ok");
   try{
     if (mode === "register"){
-      if (pass.length < 6) return showMsg("Пароль должен быть не короче 6 символов");
-      if (pass !== $("#pass2").value) return showMsg("Пароли не совпадают");
-      const { data, error } = await sb.auth.signUp({
-        email: toEmail(login), password: pass,
-        options: { data: { username: login } }
-      });
-      if (error) return showMsg(ruError(error));
-      if (!data.session) return showMsg("Аккаунт создан, но в Supabase включено подтверждение e-mail — выключите его");
+      if (pass.length < 6) return show(0, msg, "Пароль должен быть не короче 6 символов");
+      if (pass !== $("#pass2").value) return show(0, msg, "Пароли не совпадают");
+      const { data, error } = await sb.auth.signUp({ email: toEmail(login), password: pass, options:{ data:{ username: login } } });
+      if (error) return show(0, msg, ruError(error));
+      if (!data.session) return show(0, msg, "Аккаунт создан, но вход не выполнен — попробуйте войти");
     } else {
       const { error } = await sb.auth.signInWithPassword({ email: toEmail(login), password: pass });
-      if (error) return showMsg(ruError(error));
+      if (error) return show(0, msg, ruError(error));
     }
-    $("#form").reset(); showMsg("");
-  } catch(err){
-    showMsg(ruError(err));
-  } finally { btn.disabled = false; }
+    $("#authForm").reset(); show(0, msg, "");
+  } catch(err){ show(0, msg, ruError(err)); }
+  finally { btn.disabled = false; }
 });
 
-function showHome(user){
-  $("#who").textContent = (user.user_metadata && user.user_metadata.username) || user.email.split("@")[0];
-  $("#auth").classList.add("hidden");
-  $("#home").classList.remove("hidden");
-  document.title = "Karacikov";
-}
-function showAuth(){
-  $("#home").classList.add("hidden");
-  $("#auth").classList.remove("hidden");
-  document.title = "Karacikov — вход";
-  setMode(mode);
-}
-$("#logout").addEventListener("click", async () => { if (sb) await sb.auth.signOut(); });
+/* ================== СОСТОЯНИЕ ================== */
+let me = null;            // профиль текущего пользователя
+let chats = [];           // список чатов
+let openConv = null;      // открытый чат {conversation_id, other_*}
+let lastShown = null;     // дата последнего показанного сообщения (для разделителей)
+let channel = null;
 
-/* ---------- Старт: Supabase сам помнит вход ---------- */
-if (sb){
-  sb.auth.onAuthStateChange((_event, session) => session ? showHome(session.user) : showAuth());
-} else {
-  showAuth();
-  showMsg("Сайт ещё не подключён к базе: впишите SUPABASE_URL и SUPABASE_KEY");
+async function enterApp(user){
+  $("#auth").classList.add("hidden");
+  $("#app").classList.remove("hidden");
+  let { data } = await sb.from("profiles").select("*").eq("id", user.id).maybeSingle();
+  me = data || { id: user.id, username: (user.user_metadata && user.user_metadata.username) || user.email.split("@")[0], created_at: user.created_at };
+  renderProfile();
+  await loadChats();
+  subscribe();
+  if (!$("#view-search").classList.contains("hidden")) runSearch();
 }
+function leaveApp(){
+  if (channel){ sb.removeChannel(channel); channel = null; }
+  me = null; chats = []; closeConv();
+  $("#app").classList.add("hidden");
+  $("#auth").classList.remove("hidden");
+  setMode("login");
+}
+
+/* ---------- Навигация ---------- */
+function goView(v){
+  document.querySelectorAll(".nav button").forEach(b => b.classList.toggle("active", b.dataset.view === v));
+  ["chats","search","profile"].forEach(n => $("#view-"+n).classList.toggle("hidden", n !== v));
+  if (v === "search"){ runSearch(); setTimeout(() => $("#searchInput").focus(), 50); }
+  if (v === "chats") loadChats();
+}
+document.querySelectorAll(".nav button").forEach(b => b.addEventListener("click", () => goView(b.dataset.view)));
+
+/* ================== ЧАТЫ ================== */
+async function loadChats(){
+  const { data, error } = await sb.rpc("list_my_chats");
+  if (error) return;
+  chats = data || [];
+  renderChatList();
+}
+function renderChatList(){
+  const box = $("#chatList"); box.innerHTML = "";
+  const total = chats.reduce((s,c) => s + Number(c.unread||0), 0);
+  const badge = $("#unreadBadge"); badge.textContent = total > 99 ? "99+" : total; badge.classList.toggle("hidden", !total);
+  document.title = total ? `(${total}) Karacikov` : "Karacikov";
+
+  if (!chats.length){
+    const e = el("div","empty","Пока нет переписок. Найдите собеседника и напишите первым.");
+    const b = el("button","btn","Найти людей"); b.type = "button"; b.onclick = () => goView("search");
+    e.appendChild(el("br")); e.appendChild(b); box.appendChild(e); return;
+  }
+  for (const c of chats){
+    const it = el("div","chat-item" + (openConv && openConv.conversation_id === c.conversation_id ? " active":""));
+    const av = el("div","avatar"); avatar(av, c.other_display_name, c.other_username);
+    const meta = el("div","meta");
+    const r1 = el("div","row1"); r1.append(el("div","name", c.other_display_name || c.other_username), el("div","time", fmtListTime(c.last_body ? c.last_message_at : null)));
+    const r2 = el("div","row2");
+    const pv = c.last_body ? (c.last_sender === me.id ? "Вы: " : "") + c.last_body : "Нет сообщений";
+    r2.appendChild(el("div","preview", pv));
+    if (Number(c.unread)) r2.appendChild(el("div","unread", c.unread));
+    meta.append(r1, r2); it.append(av, meta);
+    it.onclick = () => openChat(c);
+    box.appendChild(it);
+  }
+}
+
+async function openChat(c){
+  openConv = c;
+  goViewSilently("chats");
+  $("#view-chats").classList.add("open"); $("#app").classList.add("in-conv");
+  $("#convEmpty").classList.add("hidden"); $("#convBox").classList.remove("hidden");
+  avatar($("#convAvatar"), c.other_display_name, c.other_username);
+  $("#convName").textContent = c.other_display_name || c.other_username;
+  $("#convLogin").textContent = "@" + c.other_username;
+  const list = $("#messages"); list.innerHTML = ""; lastShown = null;
+  list.appendChild(el("div","empty","Загрузка…"));
+  renderChatList();
+
+  const { data, error } = await sb.from("messages").select("id,sender_id,body,created_at")
+    .eq("conversation_id", c.conversation_id).order("created_at",{ascending:false}).limit(200);
+  if (openConv !== c) return;
+  list.innerHTML = "";
+  if (error){ list.appendChild(el("div","empty","Не удалось загрузить сообщения")); return; }
+  const msgs = (data || []).reverse();
+  if (!msgs.length) list.appendChild(el("div","empty","Напишите первое сообщение 👋"));
+  msgs.forEach(addBubble);
+  scrollDown();
+  markRead();
+  if (window.innerWidth > 760) $("#msgInput").focus();
+}
+function goViewSilently(v){
+  document.querySelectorAll(".nav button").forEach(b => b.classList.toggle("active", b.dataset.view === v));
+  ["chats","search","profile"].forEach(n => $("#view-"+n).classList.toggle("hidden", n !== v));
+}
+function closeConv(){
+  openConv = null;
+  $("#view-chats").classList.remove("open"); $("#app").classList.remove("in-conv");
+  $("#convBox").classList.add("hidden"); $("#convEmpty").classList.remove("hidden");
+  renderChatList();
+}
+$("#backBtn").onclick = closeConv;
+
+function addBubble(m){
+  const list = $("#messages");
+  const emptyNote = list.querySelector(".empty"); if (emptyNote) emptyNote.remove();
+  if (m.id && list.querySelector(`[data-id="${m.id}"]`)) return;
+  if (!lastShown || !sameDay(lastShown, m.created_at)) list.appendChild(el("div","day", fmtDay(m.created_at)));
+  lastShown = m.created_at;
+  const b = el("div","bubble " + (m.sender_id === me.id ? "mine" : "theirs") + (m.pending ? " pending" : ""));
+  if (m.id) b.dataset.id = m.id;
+  b.appendChild(document.createTextNode(m.body));
+  b.appendChild(el("span","t", fmtTime(m.created_at)));
+  list.appendChild(b);
+  return b;
+}
+function scrollDown(){ const l = $("#messages"); l.scrollTop = l.scrollHeight; }
+function nearBottom(){ const l = $("#messages"); return l.scrollHeight - l.scrollTop - l.clientHeight < 120; }
+
+async function markRead(){
+  if (!openConv) return;
+  const c = chats.find(x => x.conversation_id === openConv.conversation_id);
+  if (c && Number(c.unread)){ c.unread = 0; renderChatList(); }
+  await sb.from("conversation_members").update({ last_read_at: new Date((lastShown ? new Date(lastShown).getTime() : Date.now()) + 1).toISOString() })
+    .eq("conversation_id", openConv.conversation_id).eq("user_id", me.id);
+}
+
+/* ---------- Отправка ---------- */
+const input = $("#msgInput");
+function autosize(){ input.style.height = "auto"; input.style.height = Math.min(input.scrollHeight, 140) + "px"; $("#sendBtn").disabled = !input.value.trim(); }
+input.addEventListener("input", autosize);
+input.addEventListener("keydown", e => {
+  if (e.key === "Enter" && !e.shiftKey && !e.isComposing && window.innerWidth > 760){ e.preventDefault(); $("#composer").requestSubmit(); }
+});
+$("#composer").addEventListener("submit", async e => {
+  e.preventDefault();
+  const body = input.value.trim();
+  if (!body || !openConv) return;
+  input.value = ""; autosize();
+  const temp = addBubble({ sender_id: me.id, body, created_at: new Date().toISOString(), pending: true });
+  scrollDown();
+  const { data, error } = await sb.from("messages").insert({ conversation_id: openConv.conversation_id, body }).select().single();
+  if (error){
+    temp.classList.remove("pending"); temp.style.outline = "1px solid var(--danger)";
+    temp.title = "Не отправлено"; temp.lastChild.textContent = "не отправлено";
+    input.value = body; autosize(); return;
+  }
+  if ($("#messages").querySelector(`[data-id="${data.id}"]`)) temp.remove();
+  else { temp.dataset.id = data.id; temp.classList.remove("pending"); }
+  loadChats();
+});
+
+/* ---------- Новые сообщения в реальном времени ---------- */
+let reloadTimer = null;
+function subscribe(){
+  if (channel) sb.removeChannel(channel);
+  channel = sb.channel("messages-" + me.id)
+    .on("postgres_changes", { event: "INSERT", schema: "public", table: "messages" }, payload => {
+      const m = payload.new;
+      if (openConv && m.conversation_id === openConv.conversation_id && !$("#view-chats").classList.contains("hidden")){
+        const wasBottom = nearBottom();
+        const mine = m.sender_id === me.id;
+        if (!(mine && [...document.querySelectorAll(".bubble.pending")].length)) addBubble(m);
+        if (wasBottom || mine) scrollDown();
+        if (!mine) markRead();
+      }
+      clearTimeout(reloadTimer); reloadTimer = setTimeout(loadChats, 300);
+    })
+    .subscribe();
+}
+
+/* ================== ПОИСК ================== */
+let searchTimer = null, searchSeq = 0;
+$("#searchInput").addEventListener("input", () => { clearTimeout(searchTimer); searchTimer = setTimeout(runSearch, 250); });
+async function runSearch(){
+  if (!me) return;
+  const q = $("#searchInput").value.trim().replace(/[%_,()\\]/g, "");
+  const seq = ++searchSeq;
+  let req = sb.from("profiles").select("id,username,display_name,bio,created_at").neq("id", me.id).limit(30);
+  if (q) req = req.or(`username.ilike.%${q}%,display_name.ilike.%${q}%`).order("username");
+  else req = req.order("created_at",{ascending:false});
+  const { data, error } = await req;
+  if (seq !== searchSeq) return;
+  $("#searchLabel").textContent = q ? "Результаты поиска" : "Новые пользователи";
+  const box = $("#searchResults"); box.innerHTML = "";
+  if (error){ box.appendChild(el("div","empty","Ошибка поиска")); return; }
+  if (!data.length){ box.appendChild(el("div","empty", q ? "Никого не нашлось" : "Пока здесь только вы. Позовите друзей!")); return; }
+  for (const p of data){
+    const card = el("div","user-card");
+    const av = el("div","avatar"); avatar(av, p.display_name, p.username);
+    const meta = el("div","meta");
+    meta.append(el("div","name", shownName(p)), el("div","login","@" + p.username));
+    if (p.bio) meta.appendChild(el("div","bio", p.bio));
+    const b = el("button","btn","Написать"); b.type = "button";
+    b.onclick = () => startChat(p, b);
+    card.append(av, meta, b); box.appendChild(card);
+  }
+}
+async function startChat(p, btn){
+  btn.disabled = true;
+  const { data: convId, error } = await sb.rpc("get_or_create_dm", { other: p.id });
+  btn.disabled = false;
+  if (error){ btn.textContent = "Ошибка"; return; }
+  await loadChats();
+  const c = chats.find(x => x.conversation_id === convId) ||
+    { conversation_id: convId, other_id: p.id, other_username: p.username, other_display_name: p.display_name, unread: 0 };
+  openChat(c);
+}
+
+/* ================== ЛИЧНЫЙ КАБИНЕТ ================== */
+function renderProfile(){
+  avatar($("#meAvatar"), me.display_name, me.username);
+  $("#meName").textContent = shownName(me);
+  $("#meLogin").textContent = "@" + me.username;
+  $("#meSince").textContent = "С нами с " + new Date(me.created_at).toLocaleDateString("ru-RU",{day:"numeric",month:"long",year:"numeric"});
+  $("#pfName").value = me.display_name || "";
+  $("#pfBio").value = me.bio || "";
+  $("#bioCount").textContent = $("#pfBio").value.length;
+}
+$("#pfBio").addEventListener("input", () => $("#bioCount").textContent = $("#pfBio").value.length);
+$("#profileForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const msg = $("#pfMsg");
+  const display_name = $("#pfName").value.trim() || null, bio = $("#pfBio").value.trim() || null;
+  const { data, error } = await sb.from("profiles").update({ display_name, bio }).eq("id", me.id).select().single();
+  if (error) return show(0, msg, "Не удалось сохранить");
+  me = data; renderProfile(); show(0, msg, "Сохранено", "ok");
+  setTimeout(() => show(0, msg, ""), 2500);
+});
+$("#passForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const msg = $("#passMsg"), p1 = $("#np1").value, p2 = $("#np2").value;
+  if (p1.length < 6) return show(0, msg, "Пароль должен быть не короче 6 символов");
+  if (p1 !== p2) return show(0, msg, "Пароли не совпадают");
+  const { error } = await sb.auth.updateUser({ password: p1 });
+  if (error) return show(0, msg, ruError(error));
+  $("#passForm").reset(); show(0, msg, "Пароль изменён", "ok");
+});
+$("#logoutBtn").onclick = () => sb.auth.signOut();
+
+/* ================== СТАРТ ================== */
+let currentUserId; // undefined до первого события
+sb.auth.onAuthStateChange((event, session) => {
+  const uid = session ? session.user.id : null;
+  if (uid === currentUserId) return;          // обновление токена — ничего не делаем
+  currentUserId = uid;
+  if (session) setTimeout(() => enterApp(session.user), 0);
+  else leaveApp();
+});
 </script>
 </body>
 </html>
