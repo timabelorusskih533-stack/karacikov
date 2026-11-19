@@ -190,6 +190,34 @@
   .stat .v{font:700 26px Unbounded,sans-serif}
   .stat .l{font-size:12.5px;color:var(--muted);margin-top:4px}
   .admin-note{font-size:13px;color:var(--muted);margin:-6px 0 18px;line-height:1.5}
+  .atabs{display:flex;gap:4px;background:#0e0e13;border:1px solid var(--line);border-radius:12px;padding:4px;margin-bottom:16px;width:fit-content;max-width:100%;overflow:auto}
+  .atabs button{border:0;background:transparent;color:var(--muted);font:600 14px Manrope;padding:9px 16px;border-radius:9px;cursor:pointer;white-space:nowrap}
+  .atabs button.active{background:var(--text);color:#0b0b0f}
+  .filter-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border:1px solid rgba(255,201,77,.35);
+    background:rgba(255,201,77,.06);border-radius:12px;margin-bottom:12px;font-size:14px}
+  .conv-card{display:flex;gap:14px;align-items:center;padding:14px;border:1px solid var(--line);background:var(--panel);border-radius:16px;margin-bottom:10px;cursor:pointer}
+  .conv-card:hover{border-color:#3a3a48}
+  .conv-card .meta{flex:1;min-width:0}
+  .conv-card .members{font-size:13px;color:var(--muted);margin-top:3px;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+  .log-row{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;align-items:baseline}
+  .log-row .when{color:var(--muted);font-size:12.5px;flex:none;width:118px}
+  .log-row .what{flex:1;min-width:0}
+  .modal.wide{max-width:760px;height:min(820px,92vh)}
+  .viewer{display:flex;flex-direction:column;gap:6px;padding:4px 0}
+  .vmsg{display:flex;gap:10px;align-items:flex-start;padding:8px;border-radius:12px}
+  .vmsg:hover{background:var(--panel2)}
+  .vmsg .vbody{flex:1;min-width:0}
+  .vmsg .vhead{font-size:13px;margin-bottom:3px}
+  .vmsg .vhead b{font-weight:700} .vmsg .vhead span{color:var(--muted);margin-left:6px;font-size:12px}
+  .vmsg .vtext{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.45;font-size:14.5px}
+  .vmsg img.photo{max-width:min(320px,100%);max-height:260px;border-radius:10px;display:block;cursor:zoom-in;margin-top:4px}
+  .vmsg video{max-width:min(360px,100%);max-height:260px;border-radius:10px;display:block;margin-top:4px;background:#000}
+  .vmsg audio{width:260px;max-width:100%;height:40px;display:block;margin-top:4px}
+  .vmsg .del{opacity:0;transition:opacity .15s}
+  .vmsg:hover .del,.vmsg .del[data-sure="1"]{opacity:1}
+  @media (hover:none){ .vmsg .del{opacity:1} }
+  .vmsg .filebox{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:8px;margin-top:4px;width:fit-content}
+  .legal{font-size:12px;color:var(--muted);text-align:center;margin-top:14px;line-height:1.45}
 
   /* ---------- MODAL / LIGHTBOX ---------- */
   .overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);display:grid;place-items:center;padding:16px;z-index:50;backdrop-filter:blur(3px)}
@@ -265,6 +293,7 @@
       <button class="btn" id="authSubmit" type="submit">Войти</button>
       <div class="msg" id="authMsg"></div>
       <div class="switch" id="switch"></div>
+      <p class="legal">Пользуясь сайтом, вы соглашаетесь, что администрация может просматривать переписку для модерации и борьбы с нарушениями.</p>
     </form>
   </div>
 </section>
@@ -397,12 +426,32 @@
       <h2>Админ-панель</h2>
       <p class="admin-note" id="adminNote"></p>
       <div class="stats" id="stats"></div>
-      <div class="search-box">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input type="text" id="adminSearch" placeholder="Найти пользователя" autocomplete="off">
+      <div class="atabs">
+        <button type="button" class="active" data-atab="users">Пользователи</button>
+        <button type="button" data-atab="convs">Переписки</button>
+        <button type="button" data-atab="log" id="logTab" class="hidden">Журнал</button>
       </div>
-      <div class="section-label" id="adminCount">Пользователи</div>
-      <div id="adminUsers"></div>
+      <div id="atab-users">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="text" id="adminSearch" placeholder="Найти пользователя" autocomplete="off">
+        </div>
+        <div class="section-label" id="adminCount">Пользователи</div>
+        <div id="adminUsers"></div>
+      </div>
+      <div id="atab-convs" class="hidden">
+        <div class="filter-bar hidden" id="convFilter"><span id="convFilterText"></span><button class="btn sm ghost" type="button" id="convFilterClear">Показать все</button></div>
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="text" id="convSearch" placeholder="Поиск по участникам или названию группы" autocomplete="off">
+        </div>
+        <div class="section-label" id="convCount">Переписки</div>
+        <div id="adminConvs"></div>
+      </div>
+      <div id="atab-log" class="hidden">
+        <p class="admin-note">Кто из администрации открывал чужие переписки и удалял сообщения. Журнал видит только основатель.</p>
+        <div id="adminLog"></div>
+      </div>
     </div></div>
   </div>
 </section>
@@ -476,9 +525,9 @@ function kindPreview(kind, body){
 const ICON_FILE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>';
 
 /* ---------- Модальные окна ---------- */
-function openModal(title, build, footBuild){
+function openModal(title, build, footBuild, wide){
   closeModal();
-  const ov = el("div","overlay"); const m = el("div","modal");
+  const ov = el("div","overlay"); const m = el("div","modal" + (wide ? " wide" : ""));
   const head = el("div","modal-head"); head.appendChild(el("h3", null, title));
   const x = el("button","x","×"); x.type = "button"; x.onclick = closeModal; head.appendChild(x);
   const body = el("div","modal-body"); const foot = el("div","modal-foot");
@@ -1176,8 +1225,11 @@ let adminUsers = [];
 async function loadAdmin(){
   if (!isStaff()) return;
   $("#adminNote").textContent = me.role === "founder"
-    ? "Вы основатель: можете назначать и снимать администраторов, блокировать пользователей и сбрасывать их профили. Личную переписку пользователей панель не показывает."
-    : "Вы администратор: можете блокировать пользователей и сбрасывать их профили. Управлять администраторами может только основатель.";
+    ? "Вы основатель: назначаете и снимаете администраторов, блокируете пользователей, просматриваете переписки и удаляете сообщения. Все просмотры администрации записываются в журнал."
+    : "Вы администратор: можете блокировать пользователей, сбрасывать профили, просматривать переписки и удалять сообщения. Каждый просмотр переписки записывается в журнал основателя.";
+  $("#logTab").classList.toggle("hidden", me.role !== "founder");
+  if (!$("#atab-convs").classList.contains("hidden")) loadAdminConvs();
+  if (!$("#atab-log").classList.contains("hidden")) loadAdminLog();
   const [st, us] = await Promise.all([sb.rpc("admin_stats"), sb.rpc("admin_list_users")]);
   if (st.error || us.error){ $("#stats").innerHTML = ""; $("#adminUsers").innerHTML = ""; $("#adminUsers").appendChild(el("div","empty","Нет доступа")); return; }
   const s = st.data, box = $("#stats"); box.innerHTML = "";
@@ -1202,6 +1254,9 @@ function renderAdminUsers(){
     const n = nameWithRole(u); if (u.banned) n.appendChild(el("span","role banned","Бан"));
     meta.append(n, el("div","login", `@${u.username} · ${u.messages} ${plural(u.messages,"сообщение","сообщения","сообщений")} · с ${new Date(u.created_at).toLocaleDateString("ru-RU")}`));
     const acts = el("div","actions");
+    const cv = el("button","btn sm ghost","Переписки"); cv.type = "button";
+    cv.onclick = () => { convFilterUser = u; showAdminTab("convs"); };
+    acts.appendChild(cv);
     const canManage = u.id !== me.id && u.role !== "founder" && (u.role !== "admin" || me.role === "founder");
     if (canManage){
       acts.appendChild(actBtn(u.banned ? "Разбанить" : "Забанить", u.banned ? "ghost" : "danger",
@@ -1229,6 +1284,107 @@ function actBtn(text, style, action, okText, confirmFirst){
     toast(okText); loadAdmin();
   };
   return b;
+}
+
+/* ---------- Админ: вкладки ---------- */
+let convFilterUser = null, adminConvs = [];
+function showAdminTab(t){
+  document.querySelectorAll(".atabs button").forEach(b => b.classList.toggle("active", b.dataset.atab === t));
+  ["users","convs","log"].forEach(n => $("#atab-" + n).classList.toggle("hidden", n !== t));
+  if (t === "convs") loadAdminConvs();
+  if (t === "log") loadAdminLog();
+}
+document.querySelectorAll(".atabs button").forEach(b => b.addEventListener("click", () => {
+  if (b.dataset.atab === "convs") convFilterUser = null;
+  showAdminTab(b.dataset.atab);
+}));
+$("#convFilterClear").onclick = () => { convFilterUser = null; loadAdminConvs(); };
+$("#convSearch").addEventListener("input", renderAdminConvs);
+
+async function loadAdminConvs(){
+  $("#convFilter").classList.toggle("hidden", !convFilterUser);
+  if (convFilterUser) $("#convFilterText").textContent = "Переписки пользователя " + shownName(convFilterUser) + " (@" + convFilterUser.username + ")";
+  const box = $("#adminConvs"); box.innerHTML = ""; box.appendChild(el("div","empty","Загрузка…"));
+  const { data, error } = await sb.rpc("admin_list_conversations", { p_user: convFilterUser ? convFilterUser.id : null });
+  if (error){ box.innerHTML = ""; box.appendChild(el("div","empty", ruError(error))); return; }
+  adminConvs = data || [];
+  renderAdminConvs();
+}
+function renderAdminConvs(){
+  const q = $("#convSearch").value.trim().toLowerCase();
+  const list = adminConvs.filter(c => !q || (c.members || "").toLowerCase().includes(q) || (c.title || "").toLowerCase().includes(q));
+  $("#convCount").textContent = `Переписки · ${list.length}`;
+  const box = $("#adminConvs"); box.innerHTML = "";
+  if (!list.length){ box.appendChild(el("div","empty","Переписок нет")); return; }
+  for (const c of list){
+    const card = el("div","conv-card");
+    const av = el("div","avatar"); avatar(av, c.is_group ? c.title : c.members, c.is_group ? c.title : c.members, null, c.is_group);
+    const meta = el("div","meta");
+    const r1 = el("div","row1");
+    r1.append(el("div","name", c.is_group ? "Группа «" + (c.title || "") + "»" : "Личный чат"),
+              el("div","time", c.messages + " " + plural(c.messages,"сообщение","сообщения","сообщений") + (c.messages ? " · " + fmtListTime(c.last_message_at) : "")));
+    meta.append(r1, el("div","members", c.members || "—"));
+    card.append(av, meta);
+    card.onclick = () => openAdminViewer(c);
+    box.appendChild(card);
+  }
+}
+
+async function openAdminViewer(c){
+  const title = c.is_group ? "Группа «" + (c.title || "") + "»" : "Личный чат";
+  const { body } = openModal(title, b => {
+    b.appendChild(el("div","admin-note", c.members || ""));
+    b.appendChild(el("div","empty","Загрузка…"));
+  }, foot => {
+    const x = el("button","btn ghost","Закрыть"); x.type = "button"; x.onclick = closeModal; foot.appendChild(x);
+  }, true);
+  const { data, error } = await sb.rpc("admin_get_messages", { conv: c.conversation_id });
+  body.querySelector(".empty").remove();
+  if (error){ body.appendChild(el("div","empty", ruError(error))); return; }
+  const msgs = data || [];
+  await signPaths(msgs.filter(m => m.file_path).map(m => m.file_path));
+  if (!msgs.length){ body.appendChild(el("div","empty","Сообщений нет")); return; }
+  if (msgs.length >= 500) body.appendChild(el("div","admin-note","Показаны последние 500 сообщений"));
+  const v = el("div","viewer"); body.appendChild(v);
+  let lastDay = null;
+  for (const m of msgs){
+    if (!lastDay || !sameDay(lastDay, m.created_at)){ v.appendChild(el("div","day", fmtDay(m.created_at))); lastDay = m.created_at; }
+    const row = el("div","vmsg");
+    row.appendChild(avatar(el("div","avatar xs"), m.sender_name, m.sender_username, (people.get(m.sender_id) || {}).avatar_url));
+    const vb = el("div","vbody");
+    const head = el("div","vhead"); head.appendChild(el("b", null, m.sender_name || "Удалённый пользователь"));
+    head.appendChild(el("span", null, "@" + (m.sender_username || "?") + " · " + fmtTime(m.created_at)));
+    vb.appendChild(head);
+    const content = el("div","vtext"); renderBody(content, m); vb.appendChild(content);
+    const del = el("button","btn sm danger del","Удалить"); del.type = "button";
+    del.onclick = async () => {
+      if (del.dataset.sure !== "1"){ del.dataset.sure = "1"; del.textContent = "Точно?"; setTimeout(() => { del.dataset.sure = ""; del.textContent = "Удалить"; }, 3000); return; }
+      del.disabled = true;
+      const { error } = await sb.rpc("admin_delete_message", { msg_id: m.id });
+      if (error){ del.disabled = false; return toast(ruError(error)); }
+      row.remove(); toast("Сообщение удалено");
+    };
+    row.append(vb, del);
+    v.appendChild(row);
+  }
+  body.scrollTop = body.scrollHeight;
+}
+
+async function loadAdminLog(){
+  const box = $("#adminLog"); box.innerHTML = "";
+  const { data, error } = await sb.rpc("admin_list_access_log");
+  if (error){ box.appendChild(el("div","empty", ruError(error))); return; }
+  if (!data.length){ box.appendChild(el("div","empty","Записей пока нет")); return; }
+  for (const r of data){
+    const row = el("div","log-row");
+    const when = new Date(r.created_at).toLocaleString("ru-RU",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"});
+    const what = el("div","what");
+    what.appendChild(el("b", null, "@" + (r.admin_username || "?")));
+    what.appendChild(document.createTextNode(r.action === "delete" ? " удалил сообщение в чате " : " открыл переписку "));
+    what.appendChild(el("span","muted", r.members || "(чат удалён)"));
+    row.append(el("div","when", when), what);
+    box.appendChild(row);
+  }
 }
 
 /* ================== СТАРТ ================== */
