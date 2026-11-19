@@ -316,6 +316,9 @@
   .toggle input:checked + .sw{background:var(--accent)}
   .toggle input:checked + .sw::after{transform:translateX(18px)}
   .toggle .muted{display:block;font-size:12.5px;margin-top:2px}
+  .box label.toggle,.group-form label.toggle,label.toggle{display:flex!important;align-items:flex-start;gap:12px;margin:0;font-size:14px;color:var(--text)}
+  .group-form label.toggle{margin-top:14px}
+  .toggle .sw{display:inline-block}
 
   /* ---------- ADMIN ---------- */
   .stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:22px}
