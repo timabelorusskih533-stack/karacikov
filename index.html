@@ -483,6 +483,8 @@
   .draft{color:var(--danger);font-weight:600}
   .arch-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 12px;margin-bottom:4px;border-radius:14px;cursor:pointer;color:var(--muted);font-weight:600;font-size:14px;transition:background .2s}
   .arch-row:hover{background:var(--panel);color:var(--text)}
+  .clean-row{display:block;width:100%;text-align:left;border:1px dashed var(--line2);background:transparent;color:var(--muted);font:600 13.5px Manrope;padding:10px 12px;margin-bottom:6px;border-radius:14px;cursor:pointer;transition:background .2s,color .2s,border-color .2s;animation:fadeIn .25s var(--ease)}
+  .clean-row:hover{background:var(--panel);color:var(--danger);border-color:var(--danger-line)}
   .invite{margin-top:18px}
   .invite-row{display:flex;gap:6px;align-items:center}
   .invite-row input{font-size:13px;padding:9px 12px}
@@ -2227,6 +2229,15 @@ function renderChatList(){
     h.onclick = () => { showArchive = true; renderChatList(); };
     box.appendChild(h);
   }
+  if (!showArchive){
+    const gone = active.filter(isGoneDm);
+    if (gone.length){
+      const b = el("button","clean-row"); b.type = "button";
+      b.textContent = "🧹  Удалить чаты удалённых аккаунтов · " + gone.length;
+      b.onclick = () => cleanupDeleted(b);
+      box.appendChild(b);
+    }
+  }
   const list = showArchive ? arch : active;
   if (!list.length){
     const e = el("div","empty", showArchive ? "В архиве пусто" : "Пока нет переписок. Найдите собеседника или создайте группу.");
@@ -2280,6 +2291,7 @@ function chatItemMenu(c, anchor){
   if (c.kind !== "saved") items.push({ text: c.muted ? "🔔  Включить уведомления" : "🔕  Выключить уведомления", fn: () => { closeMenu(); setMuted(c, !c.muted); } });
   if (Number(c.unread)) items.push({ text: "✓  Отметить прочитанным", fn: async () => {
     closeMenu(); await sb.from("conversation_members").update({ last_read_at: new Date().toISOString() }).eq("conversation_id", c.conversation_id).eq("user_id", me.id); loadChats(); } });
+  items.push(...deleteItems(c));
   popMenu(anchor, items);
 }
 
@@ -3287,6 +3299,7 @@ function openConvMenu(anchor){
     if (b.dataset.sure !== "1"){ b.dataset.sure = "1"; b.textContent = c.kind === "channel" ? "Точно отписаться?" : "Точно выйти?"; return; }
     closeMenu(); leaveGroupFlow(c);
   } });
+  items.push(...deleteItems(c).filter(it => !c.is_group || it.forAll));
   popMenu(anchor, items);
 }
 
@@ -3490,6 +3503,48 @@ async function handleJoinParam(){
     };
     foot.append(c, ok);
   });
+}
+
+/* ---------- Удаление чатов ---------- */
+function isGoneDm(c){ return c.kind === "dm" && !c.other_id; }
+function confirmDo(b, fn, q){ if (b.dataset.sure !== "1"){ b.dataset.sure = "1"; b.textContent = q || "Точно удалить?"; return; } closeMenu(); fn(); }
+function afterDelete(c, text){
+  if (openConv && openConv.conversation_id === c.conversation_id) closeConv();
+  chats = chats.filter(x => x.conversation_id !== c.conversation_id);
+  setDraft(c.conversation_id, "");
+  renderChatList(); loadChats(); toast(text);
+}
+async function deleteChat(c, forAll){
+  const { error } = await sb.rpc("delete_chat", { conv: c.conversation_id, for_all: forAll });
+  if (error) return toast(ruError(error));
+  afterDelete(c, forAll ? "Чат удалён у обоих" : "Чат удалён");
+}
+function deleteItems(c){
+  const items = [];
+  if (c.kind === "dm" || c.kind === "saved"){
+    if (isGoneDm(c) || c.kind === "saved" || c.other_is_system){
+      items.push({ text: "🗑  Удалить чат", danger: true, fn: b => confirmDo(b, () => deleteChat(c, true)) });
+    } else {
+      items.push({ text: "🗑  Удалить у себя", danger: true, fn: b => confirmDo(b, () => deleteChat(c, false), "Удалить только у себя?") });
+      items.push({ text: "🗑  Удалить у обоих", danger: true, fn: b => confirmDo(b, () => deleteChat(c, true), "Удалить переписку у обоих?") });
+    }
+  } else if (c.is_group){
+    items.push({ text: c.kind === "channel" ? "🗑  Отписаться и удалить" : "🗑  Выйти и удалить", danger: true, fn: b => confirmDo(b, () => leaveGroupFlow(c), "Точно?") });
+    if (c.my_role === "owner") items.push({ forAll: true, text: c.kind === "channel" ? "💥  Удалить канал для всех" : "💥  Удалить группу для всех", danger: true, fn: b => confirmDo(b, async () => {
+      const { error } = await sb.rpc("delete_group", { conv: c.conversation_id });
+      if (error) return toast(ruError(error));
+      afterDelete(c, c.kind === "channel" ? "Канал удалён" : "Группа удалена");
+    }, "Удалить навсегда для всех?") });
+  }
+  return items;
+}
+async function cleanupDeleted(btn){
+  const list = chats.filter(isGoneDm);
+  if (btn.dataset.sure !== "1"){ btn.dataset.sure = "1"; btn.textContent = `Удалить ${list.length} ${plural(list.length,"чат","чата","чатов")}? Нажмите ещё раз`; return; }
+  btn.disabled = true; btn.textContent = "Удаление…";
+  for (const c of list) await sb.rpc("delete_chat", { conv: c.conversation_id, for_all: true });
+  if (openConv && list.some(c => c.conversation_id === openConv.conversation_id)) closeConv();
+  await loadChats(); toast("Удалено чатов: " + list.length);
 }
 
 /* ================== СТАРТ ================== */
