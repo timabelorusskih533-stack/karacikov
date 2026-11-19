@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="google" content="notranslate">
-<meta name="theme-color" content="#0b0b0f">
+<meta name="theme-color" content="#17212b">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -19,7 +19,7 @@
     let t = "system"; try { t = localStorage.getItem("kc_theme") || "system"; } catch(e){}
     const dark = t === "dark" || (t === "system" && !(window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches));
     document.documentElement.dataset.theme = dark ? "dark" : "light";
-    try { const r = document.documentElement.dataset; r.accent = localStorage.getItem("kc_accent") || "lime"; r.wall = localStorage.getItem("kc_wall") || "none"; r.font = localStorage.getItem("kc_font") || "m"; } catch(e){}
+    try { const r = document.documentElement.dataset; r.wall = localStorage.getItem("kc_wall") || "none"; r.font = localStorage.getItem("kc_font") || "m"; } catch(e){}
   })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,17 +31,19 @@
     --safe-b:env(safe-area-inset-bottom,0px);
   }
   [data-theme="dark"]{
-    --bg:#0b0b0f; --panel:#121218; --panel2:#18181f; --line:#24242e; --line2:#33333f; --text:#f2f2f5; --muted:#8a8a99;
-    --input:#0e0e13; --accent:#e8ff5a; --accent-ink:#0b0b0f; --danger:#ff6b6b; --danger-line:#4a2a2e; --ok:#5affb0;
-    --mine:#e8ff5a; --mine-ink:#111; --theirs:#1d1d27; --gold:#ffc94d; --admin:#7ab8ff; --ghost:#1c1c24; --online:#4ade80;
-    --shadow:0 20px 60px rgba(0,0,0,.5); --overlay:rgba(0,0,0,.6); --glow:rgba(232,255,90,.05); --chip:#22222c; --chip-mine:rgba(232,255,90,.14);
+    --bg:#0e1621; --panel:#17212b; --panel2:#1e2c3a; --line:#232f3d; --line2:#2f3d4d; --text:#f5f7fa; --muted:#7f91a4;
+    --input:#1e2a37; --accent:#5aa7f0; --accent-ink:#ffffff; --danger:#ef5b5b; --danger-line:#4a2a30; --ok:#5bd18b;
+    --mine:#2b5278; --mine-ink:#ffffff; --theirs:#182533; --gold:#f2c14e; --admin:#6ab3f3; --ghost:#1c2733; --online:#4fc56d;
+    --shadow:0 20px 60px rgba(0,0,0,.5); --overlay:rgba(0,0,0,.55); --glow:rgba(90,167,240,.06); --chip:#22303f; --chip-mine:rgba(90,167,240,.2);
+    --chatbg:#0e1621;
     color-scheme:dark;
   }
   [data-theme="light"]{
-    --bg:#f5f5f1; --panel:#ffffff; --panel2:#efefea; --line:#e3e3dc; --line2:#cfcfc6; --text:#16161a; --muted:#6c6c76;
-    --input:#f4f4f0; --accent:#d2f53c; --accent-ink:#141414; --danger:#d94848; --danger-line:#f0c8c8; --ok:#14945a;
-    --mine:#dcf94e; --mine-ink:#151515; --theirs:#ffffff; --gold:#b57c00; --admin:#2f6fd0; --ghost:#e6e6df; --online:#22a55a;
-    --shadow:0 20px 50px rgba(20,20,30,.14); --overlay:rgba(20,20,28,.35); --glow:rgba(170,200,0,.06); --chip:#efefea; --chip-mine:rgba(160,200,0,.18);
+    --bg:#f0f3f7; --panel:#ffffff; --panel2:#f2f5f8; --line:#e2e7ed; --line2:#ccd5df; --text:#0f1419; --muted:#707b87;
+    --input:#f2f5f8; --accent:#3390ec; --accent-ink:#ffffff; --danger:#e53935; --danger-line:#f6c9c9; --ok:#2f9e57;
+    --mine:#d7ebff; --mine-ink:#0f1419; --theirs:#ffffff; --gold:#b57c00; --admin:#2a7fd4; --ghost:#e8eef4; --online:#2fb35b;
+    --shadow:0 20px 50px rgba(20,40,70,.14); --overlay:rgba(15,25,40,.35); --glow:rgba(51,144,236,.07); --chip:#eef2f6; --chip-mine:rgba(51,144,236,.16);
+    --chatbg:#dfe9f3;
     color-scheme:light;
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -164,7 +166,7 @@
   .empty{padding:40px 24px;text-align:center;color:var(--muted);font-size:14px;line-height:1.5;animation:fadeIn .3s var(--ease)}
   .empty .btn{margin-top:14px}
 
-  .conv-pane{display:flex;flex-direction:column;min-height:0;background:radial-gradient(700px 500px at 100% 0%,var(--glow),transparent 60%),var(--bg)}
+  .conv-pane{display:flex;flex-direction:column;min-height:0;background:var(--chatbg)}
   #convBox{animation:fadeIn .22s var(--ease)}
   .conv-head{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--line);background:var(--panel)}
   .conv-title{display:flex;align-items:center;gap:12px;min-width:0;flex:1;cursor:pointer;border-radius:12px;padding:4px 6px;margin:-4px -6px;transition:background .2s var(--ease)}
@@ -443,7 +445,7 @@
   .media .rq{margin:4px 6px 6px}
   .ticks{margin-left:4px;letter-spacing:-3px;font-weight:700}
   .ticks.read{color:#2a7bff}
-  [data-theme="dark"] .mine .ticks.read{color:#1f6fe0}
+  [data-theme="dark"] .mine .ticks.read{color:#7cc4ff}
   .lp{display:block;margin-top:6px;padding:7px 10px;border-left:3px solid currentColor;border-radius:6px;background:#0001;text-decoration:none!important;color:inherit;max-width:340px;white-space:normal}
   .theirs .lp{background:var(--chip);border-color:var(--admin)}
   .lp-site{font-size:12px;font-weight:700;opacity:.8}
@@ -494,20 +496,15 @@
   .profile-top.colored{background-color:var(--panel)}
   .status-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
   .status-row input{width:74px;text-align:center;font-size:20px;padding:8px}
-  .emo-picks{display:flex;flex-wrap:wrap;gap:4px;flex:1}
-  .emo-pick{border:1px solid transparent;background:var(--panel2);border-radius:10px;font-size:18px;width:36px;height:36px;cursor:pointer;transition:transform .15s var(--ease),border-color .2s}
-  .emo-pick:hover{transform:scale(1.12)} .emo-pick.on{border-color:var(--accent)}
+  .emo-picks{display:flex;flex-wrap:wrap;gap:4px;flex:1 1 100%;max-height:168px;overflow-y:auto;padding:6px;border:1px solid var(--line);border-radius:14px;background:var(--input)}
+  .emo-pick{border:1px solid transparent;background:transparent;border-radius:10px;font-size:18px;width:36px;height:36px;cursor:pointer;transition:transform .15s var(--ease),border-color .2s}
+  .emo-pick:hover{transform:scale(1.12);background:var(--panel)} .emo-pick.on{border-color:var(--accent)}
   .swatches{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px}
   .swatch{width:30px;height:30px;border-radius:50%;border:2px solid transparent;cursor:pointer;outline:2px solid transparent;transition:transform .15s var(--ease),outline-color .2s}
   .swatch:hover{transform:scale(1.1)} .swatch.on{outline-color:var(--text);outline-offset:2px}
   .swatch.none{background:var(--panel2);color:var(--muted);font:600 15px Manrope}
   .sub-label{font:600 12.5px Manrope;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin:16px 0 8px}
   .box h3 + .sub-label{margin-top:4px}
-  .accent-picks{display:flex;gap:10px;flex-wrap:wrap}
-  .accent-dot{width:34px;height:34px;border-radius:50%;border:0;cursor:pointer;outline:2px solid transparent;outline-offset:3px;transition:transform .15s var(--ease),outline-color .2s}
-  .accent-dot:hover{transform:scale(1.1)} .accent-dot.on{outline-color:var(--text)}
-  .accent-dot[data-v="lime"]{background:#e8ff5a} .accent-dot[data-v="blue"]{background:#4c9dff} .accent-dot[data-v="violet"]{background:#9b7bff}
-  .accent-dot[data-v="pink"]{background:#ff6fb5} .accent-dot[data-v="orange"]{background:#ff9f43} .accent-dot[data-v="mint"]{background:#3ddc97}
   .stats.mini{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));margin-bottom:12px}
   .stats.mini .stat{padding:12px 14px} .stats.mini .stat .v{font-size:20px} .stats.mini .stat .l{font-size:12.5px}
   .me-link{display:block;margin-top:6px;color:var(--text);font-weight:600;word-break:break-all}
@@ -517,11 +514,6 @@
   .modal-foot.official-foot{align-items:flex-end}
   .modal-foot.official-foot textarea{flex:1;min-width:0;resize:none;margin:0}
   /* акценты */
-  html[data-accent="blue"]{--accent:#4c9dff!important;--accent-ink:#fff!important;--mine:#4c9dff!important;--mine-ink:#fff!important;--glow:rgba(76,157,255,.07)!important;--chip-mine:rgba(76,157,255,.16)!important}
-  html[data-accent="violet"]{--accent:#9b7bff!important;--accent-ink:#fff!important;--mine:#9b7bff!important;--mine-ink:#fff!important;--glow:rgba(155,123,255,.07)!important;--chip-mine:rgba(155,123,255,.16)!important}
-  html[data-accent="pink"]{--accent:#ff6fb5!important;--accent-ink:#1a0710!important;--mine:#ff6fb5!important;--mine-ink:#1a0710!important;--glow:rgba(255,111,181,.07)!important;--chip-mine:rgba(255,111,181,.16)!important}
-  html[data-accent="orange"]{--accent:#ff9f43!important;--accent-ink:#1a0d00!important;--mine:#ff9f43!important;--mine-ink:#1a0d00!important;--glow:rgba(255,159,67,.07)!important;--chip-mine:rgba(255,159,67,.16)!important}
-  html[data-accent="mint"]{--accent:#3ddc97!important;--accent-ink:#04170e!important;--mine:#3ddc97!important;--mine-ink:#04170e!important;--glow:rgba(61,220,151,.07)!important;--chip-mine:rgba(61,220,151,.16)!important}
   /* обои */
   html[data-wall="dots"] .messages{background-image:radial-gradient(color-mix(in srgb,var(--text) 11%,transparent) 1.2px,transparent 1.3px);background-size:22px 22px}
   html[data-wall="grid"] .messages{background-image:linear-gradient(color-mix(in srgb,var(--text) 6%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--text) 6%,transparent) 1px,transparent 1px);background-size:28px 28px}
@@ -761,8 +753,6 @@
           <button type="button" data-theme-set="light">Светлая</button>
           <button type="button" data-theme-set="system">Как в системе</button>
         </div>
-        <div class="sub-label">Цвет акцента</div>
-        <div class="accent-picks" id="accentPicks"></div>
         <div class="sub-label">Обои в чатах</div>
         <div class="seg" id="wallSeg"></div>
         <div class="sub-label">Размер текста сообщений</div>
@@ -943,7 +933,7 @@ function applyTheme(pref, animate){
   const html = document.documentElement;
   if (animate){ html.classList.add("theming"); setTimeout(() => html.classList.remove("theming"), 450); }
   html.dataset.theme = dark ? "dark" : "light";
-  document.querySelector('meta[name="theme-color"]').content = dark ? "#0b0b0f" : "#f5f5f1";
+  document.querySelector('meta[name="theme-color"]').content = dark ? "#17212b" : "#ffffff";
   document.querySelectorAll("#themeSeg button").forEach(b => b.classList.toggle("active", b.dataset.themeSet === pref));
 }
 document.querySelectorAll("#themeSeg button").forEach(b => b.onclick = () => {
@@ -979,6 +969,7 @@ function avatarFor(p, size){
   return a;
 }
 function roleBadge(role){
+  if (!isStaff()) return null;
   if (role === "founder") return el("span","role founder","Основатель");
   if (role === "admin") return el("span","role admin","Админ");
   return null;
@@ -3676,7 +3667,7 @@ async function handleProfileParam(){
 /* ---------- профиль другого человека ---------- */
 async function userInfo(p){
   if (!p || !p.id) return;
-  if (!p.created_at || p.bio === undefined || p.dm_policy === undefined){
+  {
     const { data } = await sb.from("profiles").select(PCOLS).eq("id", p.id).maybeSingle();
     if (data){ p = Object.assign(people.get(p.id) || {}, data); people.set(p.id, p); }
   }
@@ -3964,7 +3955,15 @@ async function openOfficialChat(c){
 }
 
 /* ================== ЛИЧНЫЙ КАБИНЕТ: новое ================== */
-const STATUS_PICKS = ["😊","🔥","💻","📚","🎮","🎧","☕","🏃","😴","🤒","✈️","🎉","❤️","🛡️"];
+const STATUS_PICKS = ["😊","😎","🥳","😇","🤓","🤩","😏","🥰","😂","🤔","🙃","😴","🤒","🥶","🥵","😤","🤯","🫡","🤫","👻",
+  "🔥","⚡","✨","🌟","💫","🌈","☀️","🌙","❄️","🌊","🌸","🍀","🌵","🍁",
+  "❤️","🧡","💛","💚","💙","💜","🖤","🤍","💔","💯",
+  "💻","📱","🎮","🕹️","🎧","🎵","🎸","🎨","📸","🎬","📚","✏️","🎓","💼","🛠️","🧪","🚀","🛡️","👑","💎","🏆","🎯",
+  "☕","🍕","🍔","🍣","🍩","🍓","🍉","🥑",
+  "⚽","🏀","🏐","🎾","🏃","🚴","🏋️","🧘","🏊","⛷️",
+  "✈️","🚗","🏖️","🏔️","🏠","🎉","🎁","🎄","🎃","💤",
+  "🐱","🐶","🦊","🐼","🐸","🦁","🐧","🦄","🐝","🦋",
+  "👍","👌","✌️","🤝","🙏","💪","👀","🧠","🫶","🇷🇺"];
 const PROFILE_COLORS = ["#e8ff5a","#5ab0ff","#9b7bff","#ff6fb5","#ff9f43","#3ddc97","#ff5f5f","#8a8a99"];
 let pfColor = null;
 function buildProfileExtras(){
@@ -4055,24 +4054,19 @@ async function loadMyStats(){
 }
 
 /* ---------- оформление: акцент, обои, шрифт, Enter ---------- */
-const ACCENTS = { lime: "Лайм", blue: "Синий", violet: "Фиолетовый", pink: "Розовый", orange: "Оранжевый", mint: "Мятный" };
 const WALLS = { none: "Без обоев", dots: "Точки", grid: "Сетка", waves: "Волны", aurora: "Сияние" };
 const FONTS = { s: "Мелкий", m: "Обычный", l: "Крупный" };
 function prefGet(k, d){ try { return localStorage.getItem(k) || d; } catch(e){ return d; } }
 function prefSet(k, v){ try { localStorage.setItem(k, v); } catch(e){} }
 function applyLook(){
   const r = document.documentElement;
-  r.dataset.accent = prefGet("kc_accent","lime");
   r.dataset.wall = prefGet("kc_wall","none");
   r.dataset.font = prefGet("kc_font","m");
-  document.querySelectorAll("#accentPicks button").forEach(b => b.classList.toggle("on", b.dataset.v === r.dataset.accent));
   document.querySelectorAll("#wallSeg button").forEach(b => b.classList.toggle("active", b.dataset.v === r.dataset.wall));
   document.querySelectorAll("#fontSeg button").forEach(b => b.classList.toggle("active", b.dataset.v === r.dataset.font));
   $("#ctrlEnter").checked = prefGet("kc_enter","enter") === "ctrl";
 }
 (function(){
-  const ap = $("#accentPicks");
-  for (const [k, t] of Object.entries(ACCENTS)){ const b = el("button","accent-dot"); b.type = "button"; b.dataset.v = k; b.title = t; b.onclick = () => { prefSet("kc_accent", k); applyLook(); }; ap.appendChild(b); }
   const ws = $("#wallSeg");
   for (const [k, t] of Object.entries(WALLS)){ const b = el("button", null, t); b.type = "button"; b.dataset.v = k; b.onclick = () => { prefSet("kc_wall", k); applyLook(); }; ws.appendChild(b); }
   const fs = $("#fontSeg");
