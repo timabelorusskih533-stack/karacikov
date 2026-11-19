@@ -119,7 +119,7 @@
   .legal{font-size:10.5px;color:var(--muted);opacity:.6;text-align:center;margin-top:18px;line-height:1.4}
 
   /* ---------- APP SHELL ---------- */
-  #app{height:100%;display:grid;grid-template-columns:84px 1fr;grid-template-rows:auto 1fr}
+  #app{height:100%;display:grid;grid-template-columns:84px minmax(0,1fr);grid-template-rows:auto 1fr}
   .ban-bar{grid-column:1/-1;background:color-mix(in srgb,var(--danger) 15%,var(--bg));color:var(--danger);text-align:center;font-size:13px;padding:8px 12px;border-bottom:1px solid var(--danger-line)}
   .nav{grid-row:2;background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:18px 0;gap:8px}
   .nav .brand{font-size:22px;margin-bottom:18px}
@@ -148,7 +148,7 @@
   .clickable{cursor:pointer}
 
   /* ---------- CHATS ---------- */
-  #view-chats{display:grid;grid-template-columns:340px 1fr}
+  #view-chats{display:grid;grid-template-columns:340px minmax(0,1fr)}
   .list-pane{border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;background:var(--bg)}
   .pane-head{padding:22px 16px 14px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px}
   .pane-head h2{font:700 22px Unbounded,sans-serif}
@@ -166,12 +166,16 @@
   .empty{padding:40px 24px;text-align:center;color:var(--muted);font-size:14px;line-height:1.5;animation:fadeIn .3s var(--ease)}
   .empty .btn{margin-top:14px}
 
-  .conv-pane{display:flex;flex-direction:column;min-height:0;background:var(--chatbg)}
+  .conv-pane{display:flex;flex-direction:column;min-height:0;min-width:0;overflow:hidden;background:var(--chatbg)}
   #convBox{animation:fadeIn .22s var(--ease)}
   .conv-head{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--line);background:var(--panel)}
   .conv-title{display:flex;align-items:center;gap:12px;min-width:0;flex:1;cursor:pointer;border-radius:12px;padding:4px 6px;margin:-4px -6px;transition:background .2s var(--ease)}
   .conv-title:hover{background:var(--panel2)}
-  .conv-head .name{font-size:16px}
+  .conv-head .name{font-size:16px;display:flex;align-items:center;min-width:0}
+  .conv-head .name .nm-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+  .conv-head .name > :not(.nm-text){flex:none}
+  .conv-title > div:last-child{flex:1;min-width:0}
+  @media (max-width:760px){ .conv-head{padding:10px 12px;gap:8px} .conv-head .name .role{display:none} }
   .conv-head .status{font-size:12.5px;color:var(--muted);transition:color .3s}
   .conv-head .status.online{color:var(--online)}
   .back{display:none;border:0;background:none;color:var(--text);cursor:pointer;padding:6px 8px 6px 0;font-size:22px;line-height:1}
@@ -541,11 +545,11 @@
 
   /* ---------- MOBILE ---------- */
   @media (max-width:760px){
-    #app{grid-template-columns:1fr;grid-template-rows:auto 1fr auto}
+    #app{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr auto}
     .nav{grid-row:3;flex-direction:row;justify-content:space-around;border-right:0;border-top:1px solid var(--line);padding:6px 0 calc(6px + var(--safe-b))}
     .nav .brand{display:none}
     .nav button{width:auto;flex:1}
-    #view-chats{grid-template-columns:1fr}
+    #view-chats{grid-template-columns:minmax(0,1fr)}
     #view-chats.open .list-pane{display:none}
     #view-chats:not(.open) .conv-pane{display:none}
     #view-chats.open .conv-pane{animation:slideIn .26s var(--ease)}
@@ -2408,7 +2412,7 @@ function renderConvHead(){
   else { avatar(av, c.other_display_name, c.other_username, c.other_avatar_url); av.dataset.uid = c.other_id || ""; setOnlineDot(av, isOnline(c.other_id)); }
   const nm = $("#convName"); nm.textContent = "";
   if (c.kind === "channel") nm.appendChild(el("span","kind-ic","📢"));
-  nm.appendChild(document.createTextNode(chatTitle(c)));
+  nm.appendChild(el("span","nm-text", chatTitle(c)));
   if ((!c.is_group && c.other_verified) || (c.is_group && c.conv_verified)) nm.appendChild(checkBadge());
   if (!c.is_group && c.other_status_emoji) nm.appendChild(statusEmoji(c.other_status_emoji));
   if (!c.is_group){ const b = roleBadge(c.other_role); if (b) nm.appendChild(b); }
