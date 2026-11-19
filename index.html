@@ -418,6 +418,86 @@
   .group-form .toggle{margin-top:14px}
   .setting-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--line);margin-top:14px}
 
+  /* ---------- v7: форматирование, ответы, закреп, опросы, каналы ---------- */
+  .bubble .txt{white-space:pre-wrap}
+  .bubble a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+  .theirs .bubble .txt a:not(.mention){color:var(--admin)}
+  .bubble code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;background:#0002;padding:1px 5px;border-radius:5px}
+  .theirs .bubble code{background:var(--chip)}
+  .bubble pre.code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;background:#0002;padding:8px 10px;border-radius:9px;margin:4px 0;white-space:pre-wrap;overflow-wrap:anywhere}
+  .theirs .bubble pre.code{background:var(--chip)}
+  .spoiler{background:currentColor;border-radius:4px;cursor:pointer;transition:background .3s var(--ease)}
+  .spoiler.shown{background:transparent}
+  .mention{font-weight:700;cursor:pointer;text-decoration:none!important}
+  .theirs .mention{color:var(--admin)}
+  .fwd{display:flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;opacity:.75;margin-bottom:3px}
+  .fwd svg{width:14px;height:14px}
+  .media .fwd{padding:4px 8px 0}
+  .rq{border-left:3px solid currentColor;padding:3px 9px;margin:2px 0 5px;border-radius:4px;background:#0001;cursor:pointer;max-width:320px;transition:background .2s}
+  .theirs .rq{border-color:var(--accent);background:var(--chip)}
+  [data-theme="light"] .theirs .rq{border-color:#8fb000}
+  .rq:hover{background:#0002}
+  .rq-name{font-size:12.5px;font-weight:700}
+  .rq-text{font-size:13px;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .media .rq{margin:4px 6px 6px}
+  .ticks{margin-left:4px;letter-spacing:-3px;font-weight:700}
+  .ticks.read{color:#2a7bff}
+  [data-theme="dark"] .mine .ticks.read{color:#1f6fe0}
+  .lp{display:block;margin-top:6px;padding:7px 10px;border-left:3px solid currentColor;border-radius:6px;background:#0001;text-decoration:none!important;color:inherit;max-width:340px;white-space:normal}
+  .theirs .lp{background:var(--chip);border-color:var(--admin)}
+  .lp-site{font-size:12px;font-weight:700;opacity:.8}
+  .lp-title{font-size:13.5px;font-weight:700;margin-top:2px}
+  .lp-desc{font-size:12.5px;opacity:.8;margin-top:2px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .lp-img{display:block;max-width:100%;max-height:180px;border-radius:8px;margin-top:6px;object-fit:cover}
+  .older-btn{align-self:center;border:1px solid var(--line);background:var(--panel);color:var(--muted);font:600 13px Manrope;padding:8px 14px;border-radius:20px;cursor:pointer;margin:6px 0 10px;transition:color .2s,border-color .2s}
+  .older-btn:hover{color:var(--text);border-color:var(--line2)}
+  .pin-bar{display:flex;align-items:center;gap:10px;padding:8px 16px 8px 20px;border-bottom:1px solid var(--line);background:var(--panel);cursor:pointer;animation:fadeIn .25s var(--ease)}
+  .pin-bar .pin-line{width:3px;align-self:stretch;border-radius:2px;background:var(--accent)}
+  .pin-bar .pin-txt{flex:1;min-width:0;font-size:13px}
+  .pin-bar .pin-txt b{display:block;color:var(--accent);font-size:12.5px}
+  [data-theme="light"] .pin-bar .pin-txt b{color:#7d9a00}
+  .pin-bar #pinText{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted)}
+  .conv-head .status.typing{color:var(--accent)}
+  [data-theme="light"] .conv-head .status.typing{color:#7d9a00}
+  .mention-box{max-height:220px;overflow:auto;border-top:1px solid var(--line);background:var(--panel);padding:6px;animation:fadeUp .18s var(--ease)}
+  .mention-box .meta{display:flex;flex-direction:column}
+  .poll-b{min-width:min(300px,70vw)}
+  .poll-q{font-weight:700;font-size:15px}
+  .poll-type{font-size:12px;opacity:.65;margin:2px 0 8px}
+  .poll-opts{display:flex;flex-direction:column;gap:6px}
+  .poll-opt{position:relative;overflow:hidden;display:flex;align-items:center;gap:8px;text-align:left;border:1px solid #0002;background:#0001;color:inherit;font:600 14px Manrope;padding:9px 11px;border-radius:10px;cursor:pointer;transition:border-color .2s,transform .12s var(--ease)}
+  .theirs .poll-opt{border-color:var(--line);background:var(--panel)}
+  .poll-opt:active{transform:scale(.98)}
+  .poll-opt.mine{border-color:currentColor}
+  .theirs .poll-opt.mine{border-color:var(--accent)}
+  .poll-bar{position:absolute;left:0;top:0;bottom:0;width:0;background:#0002;transition:width .5s var(--ease)}
+  .theirs .poll-bar{background:var(--chip-mine)}
+  .poll-lbl{position:relative;flex:1}
+  .poll-pct{position:relative;font-size:12.5px;opacity:.8}
+  .poll-total{font-size:12px;opacity:.65;margin-top:8px}
+  .poll-edit-row{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+  .saved-av{background:linear-gradient(135deg,#4f8cff,#2f5fd0)!important;color:#fff!important}
+  .saved-av svg{width:52%;height:52%}
+  .kind-ic{margin-right:5px;font-size:.9em}
+  .pin-ic{margin-right:4px;font-size:11px}
+  .draft{color:var(--danger);font-weight:600}
+  .arch-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 12px;margin-bottom:4px;border-radius:14px;cursor:pointer;color:var(--muted);font-weight:600;font-size:14px;transition:background .2s}
+  .arch-row:hover{background:var(--panel);color:var(--text)}
+  .invite{margin-top:18px}
+  .invite-row{display:flex;gap:6px;align-items:center}
+  .invite-row input{font-size:13px;padding:9px 12px}
+  .sres{padding:10px 12px;border-radius:12px;cursor:pointer;transition:background .15s}
+  .sres:hover{background:var(--panel2)}
+  .sres.card{border:1px solid var(--line);background:var(--panel);margin-bottom:8px;animation:fadeUp .25s var(--ease) both}
+  .sres-head{display:flex;justify-content:space-between;gap:10px;font-size:13.5px}
+  .sres-head .muted{font-size:12px;flex:none}
+  .sres-who{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .sres-text{font-size:14px;margin-top:3px;line-height:1.4;overflow-wrap:anywhere}
+  .sres-text mark{background:var(--chip-mine);color:inherit;border-radius:3px;padding:0 2px}
+  .rep-reason{font-size:14px;font-weight:600;margin-top:10px}
+  #searchResults .section-label{margin-top:18px}
+  #searchResults .section-label:first-child{margin-top:0}
+
   /* ---------- MOBILE ---------- */
   @media (max-width:760px){
     #app{grid-template-columns:1fr;grid-template-rows:auto 1fr auto}
@@ -504,7 +584,10 @@
     <div class="list-pane">
       <div class="pane-head">
         <h2>Чаты</h2>
-        <button class="btn sm ghost" id="newGroupBtn" type="button">+ Группа</button>
+        <div style="display:flex;gap:6px;align-items:center">
+          <button class="conv-more" id="savedBtn" type="button" title="Избранное"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/></svg></button>
+          <button class="btn sm ghost" id="newGroupBtn" type="button">+ Создать</button>
+        </div>
       </div>
       <div class="chat-list" id="chatList"></div>
     </div>
@@ -519,14 +602,22 @@
             <div class="avatar sm" id="convAvatar"></div>
             <div style="min-width:0"><div class="name" id="convName"></div><div class="status" id="convSub"></div></div>
           </div>
+          <button class="conv-more" id="convSearchBtn" type="button" title="Поиск в чате"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
           <button class="conv-more" id="convMore" type="button" title="Меню чата"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg></button>
         </div>
+        <div class="pin-bar hidden" id="pinBar"><span class="pin-line"></span><div class="pin-txt"><b>Закреплённое сообщение</b><span id="pinText"></span></div><button class="x" id="pinClose" type="button" title="Открепить">×</button></div>
         <div class="messages" id="messages"></div>
         <div class="edit-bar hidden" id="editBar">
           <span class="line"></span>
           <div class="txt"><b>Редактирование</b><span id="editPreview"></span></div>
           <button class="x" type="button" id="editCancel" aria-label="Отменить">×</button>
         </div>
+        <div class="edit-bar hidden" id="replyBar">
+          <span class="line"></span>
+          <div class="txt"><b id="replyName">Ответ</b><span id="replyPreview"></span></div>
+          <button class="x" type="button" id="replyCancel" aria-label="Отменить">×</button>
+        </div>
+        <div class="mention-box hidden" id="mentionBox"></div>
         <form class="composer" id="composer">
           <button class="icon-btn" id="attachBtn" type="button" title="Прикрепить файл">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5 12.5 20a5.5 5.5 0 0 1-7.8-7.8l8.5-8.5a3.7 3.7 0 0 1 5.2 5.2l-8.5 8.5a1.8 1.8 0 0 1-2.6-2.6L15 7"/></svg>
@@ -646,6 +737,7 @@
       <div class="atabs">
         <button type="button" class="active" data-atab="users">Пользователи</button>
         <button type="button" data-atab="convs">Переписки</button>
+        <button type="button" data-atab="reports">Жалобы<span class="tabcount hidden" id="reportCount"></span></button>
         <button type="button" data-atab="verif">Верификация<span class="tabcount hidden" id="verifCount"></span></button>
         <button type="button" data-atab="bcast">Рассылка</button>
         <button type="button" data-atab="log" id="logTab" class="hidden">Журнал</button>
@@ -693,6 +785,14 @@
           <div class="msg" id="bcMsg"></div>
         </div>
       </div>
+      <div id="atab-reports" class="hidden">
+        <div class="seg" id="reportSeg">
+          <button type="button" data-rs="open" class="active">Новые</button>
+          <button type="button" data-rs="resolved">Решённые</button>
+          <button type="button" data-rs="dismissed">Отклонённые</button>
+        </div>
+        <div id="reportList" style="margin-top:14px"></div>
+      </div>
       <div id="atab-log" class="hidden">
         <p class="admin-note">Кто из администрации открывал чужие переписки и удалял сообщения. Журнал видит только основатель.</p>
         <div id="adminLog"></div>
@@ -713,7 +813,7 @@ const MAX_FILE = 50 * 1024 * 1024;         // 50 МБ — лимит беспл�
 const MAX_CIRCLE_SEC = 60;
 const REACTIONS = ["👍","❤️","😂","😮","😢","🔥","👏","🙏"];
 const PCOLS = "id,username,display_name,bio,avatar_url,role,banned,created_at,verified,is_system";
-const MCOLS = "id,conversation_id,sender_id,body,kind,file_path,file_name,file_size,file_mime,created_at,edited_at,transcript";
+const MCOLS = "id,conversation_id,sender_id,body,kind,file_path,file_name,file_size,file_mime,created_at,edited_at,transcript,reply_to,fwd_name,poll";
 /* ============================================== */
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -813,15 +913,6 @@ function toast(t){
   x = el("div","toast", t); document.body.appendChild(x);
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => { x.classList.add("out"); setTimeout(() => x.remove(), 260); }, 2600);
-}
-function kindPreview(kind, body){
-  if (kind === "image") return "📷 Фото";
-  if (kind === "video") return "🎬 Видео";
-  if (kind === "voice") return "🎤 Голосовое сообщение";
-  if (kind === "circle") return "⭕ Видеосообщение";
-  if (kind === "audio") return "🎵 Аудио";
-  if (kind === "file") return "📎 Файл";
-  return body || "";
 }
 function fadeRemove(node){ if (!node) return; node.classList.add("leaving"); setTimeout(() => node.remove(), 210); }
 
@@ -934,14 +1025,6 @@ async function refreshMe(){
   const { data } = await sb.from("profiles").select(PCOLS).eq("id", me.id).maybeSingle();
   if (data){ me = data; people.set(me.id, me); applyMe(); }
 }
-function updateComposer(){
-  if (!me) return;
-  const sys = !!(openConv && !openConv.is_group && openConv.other_is_system);
-  const off = !!me.banned || sys;
-  $("#composer").classList.toggle("hidden", off);
-  $("#composerOff").classList.toggle("hidden", !off);
-  $("#composerOff").textContent = sys ? "Это официальный канал Karacikov — ответить на него нельзя" : "Вы заблокированы и не можете писать сообщения";
-}
 function applyMe(){
   renderProfile();
   $("#adminNav").classList.toggle("hidden", !isStaff());
@@ -966,6 +1049,7 @@ async function enterApp(user){
   resyncPush(); refreshNotifUI(); loadVerif();
   const qc = new URLSearchParams(location.search).get("c");
   if (qc){ try { history.replaceState(null, "", location.pathname); } catch(e){} openConvById(qc); }
+  loadBlocks(); handleJoinParam();
 }
 function leaveApp(){
   if (channel){ sb.removeChannel(channel); channel = null; }
@@ -1069,74 +1153,8 @@ async function loadChats(){
   renderChatList();
   loadPresence(chats.map(c => c.other_id));
 }
-function chatTitle(c){ return c.is_group ? (c.title || "Группа") : (c.other_display_name || c.other_username || "Удалённый пользователь"); }
-function chatAvatar(c, size){
-  const a = el("div","avatar" + (size ? " " + size : ""));
-  if (c.is_group) return avatar(a, c.title, c.title, c.conv_avatar_url, true);
-  avatar(a, c.other_display_name, c.other_username, c.other_avatar_url);
-  if (c.other_id){ a.dataset.uid = c.other_id; setOnlineDot(a, isOnline(c.other_id)); }
-  return a;
-}
 let firstListRender = true;
-function renderChatList(){
-  const box = $("#chatList"); box.innerHTML = "";
-  const total = chats.reduce((s,c) => s + (c.muted ? 0 : Number(c.unread||0)), 0);
-  const badge = $("#unreadBadge"); badge.textContent = total > 99 ? "99+" : total; badge.classList.toggle("hidden", !total);
-  document.title = total ? `(${total}) Karacikov` : "Karacikov";
-  if (!chats.length){
-    const e = el("div","empty","Пока нет переписок. Найдите собеседника или создайте группу.");
-    const b = el("button","btn","Найти людей"); b.type = "button"; b.onclick = () => goView("search");
-    e.appendChild(el("br")); e.appendChild(b); box.appendChild(e); return;
-  }
-  chats.forEach((c, i) => {
-    const it = el("div","chat-item" + (openConv && openConv.conversation_id === c.conversation_id ? " active":""));
-    if (firstListRender){ it.style.animation = `fadeUp .3s var(--ease) ${Math.min(i, 10) * 25}ms both`; }
-    const meta = el("div","meta");
-    const r1 = el("div","row1");
-    const nm = el("div","name", chatTitle(c));
-    if (!c.is_group && c.other_verified) nm.appendChild(checkBadge());
-    if (!c.is_group){ const b = roleBadge(c.other_role); if (b) nm.appendChild(b); }
-    if (c.muted) nm.appendChild(el("span","muted-ic","🔕"));
-    r1.append(nm, el("div","time", fmtListTime(c.last_kind ? c.last_message_at : null)));
-    const r2 = el("div","row2");
-    let pv = "Нет сообщений";
-    if (c.last_kind){
-      const who = c.last_sender === me.id ? "Вы: " : (c.is_group && c.last_sender_name ? c.last_sender_name + ": " : "");
-      pv = who + kindPreview(c.last_kind, c.last_body);
-    } else if (c.is_group) pv = c.member_count + " " + plural(c.member_count, "участник","участника","участников");
-    r2.appendChild(el("div","preview", pv));
-    if (Number(c.unread)) r2.appendChild(el("div","unread" + (c.muted ? " off" : ""), c.unread));
-    meta.append(r1, r2); it.append(chatAvatar(c), meta);
-    it.onclick = () => openChat(c);
-    box.appendChild(it);
-  });
-  firstListRender = false;
-}
-function renderConvHead(){
-  const c = openConv; if (!c) return;
-  const av = $("#convAvatar");
-  if (c.is_group){ avatar(av, c.title, c.title, c.conv_avatar_url, true); delete av.dataset.uid; setOnlineDot(av, false); }
-  else { avatar(av, c.other_display_name, c.other_username, c.other_avatar_url); av.dataset.uid = c.other_id || ""; setOnlineDot(av, isOnline(c.other_id)); }
-  const nm = $("#convName"); nm.textContent = chatTitle(c);
-  if (!c.is_group && c.other_verified) nm.appendChild(checkBadge());
-  if (!c.is_group){ const b = roleBadge(c.other_role); if (b) nm.appendChild(b); }
-  if (c.muted) nm.appendChild(el("span","muted-ic","🔕"));
-  updateComposer();
-  renderConvStatus();
-}
 let groupMemberIds = [];
-function renderConvStatus(){
-  const c = openConv, sub = $("#convSub"); if (!c) return;
-  if (c.is_group){
-    const on = groupMemberIds.filter(id => id !== me.id && isOnline(id)).length;
-    sub.textContent = c.member_count + " " + plural(c.member_count, "участник","участника","участников") + (on ? `, ${on} в сети` : "");
-    sub.classList.remove("online");
-  } else {
-    const s = statusText(c.other_id);
-    sub.textContent = s.text || (c.other_username ? "@" + c.other_username : "");
-    sub.classList.toggle("online", s.online);
-  }
-}
 
 async function loadMembers(convId){
   const { data } = await sb.from("conversation_members")
@@ -1146,46 +1164,6 @@ async function loadMembers(convId){
   return data || [];
 }
 
-async function openChat(c){
-  closeMenu(); if (editing) cancelEdit();
-  openConv = c;
-  showViewOnly("chats");
-  $("#view-chats").classList.add("open"); $("#app").classList.add("in-conv");
-  $("#convEmpty").classList.add("hidden");
-  const box = $("#convBox"); box.classList.add("hidden"); void box.offsetWidth; box.classList.remove("hidden");
-  groupMemberIds = [];
-  renderConvHead();
-  const list = $("#messages"); list.innerHTML = ""; lastShown = null; lastSender = null; msgStore.clear(); reactions.clear();
-  list.appendChild(el("div","empty","Загрузка…"));
-  renderChatList();
-
-  const [res, members, rx] = await Promise.all([
-    sb.from("messages").select(MCOLS).eq("conversation_id", c.conversation_id).order("created_at",{ascending:false}).limit(200),
-    c.is_group ? loadMembers(c.conversation_id) : null,
-    sb.from("message_reactions").select("message_id,user_id,emoji").eq("conversation_id", c.conversation_id)
-  ]);
-  if (openConv !== c) return;
-  if (members){ groupMemberIds = members.map(m => m.user_id); loadPresence(groupMemberIds); renderConvStatus(); }
-  else loadPresence([c.other_id]);
-  for (const r of (rx && rx.data) || []){ if (!reactions.has(r.message_id)) reactions.set(r.message_id, []); reactions.get(r.message_id).push(r); }
-  list.innerHTML = "";
-  if (res.error){ list.appendChild(el("div","empty","Не удалось загрузить сообщения")); return; }
-  const msgs = (res.data || []).reverse();
-  await signPaths(msgs.filter(m => m.file_path).map(m => m.file_path));
-  if (openConv !== c) return;
-  if (!msgs.length) list.appendChild(el("div","empty", c.is_group ? "Группа создана. Напишите что-нибудь 👋" : "Напишите первое сообщение 👋"));
-  msgs.forEach(m => addMessage(m, false));
-  scrollDown();
-  markRead();
-  if (!isTouch && !me.banned) $("#msgInput").focus();
-}
-function closeConv(){
-  stopRecording(true); closeMenu(); if (editing) cancelEdit();
-  openConv = null;
-  $("#view-chats").classList.remove("open"); $("#app").classList.remove("in-conv");
-  $("#convBox").classList.add("hidden"); $("#convEmpty").classList.remove("hidden");
-  renderChatList();
-}
 $("#backBtn").onclick = closeConv;
 $("#convTitle").onclick = () => openConv && (openConv.is_group ? groupInfo(openConv) : userInfo(people.get(openConv.other_id) || { id: openConv.other_id, username: openConv.other_username, display_name: openConv.other_display_name, avatar_url: openConv.other_avatar_url, role: openConv.other_role }));
 
@@ -1198,87 +1176,6 @@ async function signPaths(paths){
 }
 
 /* ---------- Отрисовка сообщений ---------- */
-function addMessage(m, animate){
-  const list = $("#messages");
-  const note = list.querySelector(".empty"); if (note) note.remove();
-  if (m.id && list.querySelector(`.mrow[data-id="${m.id}"]`)) return null;
-  if (!lastShown || !sameDay(lastShown, m.created_at)){ list.appendChild(el("div","day", fmtDay(m.created_at))); lastSender = null; }
-  lastShown = m.created_at;
-  if (m.id) msgStore.set(m.id, m);
-
-  const mine = m.sender_id === me.id;
-  const isGroup = openConv && openConv.is_group;
-  const row = el("div","mrow " + (mine ? "mine" : "theirs") + (animate ? " anim-in" : "") + (!isGroup || mine ? " no-av" : ""));
-  if (m.id) row.dataset.id = m.id;
-  const showAuthor = isGroup && !mine && lastSender !== m.sender_id;
-  if (isGroup && !mine){
-    const p = people.get(m.sender_id);
-    if (showAuthor){ const av = avatarFor(p || { username: "?" }, "xs"); av.classList.add("clickable"); av.onclick = () => userInfo(p); row.appendChild(av); }
-    else row.appendChild(el("div","spacer"));
-  }
-  lastSender = m.sender_id;
-
-  const col = el("div","mcol");
-  col.appendChild(buildBubble(m, showAuthor));
-  const rx = el("div","reacts"); col.appendChild(rx);
-  row.appendChild(col);
-  if (m.id) row.appendChild(buildTools(m));
-  list.appendChild(row);
-  if (m.id) renderReactions(m.id);
-  attachMenuTriggers(row);
-  return row;
-}
-function buildBubble(m, showAuthor){
-  const isMedia = ["image","video"].includes(m.kind);
-  const b = el("div","bubble" + (isMedia ? " media" : "") + (m.kind === "circle" ? " circle-b" : "") + (m.pending ? " pending" : ""));
-  if (showAuthor){
-    const p = people.get(m.sender_id);
-    const who = el("span","who", shownName(p)); who.style.color = `hsl(${hue(p && p.username)} 70% ${document.documentElement.dataset.theme === "light" ? 38 : 72}%)`;
-    if (p && p.verified) who.appendChild(checkBadge());
-    who.onclick = e => { e.stopPropagation(); userInfo(p); };
-    b.appendChild(who);
-  }
-  renderBody(b, m);
-  const t = el("span","t", m.pending ? (m.progressText || "отправка…") : (m.edited_at ? "изменено · " : "") + fmtTime(m.created_at));
-  b.appendChild(t);
-  return b;
-}
-function renderBody(b, m){
-  const url = m.localUrl || (m.file_path && urlCache.get(m.file_path));
-  if (m.kind === "image"){
-    const img = el("img","photo"); img.alt = m.file_name || "фото"; img.loading = "lazy"; img.style.opacity = 0;
-    if (url) img.src = url;
-    img.onload = () => { img.style.opacity = 1; if (nearBottom(300)) scrollDown(); };
-    img.onclick = () => url && lightbox(url);
-    b.appendChild(img);
-  } else if (m.kind === "video"){
-    const v = el("video"); v.controls = true; v.preload = "metadata"; v.playsInline = true; if (url) v.src = url; b.appendChild(v);
-  } else if (m.kind === "circle"){
-    b.appendChild(buildCircle(url));
-  } else if (m.kind === "voice" || m.kind === "audio"){
-    if (m.kind === "audio") b.appendChild(el("div","voice-label", m.file_name || "Аудио"));
-    const a = el("audio"); a.controls = true; a.preload = "metadata"; if (url) a.src = url; b.appendChild(a);
-  } else if (m.kind === "file"){
-    const a = el("a","filebox"); if (url){ a.href = url; a.target = "_blank"; a.rel = "noopener"; a.download = m.file_name || ""; }
-    const ic = el("div","ic"); ic.innerHTML = SVG.file;
-    const info = el("div"); info.append(el("div","fn", m.file_name || "Файл"), el("div","fs", fmtSize(m.file_size)));
-    a.append(ic, info); b.appendChild(a);
-  }
-  if (m.kind === "voice" || m.kind === "circle"){
-    if (m.transcript){
-      const btn = el("button","tr-btn"); btn.type = "button"; btn.innerHTML = SVG.text; btn.appendChild(document.createTextNode("Расшифровка"));
-      const tr = el("div","tr"); const inner = el("div", null, m.transcript); tr.appendChild(inner);
-      btn.onclick = e => { e.stopPropagation(); tr.classList.toggle("open"); if (tr.classList.contains("open") && nearBottom(200)) setTimeout(scrollDown, 300); };
-      b.append(btn, tr);
-    } else if (!m.pending){
-      const n = el("div","voice-label", "Расшифровка недоступна"); n.style.opacity = .5; b.appendChild(n);
-    }
-  }
-  if (m.body){
-    if (m.kind !== "text") b.appendChild(el("div","cap", m.body));
-    else b.appendChild(document.createTextNode(m.body));
-  }
-}
 function buildCircle(url){
   const wrap = el("div","circle");
   const v = el("video"); v.playsInline = true; v.muted = true; v.loop = true; v.autoplay = true; v.preload = "metadata";
@@ -1377,48 +1274,6 @@ document.addEventListener("mousedown", e => { const m = $(".menu"); if (m && !m.
 document.addEventListener("touchstart", e => { const m = $(".menu"); if (m && !m.contains(e.target)) closeMenu(); }, { passive: true });
 $("#messages").addEventListener("scroll", () => { if ($(".menu")) closeMenu(); }, { passive: true });
 
-function openMenu(id, anchor){
-  const old = $(".menu"); if (old) old.remove();
-  const m = msgStore.get(id); if (!m) return;
-  const menu = el("div","menu");
-  if (!me.banned){
-    const em = el("div","emojis");
-    const mineSet = new Set((reactions.get(id) || []).filter(r => r.user_id === me.id).map(r => r.emoji));
-    for (const e of REACTIONS){
-      const b = el("button", mineSet.has(e) ? "on" : null, e); b.type = "button";
-      b.onclick = () => { closeMenu(); toggleReaction(id, e); };
-      em.appendChild(b);
-    }
-    menu.appendChild(em);
-  }
-  const item = (svg, text, fn, danger) => { const b = el("button","item" + (danger ? " danger" : "")); b.type = "button"; b.innerHTML = svg; b.appendChild(document.createTextNode(text)); b.onclick = () => fn(b); menu.appendChild(b); return b; };
-  if (m.kind === "text" && m.body) item(SVG.copy, "Копировать текст", async () => { closeMenu(); try { await navigator.clipboard.writeText(m.body); toast("Текст скопирован"); } catch(e){ toast("Не удалось скопировать"); } });
-  if (m.transcript) item(SVG.copy, "Копировать расшифровку", async () => { closeMenu(); try { await navigator.clipboard.writeText(m.transcript); toast("Расшифровка скопирована"); } catch(e){} });
-  const mine = m.sender_id === me.id;
-  if (mine && m.kind === "text" && !me.banned) item(SVG.edit, "Изменить", () => { closeMenu(); startEdit(id); });
-  if (mine || isStaff()){
-    item(SVG.trash, mine ? "Удалить" : "Удалить (админ)", async b => {
-      if (b.dataset.sure !== "1"){ b.dataset.sure = "1"; b.lastChild.textContent = "Точно удалить?"; return; }
-      closeMenu();
-      const { error } = mine ? await sb.from("messages").delete().eq("id", id) : await sb.rpc("admin_delete_message", { msg_id: id });
-      if (error) return toast(ruError(error));
-      removeMessageRow(id); loadChats();
-    }, true);
-  }
-  document.body.appendChild(menu);
-  const r = anchor.getBoundingClientRect(), mw = menu.offsetWidth, mh = menu.offsetHeight;
-  let left = Math.min(Math.max(8, r.left + r.width / 2 - mw / 2), window.innerWidth - mw - 8);
-  let top = r.bottom + 6;
-  if (top + mh > window.innerHeight - 8){ top = r.top - mh - 6; menu.style.transformOrigin = "bottom center"; }
-  menu.style.left = left + "px"; menu.style.top = Math.max(8, top) + "px";
-}
-function removeMessageRow(id){
-  msgStore.delete(id); reactions.delete(id);
-  const row = document.querySelector(`.mrow[data-id="${id}"]`); if (!row) return;
-  row.style.transition = "opacity .22s var(--ease), transform .22s var(--ease)";
-  row.style.opacity = 0; row.style.transform = "scale(.97)";
-  setTimeout(() => row.remove(), 230);
-}
 function updateMessageRow(m){
   const old = msgStore.get(m.id); if (!old) return;
   Object.assign(old, m);
@@ -1431,15 +1286,6 @@ function updateMessageRow(m){
 
 /* ---------- Редактирование ---------- */
 let editing = null;
-function startEdit(id){
-  const m = msgStore.get(id); if (!m) return;
-  stopRecording(true);
-  editing = id;
-  $("#editBar").classList.remove("hidden");
-  $("#editPreview").textContent = m.body;
-  input.value = m.body; autosize(); input.focus();
-  input.setSelectionRange(input.value.length, input.value.length);
-}
 function cancelEdit(){ editing = null; $("#editBar").classList.add("hidden"); input.value = ""; autosize(); }
 $("#editCancel").onclick = cancelEdit;
 
@@ -1465,48 +1311,10 @@ input.addEventListener("paste", e => {
   const files = [...(e.clipboardData && e.clipboardData.files || [])];
   if (files.length && !editing){ e.preventDefault(); files.forEach(f => sendFile(f)); }
 });
-$("#composer").addEventListener("submit", async e => {
-  e.preventDefault();
-  if (recorder) return finishRecording();
-  const body = input.value.trim();
-  if (!openConv) return;
-  if (editing){
-    const id = editing, m = msgStore.get(id);
-    if (!body){ toast("Сообщение не может быть пустым"); return; }
-    cancelEdit();
-    if (!m || m.body === body) return;
-    const prev = m.body;
-    updateMessageRow({ id, body, edited_at: new Date().toISOString() });
-    const { error } = await sb.from("messages").update({ body }).eq("id", id);
-    if (error){ updateMessageRow({ id, body: prev }); toast(ruError(error)); }
-    else loadChats();
-    return;
-  }
-  if (!body) return;
-  input.value = ""; autosize();
-  const row = addMessage({ sender_id: me.id, kind: "text", body, created_at: new Date().toISOString(), pending: true }, true);
-  scrollDown(true);
-  await insertMessage(row, { conversation_id: openConv.conversation_id, kind: "text", body }, () => { input.value = body; autosize(); });
-});
-async function insertMessage(row, payload, onFail){
-  const { data, error } = await sb.from("messages").insert(payload).select(MCOLS).single();
-  const bubble = row && row.querySelector(".bubble");
-  if (error){
-    if (bubble){ bubble.classList.remove("pending"); bubble.classList.add("failed"); bubble.querySelector(".t").textContent = "не отправлено"; }
-    toast(ruError(error)); onFail && onFail(); return null;
-  }
-  if (!row || !row.isConnected || document.querySelector(`.mrow[data-id="${data.id}"]`)){ row && row.remove(); }
-  else {
-    row.dataset.id = data.id; msgStore.set(data.id, data);
-    const nb = buildBubble(data, false); bubble.replaceWith(nb);
-    row.appendChild(buildTools(data)); attachMenuTriggers(row);
-  }
-  loadChats();
-  return data;
-}
+$("#composer").addEventListener("submit", e => onComposerSubmit(e));
 
 /* ---------- Отправка файлов ---------- */
-$("#attachBtn").onclick = () => $("#fileInput").click();
+$("#attachBtn").onclick = e => openAttachMenu(e.currentTarget);
 $("#fileInput").onchange = e => { [...e.target.files].forEach(f => sendFile(f)); e.target.value = ""; };
 const convPane = $(".conv-pane");
 convPane.addEventListener("dragover", e => { if (openConv) e.preventDefault(); });
@@ -1688,80 +1496,8 @@ async function openCircleRecorder(){
 let reloadTimer = null;
 function scheduleChats(){ clearTimeout(reloadTimer); reloadTimer = setTimeout(loadChats, 300); }
 function convOpenAndVisible(convId){ return openConv && convId === openConv.conversation_id && !$("#view-chats").classList.contains("hidden"); }
-function subscribe(){
-  if (channel) sb.removeChannel(channel);
-  channel = sb.channel("db-" + me.id)
-    .on("postgres_changes", { event: "INSERT", schema: "public", table: "messages" }, async payload => {
-      const m = payload.new;
-      if (convOpenAndVisible(m.conversation_id)){
-        const mine = m.sender_id === me.id;
-        const hasPending = mine && document.querySelector("#messages .bubble.pending");
-        if (!hasPending){
-          if (m.file_path) await signPaths([m.file_path]);
-          if (openConv && openConv.is_group && !people.has(m.sender_id)) await loadMembers(openConv.conversation_id);
-          const wasBottom = nearBottom();
-          addMessage(m, true);
-          if (wasBottom || mine) scrollDown(true);
-        }
-        if (!mine) markRead();
-      }
-      if (m.sender_id !== me.id) notifyIncoming(m);
-      scheduleChats();
-    })
-    .on("postgres_changes", { event: "UPDATE", schema: "public", table: "messages" }, payload => {
-      const m = payload.new;
-      if (openConv && m.conversation_id === openConv.conversation_id && msgStore.has(m.id)){
-        const old = msgStore.get(m.id);
-        if (old.body !== m.body || old.edited_at !== m.edited_at) updateMessageRow({ id: m.id, body: m.body, edited_at: m.edited_at });
-      }
-      scheduleChats();
-    })
-    .on("postgres_changes", { event: "DELETE", schema: "public", table: "messages" }, payload => {
-      const id = payload.old && payload.old.id;
-      if (id && msgStore.has(id)) removeMessageRow(id);
-      scheduleChats();
-    })
-    .on("postgres_changes", { event: "INSERT", schema: "public", table: "message_reactions" }, payload => {
-      const r = payload.new;
-      if (!msgStore.has(r.message_id) || r.user_id === me.id) return;
-      const list = reactions.get(r.message_id) || []; reactions.set(r.message_id, list);
-      if (!list.some(x => x.user_id === r.user_id && x.emoji === r.emoji)){ list.push({ user_id: r.user_id, emoji: r.emoji }); renderReactions(r.message_id); }
-    })
-    .on("postgres_changes", { event: "DELETE", schema: "public", table: "message_reactions" }, payload => {
-      const r = payload.old || {};
-      if (!msgStore.has(r.message_id) || r.user_id === me.id) return;
-      const list = reactions.get(r.message_id) || [];
-      const i = list.findIndex(x => x.user_id === r.user_id && x.emoji === r.emoji);
-      if (i > -1){ list.splice(i, 1); renderReactions(r.message_id); }
-    })
-    .subscribe();
-}
 
 /* ================== ПРОФИЛЬ ПОЛЬЗОВАТЕЛЯ / ГРУППА ================== */
-async function userInfo(p){
-  if (!p || !p.id) return;
-  if (!p.created_at || p.bio === undefined){
-    const { data } = await sb.from("profiles").select(PCOLS).eq("id", p.id).maybeSingle();
-    if (data){ p = Object.assign(people.get(p.id) || {}, data); people.set(p.id, p); }
-  }
-  loadPresence([p.id]);
-  openModal("Профиль", body => {
-    const card = el("div","pcard");
-    card.appendChild(avatarFor(p, "lg"));
-    const n = nameWithRole(p, "pname"); card.appendChild(n);
-    card.appendChild(el("div","muted","@" + p.username));
-    const st = statusText(p.id); const ps = el("div","pstatus" + (st.online ? " online" : ""), st.text); ps.dataset.uid = p.id; card.appendChild(ps);
-    if (p.banned && isStaff()) card.appendChild(el("span","role banned","Заблокирован"));
-    if (p.bio) card.appendChild(el("div","pbio", p.bio));
-    if (p.created_at) card.appendChild(el("div","pmeta","На сайте с " + new Date(p.created_at).toLocaleDateString("ru-RU",{day:"numeric",month:"long",year:"numeric"})));
-    body.appendChild(card);
-  }, foot => {
-    if (p.id !== me.id && !p.is_system && !(openConv && !openConv.is_group && openConv.other_id === p.id && !$("#view-chats").classList.contains("hidden"))){
-      const b = el("button","btn","Написать"); b.type = "button"; b.onclick = () => { closeModal(); startChat(p, b); }; foot.appendChild(b);
-    }
-    const c = el("button","btn ghost","Закрыть"); c.type = "button"; c.onclick = () => closeModal(); foot.appendChild(c);
-  });
-}
 
 async function setMuted(c, muted){
   const { error } = await sb.from("conversation_members").update({ muted }).eq("conversation_id", c.conversation_id).eq("user_id", me.id);
@@ -1778,172 +1514,9 @@ async function leaveGroupFlow(c){
   loadChats(); toast("Вы вышли из группы");
 }
 
-async function groupInfo(c){
-  const { body, foot } = openModal("Группа", b => b.appendChild(el("div","muted","Загрузка…")));
-  const members = await loadMembers(c.conversation_id);
-  groupMemberIds = members.map(m => m.user_id);
-  loadPresence(groupMemberIds);
-  const isOwner = members.some(m => m.user_id === me.id && m.role === "owner");
-  const canAdd = isOwner || !c.only_owner_adds;
-  body.innerHTML = "";
-
-  // --- шапка: фото, название, описание ---
-  let avUrl = c.conv_avatar_url || null;
-  const top = el("div","pcard");
-  const av = avatar(el("div","avatar lg"), c.title, c.title, avUrl, true);
-  top.appendChild(av);
-  if (isOwner){
-    const acts = el("div","av-actions"); acts.style.justifyContent = "center";
-    const ch = el("button","btn sm ghost","Сменить фото"); ch.type = "button";
-    const rmv = el("button","btn sm ghost","Убрать фото"); rmv.type = "button"; rmv.classList.toggle("hidden", !avUrl);
-    const inp = el("input"); inp.type = "file"; inp.accept = "image/*"; inp.className = "hidden";
-    ch.onclick = () => inp.click();
-    inp.onchange = async () => {
-      const f = inp.files[0]; inp.value = ""; if (!f) return;
-      if (!f.type.startsWith("image/")) return toast("Выберите картинку");
-      ch.disabled = true; ch.textContent = "Загрузка…";
-      try{
-        const blob = await squareImage(f, 400);
-        const path = `${me.id}/group-${c.conversation_id}-${Date.now()}.jpg`;
-        const { error } = await sb.storage.from("avatars").upload(path, blob, { contentType: "image/jpeg", upsert: true });
-        if (error) throw error;
-        avUrl = sb.storage.from("avatars").getPublicUrl(path).data.publicUrl;
-        avatar(av, c.title, c.title, avUrl, true); rmv.classList.remove("hidden");
-        toast("Фото выбрано — нажмите «Сохранить»");
-      } catch(e){ toast("Не удалось загрузить фото"); }
-      ch.disabled = false; ch.textContent = "Сменить фото";
-    };
-    rmv.onclick = () => { avUrl = null; avatar(av, c.title, c.title, null, true); rmv.classList.add("hidden"); };
-    acts.append(ch, rmv, inp); top.appendChild(acts);
-  } else {
-    top.appendChild(el("div","pname", c.title || "Группа"));
-    top.appendChild(el("div","muted", members.length + " " + plural(members.length, "участник","участника","участников")));
-    if (c.description) top.appendChild(el("div","pbio", c.description));
-  }
-  body.appendChild(top);
-
-  // --- настройки (только создатель) ---
-  if (isOwner){
-    const form = el("div","group-form");
-    form.appendChild(el("label", null, "Название"));
-    const title = el("input"); title.maxLength = 60; title.value = c.title || ""; form.appendChild(title);
-    form.appendChild(el("label", null, "Описание"));
-    const desc = el("textarea"); desc.rows = 3; desc.maxLength = 300; desc.placeholder = "О чём эта группа"; desc.value = c.description || ""; form.appendChild(desc);
-    const tg = el("label","toggle"); const cb = el("input"); cb.type = "checkbox"; cb.checked = !!c.only_owner_adds;
-    const txt = el("span", null, "Добавлять участников может только создатель");
-    txt.appendChild(el("span","muted","Иначе приглашать могут все участники группы"));
-    tg.append(cb, el("span","sw"), txt); form.appendChild(tg);
-    const save = el("button","btn","Сохранить"); save.type = "button"; save.style.marginTop = "16px";
-    save.onclick = async () => {
-      if (!title.value.trim()){ title.focus(); return toast("Введите название"); }
-      save.disabled = true;
-      const { error } = await sb.rpc("update_group", { conv: c.conversation_id, p_title: title.value, p_description: desc.value, p_avatar_url: avUrl, p_only_owner_adds: cb.checked });
-      save.disabled = false;
-      if (error) return toast(ruError(error));
-      Object.assign(c, { title: title.value.trim(), description: desc.value.trim() || null, conv_avatar_url: avUrl, only_owner_adds: cb.checked });
-      toast("Настройки группы сохранены"); await loadChats(); if (openConv) renderConvHead();
-    };
-    form.appendChild(save);
-    body.appendChild(form);
-  }
-
-  // --- уведомления ---
-  const nrow = el("div","setting-row");
-  const ntg = el("label","toggle"); ntg.style.flex = "1";
-  const ncb = el("input"); ncb.type = "checkbox"; ncb.checked = !c.muted;
-  const ntx = el("span", null, "Уведомления"); ntx.appendChild(el("span","muted","Сообщать о новых сообщениях в этой группе"));
-  ntg.append(ncb, el("span","sw"), ntx); nrow.appendChild(ntg);
-  ncb.onchange = () => setMuted(c, !ncb.checked);
-  body.appendChild(nrow);
-
-  // --- участники ---
-  const head = el("div","row1"); head.style.margin = "18px 0 6px";
-  head.appendChild(el("div","section-label", `Участники · ${members.length}`));
-  if (canAdd){
-    const add = el("button","btn sm","+ Добавить"); add.type = "button";
-    add.onclick = () => pickUsers("Добавить в группу", new Set(members.map(m => m.user_id)), async ids => {
-      const { error } = await sb.rpc("add_group_members", { conv: c.conversation_id, p_members: ids });
-      if (error) return toast(ruError(error));
-      toast("Участники добавлены"); await loadChats(); groupInfo(chats.find(x => x.conversation_id === c.conversation_id) || c);
-    });
-    head.appendChild(add);
-  }
-  body.appendChild(head);
-  members.sort((a,b) => (b.role === "owner") - (a.role === "owner"));
-  for (const m of members){
-    const p = m.profiles || { id: m.user_id, username: "?" };
-    const r = el("div","member");
-    const mav = avatarFor(p, "sm"); mav.classList.add("clickable"); mav.onclick = () => userInfo(p);
-    const meta = el("div","meta"); const n = nameWithRole(p); n.classList.add("clickable"); n.onclick = () => userInfo(p);
-    if (m.role === "owner") n.appendChild(el("span","role owner","создатель"));
-    const st = statusText(p.id);
-    meta.append(n, el("div","time","@" + p.username + (p.id === me.id ? " · вы" : (st.text ? " · " + st.text : ""))));
-    r.append(mav, meta);
-    if (isOwner && m.user_id !== me.id){
-      const rm = el("button","btn sm danger","Исключить"); rm.type = "button";
-      rm.onclick = async () => {
-        if (rm.dataset.sure !== "1"){ rm.dataset.sure = "1"; rm.textContent = "Точно?"; setTimeout(() => { rm.dataset.sure = ""; rm.textContent = "Исключить"; }, 3000); return; }
-        rm.disabled = true;
-        const { error } = await sb.rpc("remove_group_member", { conv: c.conversation_id, target: m.user_id });
-        if (error){ rm.disabled = false; return toast(ruError(error)); }
-        fadeRemove(r); loadChats();
-      };
-      r.appendChild(rm);
-    }
-    body.appendChild(r);
-  }
-
-  // --- низ окна ---
-  const leave = el("button","btn danger","Выйти из группы"); leave.type = "button";
-  leave.onclick = () => {
-    if (leave.dataset.sure !== "1"){ leave.dataset.sure = "1"; leave.textContent = isOwner ? "Точно выйти? Создателем станет другой участник" : "Точно выйти?"; return; }
-    leaveGroupFlow(c);
-  };
-  foot.appendChild(leave);
-  if (isOwner){
-    const del = el("button","btn danger","Удалить группу"); del.type = "button";
-    del.onclick = async () => {
-      if (del.dataset.sure !== "1"){ del.dataset.sure = "1"; del.textContent = "Удалить навсегда для всех?"; return; }
-      const { error } = await sb.rpc("delete_group", { conv: c.conversation_id });
-      if (error) return toast(ruError(error));
-      closeModal(); if (openConv && openConv.conversation_id === c.conversation_id) closeConv();
-      loadChats(); toast("Группа удалена");
-    };
-    foot.appendChild(del);
-  }
-  const close = el("button","btn ghost","Закрыть"); close.type = "button"; close.onclick = () => closeModal();
-  foot.appendChild(close);
-  body.parentNode.appendChild(foot);
-}
 
 /* ---------- Меню «⋯» в шапке чата ---------- */
-function popMenu(anchor, items){
-  const old = $(".menu"); if (old) old.remove();
-  const menu = el("div","menu");
-  for (const it of items){
-    const b = el("button","item" + (it.danger ? " danger" : "")); b.type = "button";
-    b.textContent = it.text;
-    b.onclick = () => it.fn(b);
-    menu.appendChild(b);
-  }
-  document.body.appendChild(menu);
-  const r = anchor.getBoundingClientRect(), mw = menu.offsetWidth;
-  menu.style.left = Math.max(8, Math.min(r.right - mw, window.innerWidth - mw - 8)) + "px";
-  menu.style.top = (r.bottom + 6) + "px";
-}
-$("#convMore").onclick = e => {
-  e.stopPropagation();
-  const c = openConv; if (!c) return;
-  const items = [];
-  if (c.is_group) items.push({ text: "⚙️  Настройки группы", fn: () => { closeMenu(); groupInfo(c); } });
-  else items.push({ text: "👤  Профиль", fn: () => { closeMenu(); $("#convTitle").click(); } });
-  items.push({ text: c.muted ? "🔔  Включить уведомления" : "🔕  Выключить уведомления", fn: () => { closeMenu(); setMuted(c, !c.muted); } });
-  if (c.is_group) items.push({ text: "🚪  Выйти из группы", danger: true, fn: b => {
-    if (b.dataset.sure !== "1"){ b.dataset.sure = "1"; b.textContent = "Точно выйти?"; return; }
-    closeMenu(); leaveGroupFlow(c);
-  } });
-  popMenu(e.currentTarget, items);
-};
+$("#convMore").onclick = e => { e.stopPropagation(); openConvMenu(e.currentTarget); };
 
 /* ---------- Выбор пользователей (для групп) ---------- */
 function pickUsers(title, exclude, onDone, extraTop){
@@ -1983,53 +1556,11 @@ function pickUsers(title, exclude, onDone, extraTop){
   });
   refreshChips(); search("");
 }
-$("#newGroupBtn").onclick = () => {
-  let titleInput;
-  pickUsers("Новая группа", new Set(), async ids => {
-    const title = titleInput.value.trim();
-    if (!title){ titleInput.focus(); titleInput.style.borderColor = "var(--danger)"; return; }
-    const { data: convId, error } = await sb.rpc("create_group", { p_title: title, p_members: ids });
-    if (error) return toast(ruError(error));
-    closeModal(); await loadChats();
-    const c = chats.find(x => x.conversation_id === convId);
-    if (c) openChat(c);
-  }, body => {
-    body.appendChild(el("div","section-label","Название группы"));
-    titleInput = el("input"); titleInput.maxLength = 60; titleInput.placeholder = "Например, Группа 965";
-    titleInput.style.marginBottom = "16px"; body.appendChild(titleInput);
-    body.appendChild(el("div","section-label","Участники"));
-    if (!isTouch) setTimeout(() => titleInput.focus(), 50);
-  });
-};
+$("#newGroupBtn").onclick = e => openCreateMenu(e.currentTarget);
 
 /* ================== ПОИСК ================== */
 let searchTimer = null, searchSeq = 0;
 $("#searchInput").addEventListener("input", () => { clearTimeout(searchTimer); searchTimer = setTimeout(runSearch, 250); });
-async function runSearch(){
-  if (!me) return;
-  const q = $("#searchInput").value.trim().replace(/[%_,()\\]/g, "");
-  const seq = ++searchSeq;
-  let req = sb.from("profiles").select(PCOLS).neq("id", me.id).eq("is_system", false).limit(30);
-  req = q ? req.or(`username.ilike.%${q}%,display_name.ilike.%${q}%`).order("username") : req.order("created_at",{ascending:false});
-  const { data, error } = await req;
-  if (seq !== searchSeq) return;
-  $("#searchLabel").textContent = q ? "Результаты поиска" : "Новые пользователи";
-  const box = $("#searchResults"); box.innerHTML = "";
-  if (error){ box.appendChild(el("div","empty","Ошибка поиска")); return; }
-  if (!data.length){ box.appendChild(el("div","empty", q ? "Никого не нашлось" : "Пока здесь только вы. Позовите друзей!")); return; }
-  data.forEach((p, i) => {
-    people.set(p.id, Object.assign(people.get(p.id) || {}, p));
-    const card = el("div","user-card"); card.style.animationDelay = Math.min(i, 10) * 25 + "ms";
-    const av = avatarFor(p); av.classList.add("clickable"); av.onclick = () => userInfo(p);
-    const meta = el("div","meta clickable"); meta.onclick = () => userInfo(p);
-    meta.append(nameWithRole(p), el("div","login","@" + p.username));
-    if (p.bio) meta.appendChild(el("div","bio", p.bio));
-    const b = el("button","btn","Написать"); b.type = "button";
-    b.onclick = () => startChat(p, b);
-    card.append(av, meta, b); box.appendChild(card);
-  });
-  loadPresence(data.map(p => p.id));
-}
 async function startChat(p, btn){
   if (btn) btn.disabled = true;
   const { data: convId, error } = await sb.rpc("get_or_create_dm", { other: p.id });
@@ -2150,6 +1681,7 @@ async function loadAdmin(){
     .forEach(([k,l], i) => { const d = el("div","stat"); d.style.animationDelay = i * 25 + "ms"; d.append(el("div","v", String(s[k] ?? 0)), el("div","l", l)); box.appendChild(d); });
   adminUsers = us.data || [];
   renderAdminUsers();
+  loadReportCount();
   sb.rpc("admin_list_verifications", { p_status: "pending" }).then(({ data }) => {
     const n = (data || []).length, b = $("#verifCount"); b.textContent = n; b.classList.toggle("hidden", !n);
   });
@@ -2213,10 +1745,11 @@ function actBtn(text, style, action, okText, confirmFirst){
 let convFilterUser = null, adminConvs = [];
 function showAdminTab(t){
   document.querySelectorAll(".atabs button").forEach(b => b.classList.toggle("active", b.dataset.atab === t));
-  ["users","convs","verif","bcast","log"].forEach(n => { const node = $("#atab-" + n); node.classList.toggle("hidden", n !== t); if (n === t){ node.classList.remove("view-anim"); void node.offsetWidth; node.classList.add("view-anim"); } });
+  ["users","convs","reports","verif","bcast","log"].forEach(n => { const node = $("#atab-" + n); node.classList.toggle("hidden", n !== t); if (n === t){ node.classList.remove("view-anim"); void node.offsetWidth; node.classList.add("view-anim"); } });
   if (t === "convs") loadAdminConvs();
   if (t === "log") loadAdminLog();
   if (t === "verif") loadVerifList();
+  if (t === "reports") loadReports();
 }
 document.querySelectorAll(".atabs button").forEach(b => b.addEventListener("click", () => {
   if (b.dataset.atab === "convs") convFilterUser = null;
@@ -2421,7 +1954,7 @@ function ping(){
 }
 async function notifyIncoming(m){
   const c = chats.find(x => x.conversation_id === m.conversation_id);
-  if (c && c.muted) return;
+  if (c && c.muted && !(m.body && me && m.body.includes("@" + me.username))) return;
   if (!document.hidden && convOpenAndVisible(m.conversation_id)) return;
   ping();
   if (!document.hidden) return;                 // вкладка на экране — достаточно звука и счётчика
@@ -2559,6 +2092,1405 @@ $("#bcSend").onclick = async () => {
   show(msg, `Отправлено: ${data} ${plural(data,"получатель","получателя","получателей")}`, "ok");
   $("#bcText").value = ""; $("#bcCount").textContent = "0";
 };
+
+/* ================== v7: ПЕРЕПИСКА, ЧАТЫ, ГРУППЫ И КАНАЛЫ ================== */
+let loadedMsgs = [];            // сообщения открытого чата по порядку
+let othersRead = 0;             // до какого момента собеседники прочитали (мс)
+let replyTo = null;             // id сообщения, на которое отвечаем
+const pollVotes = new Map();    // id сообщения → [{user_id, option_idx}]
+let typingCh = null; const typers = new Map();
+let myBlocks = new Set();
+const previewCache = new Map();
+const msgFetchCache = new Map();
+let showArchive = false;
+let lastTypingSent = 0;
+
+Object.assign(SVG, {
+  bookmark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/></svg>',
+  reply: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 8 5 12l5 4"/><path d="M5 12h9a5 5 0 0 1 5 5v1"/></svg>',
+  forward: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8l5 4-5 4"/><path d="M19 12h-9a5 5 0 0 0-5 5v1"/></svg>',
+  pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6l-1 6 3 3H7l3-3z"/><path d="M12 13v8"/></svg>',
+  flag: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4h11l-2 4 2 4H5"/></svg>',
+  search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>'
+});
+
+/* ---------- Форматирование текста ---------- */
+function escHTML(s){ return String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c])); }
+function inlineFmt(s){
+  const codes = [];
+  s = s.replace(/`([^`\n]+)`/g, (_, c) => { codes.push(c); return "\u0000" + (codes.length - 1) + "\u0000"; });
+  s = escHTML(s);
+  s = s.replace(/(https?:\/\/[^\s<]+[^\s<.,;:!?)"'\]])/g, u => `<a href="${u}" target="_blank" rel="noopener noreferrer">${u}</a>`);
+  s = s.replace(/\*\*([^*\n]+)\*\*/g, "<b>$1</b>")
+       .replace(/__([^_\n]+)__/g, "<i>$1</i>")
+       .replace(/~~([^~\n]+)~~/g, "<s>$1</s>")
+       .replace(/\|\|([^|\n]+)\|\|/g, '<span class="spoiler">$1</span>');
+  s = s.replace(/(^|[\s(])@([a-zA-Z0-9_.\-]{3,32})/g, (_, p, u) => `${p}<a class="mention" data-u="${u}">@${u}</a>`);
+  s = s.replace(/\u0000(\d+)\u0000/g, (_, i) => "<code>" + escHTML(codes[+i]) + "</code>");
+  return s;
+}
+function fmtHTML(text){
+  const out = []; const re = /```([\s\S]*?)```/g; let last = 0, m;
+  while ((m = re.exec(text))){ out.push(inlineFmt(text.slice(last, m.index))); out.push('<pre class="code">' + escHTML(m[1].replace(/^\n/, "")) + "</pre>"); last = re.lastIndex; }
+  out.push(inlineFmt(text.slice(last)));
+  return out.join("");
+}
+$("#messages").addEventListener("click", async e => {
+  const sp = e.target.closest(".spoiler"); if (sp){ sp.classList.add("shown"); return; }
+  const mn = e.target.closest(".mention");
+  if (mn){
+    e.preventDefault();
+    const { data } = await sb.from("profiles").select(PCOLS).eq("username", mn.dataset.u).maybeSingle();
+    if (data) userInfo(data); else toast("Пользователь @" + mn.dataset.u + " не найден");
+  }
+});
+
+/* ---------- Превью ссылок ---------- */
+function getPreview(url){
+  if (!previewCache.has(url)) previewCache.set(url,
+    fetch(SUPABASE_URL + "/functions/v1/link-preview", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ url }) })
+      .then(r => r.json()).catch(() => null));
+  return previewCache.get(url);
+}
+function attachPreview(b, text){
+  const mm = text.match(/https?:\/\/[^\s<]+[^\s<.,;:!?)"'\]]/); if (!mm) return;
+  getPreview(mm[0]).then(p => {
+    if (!p || p.error || (!p.title && !p.image) || !b.isConnected || b.querySelector(".lp")) return;
+    const a = el("a","lp"); a.href = mm[0]; a.target = "_blank"; a.rel = "noopener noreferrer";
+    if (p.site) a.appendChild(el("div","lp-site", p.site));
+    if (p.title) a.appendChild(el("div","lp-title", p.title));
+    if (p.description) a.appendChild(el("div","lp-desc", p.description));
+    if (p.image){ const im = el("img","lp-img"); im.src = p.image; im.loading = "lazy"; im.referrerPolicy = "no-referrer"; im.onerror = () => im.remove(); a.appendChild(im); }
+    const wasBottom = nearBottom(220);
+    b.insertBefore(a, b.querySelector(".t"));
+    if (wasBottom) scrollDown();
+  });
+}
+
+/* ---------- Черновики ---------- */
+function getDraft(id){ try { return localStorage.getItem("kc_draft_" + id) || ""; } catch(e){ return ""; } }
+function setDraft(id, v){ try { v ? localStorage.setItem("kc_draft_" + id, v) : localStorage.removeItem("kc_draft_" + id); } catch(e){} }
+let draftTimer;
+function scheduleDraft(){ clearTimeout(draftTimer); draftTimer = setTimeout(saveDraftNow, 400); }
+function saveDraftNow(){ if (openConv && !editing) setDraft(openConv.conversation_id, input.value.trim() ? input.value : ""); }
+
+/* ---------- Список чатов ---------- */
+function kindPreview(kind, body){
+  if (kind === "image") return "📷 Фото";
+  if (kind === "video") return "🎬 Видео";
+  if (kind === "voice") return "🎤 Голосовое сообщение";
+  if (kind === "circle") return "⭕ Видеосообщение";
+  if (kind === "audio") return "🎵 Аудио";
+  if (kind === "file") return "📎 Файл";
+  if (kind === "poll") return "📊 " + (body || "Опрос");
+  return body || "";
+}
+function chatTitle(c){
+  if (c.kind === "saved") return "Избранное";
+  if (c.is_group) return c.title || (c.kind === "channel" ? "Канал" : "Группа");
+  return c.other_display_name || c.other_username || "Удалённый пользователь";
+}
+function savedAvatar(size){ const a = el("div","avatar saved-av" + (size ? " " + size : "")); a.innerHTML = SVG.bookmark; return a; }
+function chatAvatar(c, size){
+  if (c.kind === "saved") return savedAvatar(size);
+  const a = el("div","avatar" + (size ? " " + size : ""));
+  if (c.is_group) return avatar(a, c.title, c.title, c.conv_avatar_url, true);
+  avatar(a, c.other_display_name, c.other_username, c.other_avatar_url);
+  if (c.other_id){ a.dataset.uid = c.other_id; setOnlineDot(a, isOnline(c.other_id)); }
+  return a;
+}
+function chatPreview(c){
+  const d = getDraft(c.conversation_id);
+  if (d && !(openConv && openConv.conversation_id === c.conversation_id)) return { draft: true, text: d.replace(/\s+/g, " ") };
+  if (c.last_kind){
+    const who = c.last_sender === me.id ? "Вы: " : (c.kind === "group" && c.last_sender_name ? c.last_sender_name + ": " : "");
+    return { text: who + kindPreview(c.last_kind, c.last_body) };
+  }
+  if (c.kind === "saved") return { text: "Заметки и сохранённые сообщения" };
+  if (c.kind === "channel") return { text: c.member_count + " " + plural(c.member_count, "подписчик","подписчика","подписчиков") };
+  if (c.is_group) return { text: c.member_count + " " + plural(c.member_count, "участник","участника","участников") };
+  return { text: "Нет сообщений" };
+}
+function renderChatList(){
+  const box = $("#chatList"); box.innerHTML = "";
+  const active = chats.filter(c => !c.archived), arch = chats.filter(c => c.archived);
+  const total = active.reduce((s,c) => s + (c.muted ? 0 : Number(c.unread||0)), 0);
+  const badge = $("#unreadBadge"); badge.textContent = total > 99 ? "99+" : total; badge.classList.toggle("hidden", !total);
+  document.title = total ? `(${total}) Karacikov` : "Karacikov";
+  if (showArchive){
+    const h = el("div","arch-row"); h.innerHTML = "← &nbsp;Архив"; h.onclick = () => { showArchive = false; renderChatList(); };
+    box.appendChild(h);
+  } else if (arch.length){
+    const au = arch.reduce((s,c) => s + Number(c.unread||0), 0);
+    const h = el("div","arch-row"); h.appendChild(el("span", null, "🗄  Архив · " + arch.length));
+    if (au) h.appendChild(el("span","unread off", au));
+    h.onclick = () => { showArchive = true; renderChatList(); };
+    box.appendChild(h);
+  }
+  const list = showArchive ? arch : active;
+  if (!list.length){
+    const e = el("div","empty", showArchive ? "В архиве пусто" : "Пока нет переписок. Найдите собеседника или создайте группу.");
+    if (!showArchive){ const b = el("button","btn","Найти людей"); b.type = "button"; b.onclick = () => goView("search"); e.appendChild(el("br")); e.appendChild(b); }
+    box.appendChild(e); return;
+  }
+  list.forEach((c, i) => {
+    const it = el("div","chat-item" + (openConv && openConv.conversation_id === c.conversation_id ? " active":""));
+    if (firstListRender) it.style.animation = `fadeUp .3s var(--ease) ${Math.min(i, 10) * 25}ms both`;
+    const meta = el("div","meta");
+    const r1 = el("div","row1");
+    const nm = el("div","name");
+    if (c.kind === "channel") nm.appendChild(el("span","kind-ic","📢"));
+    nm.appendChild(document.createTextNode(chatTitle(c)));
+    if (!c.is_group && c.other_verified) nm.appendChild(checkBadge());
+    if (!c.is_group){ const b = roleBadge(c.other_role); if (b) nm.appendChild(b); }
+    if (c.muted) nm.appendChild(el("span","muted-ic","🔕"));
+    const tm = el("div","time");
+    if (c.pinned) tm.appendChild(el("span","pin-ic","📌"));
+    tm.appendChild(document.createTextNode(fmtListTime(c.last_kind ? c.last_message_at : null)));
+    r1.append(nm, tm);
+    const r2 = el("div","row2");
+    const pv = chatPreview(c), pvEl = el("div","preview");
+    if (pv.draft){ pvEl.appendChild(el("span","draft","Черновик: ")); }
+    pvEl.appendChild(document.createTextNode(pv.text));
+    r2.appendChild(pvEl);
+    if (Number(c.unread)) r2.appendChild(el("div","unread" + (c.muted ? " off" : ""), c.unread));
+    meta.append(r1, r2); it.append(chatAvatar(c), meta);
+    it.onclick = () => openChat(c);
+    it.addEventListener("contextmenu", e => { e.preventDefault(); chatItemMenu(c, it); });
+    let t = null;
+    it.addEventListener("touchstart", () => { t = setTimeout(() => { t = null; if (navigator.vibrate) navigator.vibrate(10); chatItemMenu(c, it); }, 500); }, { passive: true });
+    ["touchend","touchmove","touchcancel"].forEach(ev => it.addEventListener(ev, () => { clearTimeout(t); }, { passive: true }));
+    box.appendChild(it);
+  });
+  firstListRender = false;
+}
+async function setMemberFlag(c, field, value, okText){
+  const { error } = await sb.from("conversation_members").update({ [field]: value }).eq("conversation_id", c.conversation_id).eq("user_id", me.id);
+  if (error) return toast(ruError(error));
+  c[field] = value; const inList = chats.find(x => x.conversation_id === c.conversation_id); if (inList) inList[field] = value;
+  if (field === "pinned") chats.sort((a, b) => (b.pinned - a.pinned) || (new Date(b.last_message_at) - new Date(a.last_message_at)));
+  renderChatList(); if (openConv && openConv.conversation_id === c.conversation_id) renderConvHead();
+  if (okText) toast(okText);
+}
+function chatItemMenu(c, anchor){
+  const items = [
+    { text: c.pinned ? "📌  Открепить чат" : "📌  Закрепить чат", fn: () => { closeMenu(); setMemberFlag(c, "pinned", !c.pinned); } },
+    { text: c.archived ? "🗄  Вернуть из архива" : "🗄  В архив", fn: () => { closeMenu(); setMemberFlag(c, "archived", !c.archived, c.archived ? "Чат возвращён из архива" : "Чат перенесён в архив"); } }
+  ];
+  if (c.kind !== "saved") items.push({ text: c.muted ? "🔔  Включить уведомления" : "🔕  Выключить уведомления", fn: () => { closeMenu(); setMuted(c, !c.muted); } });
+  if (Number(c.unread)) items.push({ text: "✓  Отметить прочитанным", fn: async () => {
+    closeMenu(); await sb.from("conversation_members").update({ last_read_at: new Date().toISOString() }).eq("conversation_id", c.conversation_id).eq("user_id", me.id); loadChats(); } });
+  popMenu(anchor, items);
+}
+
+/* ---------- Шапка чата и поле ввода ---------- */
+function renderConvHead(){
+  const c = openConv; if (!c) return;
+  const av = $("#convAvatar");
+  av.classList.remove("saved-av");
+  if (c.kind === "saved"){ av.style.backgroundImage = ""; av.style.backgroundColor = ""; av.classList.add("saved-av"); av.innerHTML = SVG.bookmark; delete av.dataset.uid; }
+  else if (c.is_group){ avatar(av, c.title, c.title, c.conv_avatar_url, true); delete av.dataset.uid; setOnlineDot(av, false); }
+  else { avatar(av, c.other_display_name, c.other_username, c.other_avatar_url); av.dataset.uid = c.other_id || ""; setOnlineDot(av, isOnline(c.other_id)); }
+  const nm = $("#convName"); nm.textContent = "";
+  if (c.kind === "channel") nm.appendChild(el("span","kind-ic","📢"));
+  nm.appendChild(document.createTextNode(chatTitle(c)));
+  if (!c.is_group && c.other_verified) nm.appendChild(checkBadge());
+  if (!c.is_group){ const b = roleBadge(c.other_role); if (b) nm.appendChild(b); }
+  if (c.muted) nm.appendChild(el("span","muted-ic","🔕"));
+  renderConvStatus(); updateComposer(); renderPinnedBar();
+}
+function renderConvStatus(){
+  const c = openConv, sub = $("#convSub"); if (!c) return;
+  sub.classList.remove("online","typing");
+  if (typers.size){
+    const names = [...typers.values()].map(t => t.name);
+    sub.textContent = c.is_group ? (names.length === 1 ? names[0] + " печатает…" : names.length + " " + plural(names.length,"человек","человека","человек") + " печатают…") : "печатает…";
+    sub.classList.add("typing"); return;
+  }
+  if (c.kind === "saved"){ sub.textContent = "заметки и сохранённое"; return; }
+  if (c.kind === "channel"){ sub.textContent = c.member_count + " " + plural(c.member_count,"подписчик","подписчика","подписчиков") + (c.is_public ? " · публичный канал" : " · частный канал"); return; }
+  if (c.is_group){
+    const on = groupMemberIds.filter(id => id !== me.id && isOnline(id)).length;
+    sub.textContent = c.member_count + " " + plural(c.member_count, "участник","участника","участников") + (on ? `, ${on} в сети` : "");
+    return;
+  }
+  const s = statusText(c.other_id);
+  sub.textContent = s.text || (c.other_username ? "@" + c.other_username : "");
+  sub.classList.toggle("online", s.online);
+}
+function composerBlockReason(){
+  if (!me) return "";
+  if (me.banned) return "Вы заблокированы и не можете писать сообщения";
+  const c = openConv; if (!c) return "";
+  if (!c.is_group && c.other_is_system) return "Это официальный канал Karacikov — ответить на него нельзя";
+  if (c.kind === "channel" && !["owner","admin"].includes(c.my_role)) return "Вы подписаны на канал — публикуют только администраторы";
+  if (c.kind === "dm" && c.i_blocked) return "Вы заблокировали этого пользователя";
+  if (c.kind === "dm" && c.blocked_me) return "Пользователь ограничил входящие сообщения";
+  return "";
+}
+function updateComposer(){
+  const r = composerBlockReason();
+  $("#composer").classList.toggle("hidden", !!r);
+  $("#composerOff").classList.toggle("hidden", !r);
+  $("#composerOff").textContent = r;
+  if (r){ cancelReply(); $("#mentionBox").classList.add("hidden"); }
+}
+
+/* ---------- Открытие чата и загрузка сообщений ---------- */
+function emptyText(c){
+  if (c.kind === "saved") return "Здесь можно хранить заметки и пересланные сообщения 🔖";
+  if (c.kind === "channel") return "В канале пока нет публикаций";
+  if (c.is_group) return "Группа создана. Напишите что-нибудь 👋";
+  return "Напишите первое сообщение 👋";
+}
+async function loadRecent(c, jumpId){
+  if (jumpId){
+    const { data: t } = await sb.from("messages").select("created_at").eq("id", jumpId).maybeSingle();
+    if (t){
+      const [after, before] = await Promise.all([
+        sb.from("messages").select(MCOLS).eq("conversation_id", c.conversation_id).gte("created_at", t.created_at).order("created_at",{ascending:true}).limit(400),
+        sb.from("messages").select(MCOLS).eq("conversation_id", c.conversation_id).lt("created_at", t.created_at).order("created_at",{ascending:false}).limit(30)
+      ]);
+      const b = (before.data || []).reverse();
+      return { data: b.concat(after.data || []), error: after.error, hasOlder: b.length === 30 };
+    }
+  }
+  const r = await sb.from("messages").select(MCOLS).eq("conversation_id", c.conversation_id).order("created_at",{ascending:false}).limit(150);
+  return { data: (r.data || []).reverse(), error: r.error, hasOlder: (r.data || []).length === 150 };
+}
+function renderAll(msgs, hasOlder){
+  const list = $("#messages"); list.innerHTML = "";
+  lastShown = null; lastSender = null; msgStore.clear(); loadedMsgs = [];
+  if (hasOlder){ const b = el("button","older-btn","Показать более ранние сообщения"); b.type = "button"; b.onclick = loadOlder; list.appendChild(b); }
+  if (!msgs.length) list.appendChild(el("div","empty", emptyText(openConv)));
+  msgs.forEach(m => addMessage(m, false));
+}
+async function loadOlder(){
+  if (!openConv || !loadedMsgs.length) return;
+  const c = openConv, first = loadedMsgs[0];
+  const r = await sb.from("messages").select(MCOLS).eq("conversation_id", c.conversation_id).lt("created_at", first.created_at).order("created_at",{ascending:false}).limit(150);
+  if (openConv !== c) return;
+  const older = (r.data || []).reverse();
+  await signPaths(older.filter(m => m.file_path).map(m => m.file_path));
+  const l = $("#messages"), h = l.scrollHeight, top = l.scrollTop;
+  renderAll(older.concat(loadedMsgs.slice()), older.length === 150);
+  l.scrollTop = l.scrollHeight - h + top;
+}
+function flashRow(row){ const b = row.querySelector(".bubble"); if (!b) return; b.classList.add("flash"); setTimeout(() => b.classList.remove("flash"), 1400); }
+async function jumpTo(id){
+  let row = document.querySelector(`.mrow[data-id="${id}"]`);
+  if (!row && openConv){ await openChat(openConv, id); row = document.querySelector(`.mrow[data-id="${id}"]`); }
+  if (!row){ toast("Сообщение не найдено — возможно, его удалили"); return; }
+  row.scrollIntoView({ block: "center", behavior: "smooth" }); flashRow(row);
+}
+async function openChat(c, jumpId){
+  closeMenu(); if (editing) cancelEdit(); cancelReply(); saveDraftNow();
+  const same = !!(openConv && openConv.conversation_id === c.conversation_id);
+  openConv = c;
+  showViewOnly("chats");
+  $("#view-chats").classList.add("open"); $("#app").classList.add("in-conv");
+  $("#convEmpty").classList.add("hidden");
+  const box = $("#convBox"); if (!same){ box.classList.add("hidden"); void box.offsetWidth; } box.classList.remove("hidden");
+  if (!same){ groupMemberIds = []; typers.clear(); subscribeTyping(c.conversation_id); input.value = getDraft(c.conversation_id); autosize(); }
+  renderConvHead();
+  const list = $("#messages"); list.innerHTML = ""; lastShown = null; lastSender = null; msgStore.clear(); loadedMsgs = [];
+  list.appendChild(el("div","empty","Загрузка…"));
+  renderChatList();
+  const [res, members, rx, votes, reads] = await Promise.all([
+    loadRecent(c, jumpId),
+    c.is_group ? loadMembers(c.conversation_id) : null,
+    sb.from("message_reactions").select("message_id,user_id,emoji").eq("conversation_id", c.conversation_id),
+    sb.from("poll_votes").select("message_id,user_id,option_idx").eq("conversation_id", c.conversation_id),
+    sb.from("conversation_members").select("user_id,last_read_at").eq("conversation_id", c.conversation_id)
+  ]);
+  if (openConv !== c) return;
+  if (members){ groupMemberIds = members.map(m => m.user_id); loadPresence(groupMemberIds); renderConvStatus(); }
+  else if (c.other_id) loadPresence([c.other_id]);
+  reactions.clear();
+  for (const r of (rx && rx.data) || []){ if (!reactions.has(r.message_id)) reactions.set(r.message_id, []); reactions.get(r.message_id).push(r); }
+  pollVotes.clear();
+  for (const v of (votes && votes.data) || []){ if (!pollVotes.has(v.message_id)) pollVotes.set(v.message_id, []); pollVotes.get(v.message_id).push(v); }
+  othersRead = 0;
+  for (const r of (reads && reads.data) || []) if (r.user_id !== me.id) othersRead = Math.max(othersRead, new Date(r.last_read_at).getTime());
+  if (res.error){ list.innerHTML = ""; list.appendChild(el("div","empty","Не удалось загрузить сообщения")); return; }
+  await signPaths(res.data.filter(m => m.file_path).map(m => m.file_path));
+  if (openConv !== c) return;
+  renderAll(res.data, res.hasOlder);
+  renderPinnedBar();
+  const target = jumpId && document.querySelector(`.mrow[data-id="${jumpId}"]`);
+  if (target){ target.scrollIntoView({ block: "center" }); flashRow(target); } else scrollDown();
+  markRead();
+  if (!isTouch && !jumpId && !composerBlockReason()) input.focus();
+}
+function closeConv(){
+  stopRecording(true); closeMenu(); if (editing) cancelEdit(); cancelReply(); saveDraftNow();
+  if (typingCh){ sb.removeChannel(typingCh); typingCh = null; } typers.clear();
+  openConv = null;
+  $("#view-chats").classList.remove("open"); $("#app").classList.remove("in-conv");
+  $("#convBox").classList.add("hidden"); $("#convEmpty").classList.remove("hidden");
+  $("#pinBar").classList.add("hidden");
+  renderChatList();
+}
+async function openSaved(){
+  const { data: id, error } = await sb.rpc("get_saved_chat");
+  if (error) return toast(ruError(error));
+  await loadChats();
+  const c = chats.find(x => x.conversation_id === id); if (c) openChat(c);
+}
+$("#savedBtn").onclick = openSaved;
+
+/* ---------- Отрисовка сообщений ---------- */
+function addMessage(m, animate){
+  const list = $("#messages");
+  const note = list.querySelector(".empty"); if (note) note.remove();
+  if (m.id && list.querySelector(`.mrow[data-id="${m.id}"]`)) return null;
+  if (!lastShown || !sameDay(lastShown, m.created_at)){ list.appendChild(el("div","day", fmtDay(m.created_at))); lastSender = null; }
+  lastShown = m.created_at;
+  if (m.id){ msgStore.set(m.id, m); loadedMsgs.push(m); }
+  const mine = m.sender_id === me.id;
+  const isGroup = !!(openConv && openConv.kind === "group");
+  const row = el("div","mrow " + (mine ? "mine" : "theirs") + (animate ? " anim-in" : "") + (!isGroup || mine ? " no-av" : ""));
+  if (m.id) row.dataset.id = m.id;
+  const showAuthor = isGroup && !mine && lastSender !== m.sender_id;
+  if (isGroup && !mine){
+    const p = people.get(m.sender_id);
+    if (showAuthor){ const av = avatarFor(p || { username: "?" }, "xs"); av.classList.add("clickable"); av.onclick = () => userInfo(p); row.appendChild(av); }
+    else row.appendChild(el("div","spacer"));
+  }
+  lastSender = m.sender_id;
+  const col = el("div","mcol");
+  col.appendChild(buildBubble(m, showAuthor));
+  col.appendChild(el("div","reacts"));
+  row.appendChild(col);
+  if (m.id) row.appendChild(buildTools(m));
+  list.appendChild(row);
+  if (m.id) renderReactions(m.id);
+  attachMenuTriggers(row);
+  return row;
+}
+function isRead(m){ return !!othersRead && new Date(m.created_at).getTime() <= othersRead; }
+function refreshTicks(){
+  document.querySelectorAll("#messages .mrow.mine").forEach(r => {
+    const m = msgStore.get(+r.dataset.id), tk = r.querySelector(".ticks");
+    if (m && tk){ const rd = isRead(m); tk.textContent = rd ? "✓✓" : "✓"; tk.classList.toggle("read", rd); }
+  });
+}
+function fetchMsg(id){
+  if (!msgFetchCache.has(id)) msgFetchCache.set(id, sb.from("messages").select(MCOLS).eq("id", id).maybeSingle().then(r => r.data));
+  return msgFetchCache.get(id);
+}
+function buildReplyQuote(id){
+  const q = el("div","rq"); const n = el("div","rq-name","…"), t = el("div","rq-text","");
+  q.append(n, t);
+  const fill = r => {
+    if (!r){ n.textContent = "Сообщение"; t.textContent = "удалено"; return; }
+    const p = people.get(r.sender_id);
+    n.textContent = r.sender_id === me.id ? "Вы" : shownName(p);
+    t.textContent = kindPreview(r.kind, r.body).slice(0, 140);
+  };
+  const r = msgStore.get(id); if (r) fill(r); else fetchMsg(id).then(fill);
+  q.onclick = e => { e.stopPropagation(); jumpTo(id); };
+  return q;
+}
+function buildBubble(m, showAuthor){
+  const isMedia = ["image","video"].includes(m.kind);
+  const b = el("div","bubble" + (isMedia ? " media" : "") + (m.kind === "circle" ? " circle-b" : "") + (m.kind === "poll" ? " poll-b" : "") + (m.pending ? " pending" : ""));
+  if (showAuthor){
+    const p = people.get(m.sender_id);
+    const who = el("span","who", shownName(p)); who.style.color = `hsl(${hue(p && p.username)} 70% ${document.documentElement.dataset.theme === "light" ? 38 : 72}%)`;
+    if (p && p.verified) who.appendChild(checkBadge());
+    who.onclick = e => { e.stopPropagation(); userInfo(p); };
+    b.appendChild(who);
+  }
+  if (m.fwd_name){ const f = el("div","fwd"); f.innerHTML = SVG.forward; f.appendChild(document.createTextNode("Переслано от " + m.fwd_name)); b.appendChild(f); }
+  if (m.reply_to) b.appendChild(buildReplyQuote(m.reply_to));
+  renderBody(b, m);
+  const t = el("span","t", m.pending ? (m.progressText || "отправка…") : (m.edited_at ? "изменено · " : "") + fmtTime(m.created_at));
+  if (!m.pending && m.sender_id === me.id && openConv && openConv.kind !== "channel" && openConv.kind !== "saved"){
+    const rd = isRead(m); t.appendChild(el("span","ticks" + (rd ? " read" : ""), rd ? "✓✓" : "✓"));
+  }
+  b.appendChild(t);
+  if (m.kind === "text" && m.body && !m.pending) attachPreview(b, m.body);
+  return b;
+}
+function renderBody(b, m){
+  const url = m.localUrl || (m.file_path && urlCache.get(m.file_path));
+  if (m.kind === "poll"){ renderPoll(b, m); return; }
+  if (m.kind === "image"){
+    const img = el("img","photo"); img.alt = m.file_name || "фото"; img.loading = "lazy"; img.style.opacity = 0;
+    if (url) img.src = url;
+    img.onload = () => { img.style.opacity = 1; if (nearBottom(300)) scrollDown(); };
+    img.onclick = () => url && lightbox(url);
+    b.appendChild(img);
+  } else if (m.kind === "video"){
+    const v = el("video"); v.controls = true; v.preload = "metadata"; v.playsInline = true; if (url) v.src = url; b.appendChild(v);
+  } else if (m.kind === "circle"){
+    b.appendChild(buildCircle(url));
+  } else if (m.kind === "voice" || m.kind === "audio"){
+    if (m.kind === "audio") b.appendChild(el("div","voice-label", m.file_name || "Аудио"));
+    const a = el("audio"); a.controls = true; a.preload = "metadata"; if (url) a.src = url; b.appendChild(a);
+  } else if (m.kind === "file"){
+    const a = el("a","filebox"); if (url){ a.href = url; a.target = "_blank"; a.rel = "noopener"; a.download = m.file_name || ""; }
+    const ic = el("div","ic"); ic.innerHTML = SVG.file;
+    const info = el("div"); info.append(el("div","fn", m.file_name || "Файл"), el("div","fs", fmtSize(m.file_size)));
+    a.append(ic, info); b.appendChild(a);
+  }
+  if (m.kind === "voice" || m.kind === "circle"){
+    if (m.transcript){
+      const btn = el("button","tr-btn"); btn.type = "button"; btn.innerHTML = SVG.text; btn.appendChild(document.createTextNode("Расшифровка"));
+      const tr = el("div","tr"); tr.appendChild(el("div", null, m.transcript));
+      btn.onclick = e => { e.stopPropagation(); tr.classList.toggle("open"); if (tr.classList.contains("open") && nearBottom(200)) setTimeout(scrollDown, 300); };
+      b.append(btn, tr);
+    } else if (!m.pending){
+      const n = el("div","voice-label","Расшифровка недоступна"); n.style.opacity = .5; b.appendChild(n);
+    }
+  }
+  if (m.body){
+    const tx = el("div", m.kind !== "text" ? "cap txt" : "txt");
+    tx.innerHTML = fmtHTML(m.body);
+    b.appendChild(tx);
+  }
+}
+async function insertMessage(row, payload, onFail){
+  const { data, error } = await sb.from("messages").insert(payload).select(MCOLS).single();
+  const bubble = row && row.querySelector(".bubble");
+  if (error){
+    if (bubble){ bubble.classList.remove("pending"); bubble.classList.add("failed"); bubble.querySelector(".t").textContent = "не отправлено"; }
+    toast(ruError(error)); onFail && onFail(); return null;
+  }
+  if (!row || !row.isConnected || document.querySelector(`.mrow[data-id="${data.id}"]`)){ row && row.remove(); }
+  else {
+    row.dataset.id = data.id; msgStore.set(data.id, data); loadedMsgs.push(data);
+    const nb = buildBubble(data, false); bubble.replaceWith(nb);
+    row.appendChild(buildTools(data)); attachMenuTriggers(row);
+    if (data.kind === "poll") updatePoll(data.id);
+  }
+  loadChats();
+  return data;
+}
+function removeMessageRow(id){
+  msgStore.delete(id); reactions.delete(id); pollVotes.delete(id);
+  loadedMsgs = loadedMsgs.filter(x => x.id !== id);
+  const row = document.querySelector(`.mrow[data-id="${id}"]`); if (!row) return;
+  row.style.transition = "opacity .22s var(--ease), transform .22s var(--ease)";
+  row.style.opacity = 0; row.style.transform = "scale(.97)";
+  setTimeout(() => row.remove(), 230);
+  if (openConv && openConv.pinned_message_id === id){ openConv.pinned_message_id = null; renderPinnedBar(); }
+}
+
+/* ---------- Ответ на сообщение ---------- */
+function startReply(id){
+  const m = msgStore.get(id); if (!m) return;
+  if (editing) cancelEdit();
+  replyTo = id;
+  $("#replyName").textContent = m.sender_id === me.id ? "Ответ себе" : "Ответ " + shownName(people.get(m.sender_id));
+  $("#replyPreview").textContent = kindPreview(m.kind, m.body).slice(0, 140);
+  $("#replyBar").classList.remove("hidden");
+  input.focus();
+}
+function cancelReply(){ replyTo = null; const b = $("#replyBar"); if (b) b.classList.add("hidden"); }
+$("#replyCancel").onclick = cancelReply;
+document.addEventListener("keydown", e => { if (e.key === "Escape" && replyTo && !$("#modalRoot .overlay") && !$(".menu")) cancelReply(); });
+function startEdit(id){
+  const m = msgStore.get(id); if (!m) return;
+  stopRecording(true); cancelReply();
+  editing = id;
+  $("#editBar").classList.remove("hidden");
+  $("#editPreview").textContent = m.body;
+  input.value = m.body; autosize(); input.focus();
+  input.setSelectionRange(input.value.length, input.value.length);
+}
+
+/* ---------- Отправка ---------- */
+async function onComposerSubmit(e){
+  e.preventDefault();
+  if (recorder) return finishRecording();
+  const body = input.value.trim();
+  if (!openConv) return;
+  $("#mentionBox").classList.add("hidden");
+  if (editing){
+    const id = editing, m = msgStore.get(id);
+    if (!body){ toast("Сообщение не может быть пустым"); return; }
+    cancelEdit();
+    if (!m || m.body === body) return;
+    const prev = m.body;
+    updateMessageRow({ id, body, edited_at: new Date().toISOString() });
+    const { error } = await sb.from("messages").update({ body }).eq("id", id);
+    if (error){ updateMessageRow({ id, body: prev }); toast(ruError(error)); } else loadChats();
+    return;
+  }
+  if (!body) return;
+  const reply = replyTo; cancelReply();
+  input.value = ""; autosize(); setDraft(openConv.conversation_id, "");
+  const row = addMessage({ sender_id: me.id, kind: "text", body, reply_to: reply, created_at: new Date().toISOString(), pending: true }, true);
+  scrollDown(true);
+  await insertMessage(row, { conversation_id: openConv.conversation_id, kind: "text", body, reply_to: reply }, () => { input.value = body; autosize(); });
+}
+
+/* ---------- «Печатает…» ---------- */
+function subscribeTyping(conv){
+  if (typingCh){ sb.removeChannel(typingCh); typingCh = null; }
+  typers.clear();
+  typingCh = sb.channel("typing-" + conv, { config: { broadcast: { self: false } } });
+  typingCh
+    .on("broadcast", { event: "typing" }, ({ payload }) => {
+      if (!payload || !me || payload.uid === me.id || !openConv || openConv.conversation_id !== conv) return;
+      const prev = typers.get(payload.uid); if (prev) clearTimeout(prev.t);
+      typers.set(payload.uid, { name: payload.name, t: setTimeout(() => { typers.delete(payload.uid); renderConvStatus(); }, 4500) });
+      renderConvStatus();
+    })
+    .on("broadcast", { event: "pin" }, () => loadChats())
+    .subscribe();
+}
+function sendTyping(){
+  if (!typingCh || !openConv || Date.now() - lastTypingSent < 2500) return;
+  lastTypingSent = Date.now();
+  typingCh.send({ type: "broadcast", event: "typing", payload: { uid: me.id, name: shownName(me) } });
+}
+input.addEventListener("input", () => { if (input.value.trim() && !editing) sendTyping(); scheduleDraft(); mentionSuggest(); });
+input.addEventListener("click", mentionSuggest);
+input.addEventListener("blur", () => setTimeout(() => $("#mentionBox").classList.add("hidden"), 150));
+
+/* ---------- Упоминания @ ---------- */
+function mentionSuggest(){
+  const box = $("#mentionBox");
+  if (!openConv || openConv.kind !== "group"){ box.classList.add("hidden"); return; }
+  const pos = input.selectionStart, before = input.value.slice(0, pos);
+  const mm = before.match(/(^|\s)@([a-zA-Z0-9_.\-]*)$/);
+  if (!mm){ box.classList.add("hidden"); return; }
+  const q = mm[2].toLowerCase();
+  const list = groupMemberIds.filter(id => id !== me.id).map(id => people.get(id))
+    .filter(p => p && (p.username.toLowerCase().startsWith(q) || (p.display_name || "").toLowerCase().includes(q))).slice(0, 6);
+  if (!list.length){ box.classList.add("hidden"); return; }
+  box.innerHTML = "";
+  for (const p of list){
+    const it = el("div","pick");
+    const meta = el("div","meta"); meta.append(el("div","name", shownName(p)), el("div","login","@" + p.username));
+    it.append(avatarFor(p, "xs"), meta);
+    it.onmousedown = ev => {
+      ev.preventDefault();
+      const start = pos - mm[2].length - 1;
+      input.value = input.value.slice(0, start) + "@" + p.username + " " + input.value.slice(pos);
+      const np = start + p.username.length + 2; input.setSelectionRange(np, np);
+      box.classList.add("hidden"); autosize(); input.focus();
+    };
+    box.appendChild(it);
+  }
+  box.classList.remove("hidden");
+}
+
+/* ---------- Закреплённое сообщение ---------- */
+function canPin(){ const c = openConv; if (!c) return false; if (c.kind === "dm" || c.kind === "saved") return !c.other_is_system; return ["owner","admin"].includes(c.my_role); }
+function renderPinnedBar(){
+  const bar = $("#pinBar"), c = openConv;
+  const id = c && c.pinned_message_id;
+  if (!id){ bar.classList.add("hidden"); return; }
+  bar.classList.remove("hidden");
+  $("#pinClose").classList.toggle("hidden", !canPin());
+  const fill = r => { $("#pinText").textContent = r ? kindPreview(r.kind, r.body).slice(0, 160) : "Сообщение удалено"; };
+  const r = msgStore.get(id); if (r) fill(r); else fetchMsg(id).then(fill);
+  bar.onclick = e => { if (e.target.closest("#pinClose")) return; jumpTo(id); };
+}
+async function pinMessage(id){
+  const c = openConv; if (!c) return;
+  const { error } = await sb.rpc("pin_message", { conv: c.conversation_id, msg_id: id });
+  if (error) return toast(ruError(error));
+  c.pinned_message_id = id; renderPinnedBar();
+  if (typingCh) typingCh.send({ type: "broadcast", event: "pin", payload: {} });
+  toast(id ? "Сообщение закреплено" : "Сообщение откреплено");
+}
+$("#pinClose").onclick = e => { e.stopPropagation(); pinMessage(null); };
+
+/* ---------- Меню сообщения ---------- */
+function openMenu(id, anchor){
+  const old = $(".menu"); if (old) old.remove();
+  const m = msgStore.get(id); if (!m) return;
+  const c = openConv;
+  const menu = el("div","menu");
+  const mine = m.sender_id === me.id;
+  if (!me.banned){
+    const em = el("div","emojis");
+    const mineSet = new Set((reactions.get(id) || []).filter(r => r.user_id === me.id).map(r => r.emoji));
+    for (const e of REACTIONS){
+      const b = el("button", mineSet.has(e) ? "on" : null, e); b.type = "button";
+      b.onclick = () => { closeMenu(); toggleReaction(id, e); };
+      em.appendChild(b);
+    }
+    menu.appendChild(em);
+  }
+  const item = (svg, text, fn, danger) => { const b = el("button","item" + (danger ? " danger" : "")); b.type = "button"; b.innerHTML = svg; b.appendChild(document.createTextNode(text)); b.onclick = () => fn(b); menu.appendChild(b); return b; };
+  if (!composerBlockReason()) item(SVG.reply, "Ответить", () => { closeMenu(); startReply(id); });
+  if (m.kind !== "poll" || true) item(SVG.forward, "Переслать", () => { closeMenu(); forwardMessage(id); });
+  if (m.kind === "text" && m.body) item(SVG.copy, "Копировать текст", async () => { closeMenu(); try { await navigator.clipboard.writeText(m.body); toast("Текст скопирован"); } catch(e){ toast("Не удалось скопировать"); } });
+  if (m.transcript) item(SVG.copy, "Копировать расшифровку", async () => { closeMenu(); try { await navigator.clipboard.writeText(m.transcript); toast("Расшифровка скопирована"); } catch(e){} });
+  if (canPin()) item(SVG.pin, c.pinned_message_id === id ? "Открепить" : "Закрепить", () => { closeMenu(); pinMessage(c.pinned_message_id === id ? null : id); });
+  if (mine && m.kind === "text" && !me.banned) item(SVG.edit, "Изменить", () => { closeMenu(); startEdit(id); });
+  if (!mine && c.kind !== "saved") item(SVG.flag, "Пожаловаться", () => { closeMenu(); reportMessage(id); });
+  const groupAdmin = c.is_group && ["owner","admin"].includes(c.my_role);
+  if (mine || groupAdmin || isStaff()){
+    const label = mine ? "Удалить" : groupAdmin ? "Удалить (админ группы)" : "Удалить (админ сайта)";
+    item(SVG.trash, label, async b => {
+      if (b.dataset.sure !== "1"){ b.dataset.sure = "1"; b.lastChild.textContent = "Точно удалить?"; return; }
+      closeMenu();
+      let res;
+      if (mine) res = await sb.from("messages").delete().eq("id", id);
+      else if (groupAdmin){ res = await sb.rpc("group_delete_message", { msg_id: id }); if (res.error && isStaff()) res = await sb.rpc("admin_delete_message", { msg_id: id }); }
+      else res = await sb.rpc("admin_delete_message", { msg_id: id });
+      if (res.error) return toast(ruError(res.error));
+      removeMessageRow(id); loadChats();
+    }, true);
+  }
+  document.body.appendChild(menu);
+  const r = anchor.getBoundingClientRect(), mw = menu.offsetWidth, mh = menu.offsetHeight;
+  const left = Math.min(Math.max(8, r.left + r.width / 2 - mw / 2), window.innerWidth - mw - 8);
+  let top = r.bottom + 6;
+  if (top + mh > window.innerHeight - 8){ top = r.top - mh - 6; menu.style.transformOrigin = "bottom center"; }
+  menu.style.left = left + "px"; menu.style.top = Math.max(8, top) + "px";
+}
+function popMenu(anchor, items){
+  const old = $(".menu"); if (old) old.remove();
+  const menu = el("div","menu");
+  for (const it of items){
+    const b = el("button","item" + (it.danger ? " danger" : "")); b.type = "button";
+    b.textContent = it.text; b.onclick = () => it.fn(b);
+    menu.appendChild(b);
+  }
+  document.body.appendChild(menu);
+  const r = anchor.getBoundingClientRect(), mw = menu.offsetWidth, mh = menu.offsetHeight;
+  let left = r.left;
+  if (left + mw > window.innerWidth - 8) left = r.right - mw;
+  left = Math.max(8, Math.min(left, window.innerWidth - mw - 8));
+  let top = r.bottom + 6;
+  if (top + mh > window.innerHeight - 8){ top = r.top - mh - 6; menu.style.transformOrigin = "bottom center"; }
+  menu.style.left = left + "px"; menu.style.top = Math.max(8, top) + "px";
+}
+
+/* ---------- Пересылка ---------- */
+function forwardMessage(id){
+  const m = msgStore.get(id); if (!m) return;
+  const targets = chats.filter(c => c.kind !== "saved" && !(c.kind === "channel" && !["owner","admin"].includes(c.my_role)) && !c.other_is_system && !c.blocked_me && !c.i_blocked);
+  openModal("Переслать", body => {
+    const s = el("input"); s.placeholder = "Поиск чата"; s.style.marginBottom = "10px";
+    const list = el("div");
+    const draw = () => {
+      list.innerHTML = ""; const q = s.value.trim().toLowerCase();
+      const items = [{ saved: true }].concat(targets);
+      for (const c of items){
+        const title = c.saved ? "Избранное" : chatTitle(c);
+        if (q && !title.toLowerCase().includes(q)) continue;
+        const r = el("div","pick");
+        const meta = el("div","meta"); meta.appendChild(el("div","name", title));
+        if (!c.saved) meta.appendChild(el("div","login", c.kind === "channel" ? "канал" : c.is_group ? "группа" : "@" + (c.other_username || "")));
+        r.append(c.saved ? savedAvatar("sm") : chatAvatar(c, "sm"), meta);
+        r.onclick = () => doForward(m, c);
+        list.appendChild(r);
+      }
+      if (!list.children.length) list.appendChild(el("div","empty","Ничего не найдено"));
+    };
+    s.oninput = draw; body.append(s, list); draw();
+    if (!isTouch) setTimeout(() => s.focus(), 50);
+  });
+}
+async function doForward(m, c){
+  let conv = c.conversation_id;
+  if (c.saved){ const r = await sb.rpc("get_saved_chat"); if (r.error) return toast(ruError(r.error)); conv = r.data; }
+  closeModal();
+  const src = m.sender_id === me.id ? me : people.get(m.sender_id);
+  const payload = { conversation_id: conv, kind: m.kind, body: m.body, fwd_name: m.fwd_name || shownName(src),
+    transcript: m.transcript || null, file_name: m.file_name || null, file_size: m.file_size || null, file_mime: m.file_mime || null, poll: m.poll || null };
+  if (m.file_path){
+    const np = `${conv}/${Date.now()}-${Math.random().toString(36).slice(2,8)}-${safeName(m.file_name || "file")}`;
+    const { error } = await sb.storage.from("chat-files").copy(m.file_path, np);
+    if (error) return toast("Не удалось переслать файл");
+    payload.file_path = np;
+  }
+  const { error } = await sb.from("messages").insert(payload);
+  if (error) return toast(ruError(error));
+  toast("Переслано в «" + (c.saved ? "Избранное" : chatTitle(c)) + "»");
+  loadChats();
+}
+
+/* ---------- Опросы ---------- */
+function renderPoll(b, m){
+  const poll = m.poll || { options: [] };
+  const box = el("div","poll");
+  box.appendChild(el("div","poll-q", m.body || "Опрос"));
+  box.appendChild(el("div","poll-type", (poll.anonymous ? "Анонимный опрос" : "Открытый опрос") + (poll.multiple ? " · несколько ответов" : "")));
+  box.appendChild(el("div","poll-opts"));
+  box.appendChild(el("div","poll-total",""));
+  b.appendChild(box);
+  drawPollOptions(box, m, (m.id && pollVotes.get(m.id)) || []);
+}
+function updatePoll(id){
+  const m = msgStore.get(id), row = document.querySelector(`.mrow[data-id="${id}"]`); if (!m || !row) return;
+  const box = row.querySelector(".poll"); if (box) drawPollOptions(box, m, pollVotes.get(id) || []);
+}
+function drawPollOptions(box, m, votes){
+  const poll = m.poll || { options: [] }; const opts = box.querySelector(".poll-opts"); opts.innerHTML = "";
+  const total = new Set(votes.map(v => v.user_id)).size;
+  const mineSet = new Set(votes.filter(v => v.user_id === me.id).map(v => v.option_idx));
+  const voted = mineSet.size > 0 || (m.sender_id === me.id && total > 0);
+  (poll.options || []).forEach((txt, i) => {
+    const vs = votes.filter(v => v.option_idx === i), cnt = vs.length, pct = total ? Math.round(cnt * 100 / total) : 0;
+    const o = el("button","poll-opt" + (mineSet.has(i) ? " mine" : "")); o.type = "button";
+    const bar = el("span","poll-bar"); o.appendChild(bar);
+    o.appendChild(el("span","poll-lbl", (mineSet.has(i) ? "✓ " : "") + txt));
+    o.appendChild(el("span","poll-pct", voted ? pct + "%" : ""));
+    requestAnimationFrame(() => { bar.style.width = (voted ? pct : 0) + "%"; });
+    if (!poll.anonymous && cnt) o.title = vs.map(v => v.user_id === me.id ? "Вы" : shownName(people.get(v.user_id))).join(", ");
+    o.onclick = e => { e.stopPropagation(); if (m.id) votePoll(m, i); };
+    opts.appendChild(o);
+  });
+  box.querySelector(".poll-total").textContent = total ? total + " " + plural(total,"голос","голоса","голосов") : "Пока никто не голосовал";
+}
+async function votePoll(m, i){
+  if (me.banned) return;
+  const list = pollVotes.get(m.id) || []; pollVotes.set(m.id, list);
+  const mine = list.filter(v => v.user_id === me.id).map(v => v.option_idx);
+  const has = mine.includes(i), multiple = !!(m.poll && m.poll.multiple);
+  const del = has ? [i] : (multiple ? [] : mine), add = has ? null : i;
+  for (const d of del){ const k = list.findIndex(v => v.user_id === me.id && v.option_idx === d); if (k > -1) list.splice(k, 1); }
+  if (add !== null) list.push({ user_id: me.id, option_idx: add });
+  updatePoll(m.id);
+  if (del.length) await sb.from("poll_votes").delete().eq("message_id", m.id).eq("user_id", me.id).in("option_idx", del);
+  if (add !== null){
+    const { error } = await sb.from("poll_votes").insert({ message_id: m.id, conversation_id: m.conversation_id || openConv.conversation_id, option_idx: add });
+    if (error && error.code !== "23505") toast(ruError(error));
+  }
+}
+function toggleRow(title, hint, checked){
+  const lab = el("label","toggle"); lab.style.marginTop = "14px";
+  const cb = el("input"); cb.type = "checkbox"; cb.checked = !!checked;
+  const t = el("span", null, title); if (hint) t.appendChild(el("span","muted", hint));
+  lab.append(cb, el("span","sw"), t);
+  return { el: lab, cb };
+}
+function openPollCreator(){
+  if (!openConv) return;
+  const opts = ["", ""]; let q, t1, t2;
+  openModal("Новый опрос", body => {
+    body.appendChild(el("div","section-label","Вопрос"));
+    q = el("input"); q.maxLength = 300; q.placeholder = "Задайте вопрос"; body.appendChild(q);
+    const lab = el("div","section-label","Варианты ответа"); lab.style.marginTop = "16px"; body.appendChild(lab);
+    const list = el("div","poll-edit"); body.appendChild(list);
+    const add = el("button","btn sm ghost","+ Добавить вариант"); add.type = "button";
+    const draw = () => {
+      list.innerHTML = "";
+      opts.forEach((v, i) => {
+        const row = el("div","poll-edit-row"); const inp = el("input"); inp.value = v; inp.maxLength = 100; inp.placeholder = "Вариант " + (i + 1);
+        inp.oninput = () => { opts[i] = inp.value; };
+        row.appendChild(inp);
+        if (opts.length > 2){ const x = el("button","x","×"); x.type = "button"; x.onclick = () => { opts.splice(i, 1); draw(); }; row.appendChild(x); }
+        list.appendChild(row);
+      });
+      add.classList.toggle("hidden", opts.length >= 10);
+    };
+    add.onclick = () => { opts.push(""); draw(); list.lastChild.querySelector("input").focus(); };
+    body.appendChild(add);
+    t1 = toggleRow("Несколько ответов", "Можно выбрать больше одного варианта");
+    t2 = toggleRow("Анонимный опрос", "Никто не увидит, кто как голосовал");
+    body.append(t1.el, t2.el);
+    draw(); if (!isTouch) setTimeout(() => q.focus(), 50);
+  }, foot => {
+    const c = el("button","btn ghost","Отмена"); c.type = "button"; c.onclick = () => closeModal();
+    const ok = el("button","btn","Создать опрос"); ok.type = "button";
+    ok.onclick = () => {
+      const question = q.value.trim(), options = opts.map(s => s.trim()).filter(Boolean);
+      if (!question){ q.focus(); return toast("Введите вопрос"); }
+      if (options.length < 2) return toast("Нужно минимум 2 варианта ответа");
+      closeModal(); sendPoll(question, options, t1.cb.checked, t2.cb.checked);
+    };
+    foot.append(c, ok);
+  });
+}
+async function sendPoll(q, options, multiple, anonymous){
+  if (!openConv) return;
+  const poll = { options, multiple, anonymous };
+  const row = addMessage({ sender_id: me.id, kind: "poll", body: q, poll, created_at: new Date().toISOString(), pending: true }, true);
+  scrollDown(true);
+  await insertMessage(row, { conversation_id: openConv.conversation_id, kind: "poll", body: q, poll });
+}
+function openAttachMenu(anchor){
+  popMenu(anchor, [
+    { text: "📎  Фото, видео или файл", fn: () => { closeMenu(); $("#fileInput").click(); } },
+    { text: "📊  Опрос", fn: () => { closeMenu(); openPollCreator(); } }
+  ]);
+}
+
+/* ---------- Новые сообщения в реальном времени ---------- */
+function subscribe(){
+  if (channel) sb.removeChannel(channel);
+  channel = sb.channel("db-" + me.id)
+    .on("postgres_changes", { event: "INSERT", schema: "public", table: "messages" }, async payload => {
+      const m = payload.new;
+      if (typers.has(m.sender_id)){ clearTimeout(typers.get(m.sender_id).t); typers.delete(m.sender_id); renderConvStatus(); }
+      if (convOpenAndVisible(m.conversation_id)){
+        const mine = m.sender_id === me.id;
+        const hasPending = mine && document.querySelector("#messages .bubble.pending");
+        if (!hasPending){
+          if (m.file_path) await signPaths([m.file_path]);
+          if (openConv && openConv.is_group && !people.has(m.sender_id)) await loadMembers(openConv.conversation_id);
+          const wasBottom = nearBottom();
+          addMessage(m, true);
+          if (wasBottom || mine) scrollDown(true);
+        }
+        if (!mine) markRead();
+      }
+      if (m.sender_id !== me.id) notifyIncoming(m);
+      scheduleChats();
+    })
+    .on("postgres_changes", { event: "UPDATE", schema: "public", table: "messages" }, payload => {
+      const m = payload.new;
+      if (openConv && m.conversation_id === openConv.conversation_id && msgStore.has(m.id)){
+        const old = msgStore.get(m.id);
+        if (old.body !== m.body || old.edited_at !== m.edited_at) updateMessageRow({ id: m.id, body: m.body, edited_at: m.edited_at });
+      }
+    })
+    .on("postgres_changes", { event: "DELETE", schema: "public", table: "messages" }, payload => {
+      const id = payload.old && payload.old.id;
+      if (id && msgStore.has(id)) removeMessageRow(id);
+      scheduleChats();
+    })
+    .on("postgres_changes", { event: "INSERT", schema: "public", table: "message_reactions" }, payload => {
+      const r = payload.new;
+      if (!msgStore.has(r.message_id) || r.user_id === me.id) return;
+      const list = reactions.get(r.message_id) || []; reactions.set(r.message_id, list);
+      if (!list.some(x => x.user_id === r.user_id && x.emoji === r.emoji)){ list.push({ user_id: r.user_id, emoji: r.emoji }); renderReactions(r.message_id); }
+    })
+    .on("postgres_changes", { event: "DELETE", schema: "public", table: "message_reactions" }, payload => {
+      const r = payload.old || {};
+      if (!msgStore.has(r.message_id) || r.user_id === me.id) return;
+      const list = reactions.get(r.message_id) || [];
+      const i = list.findIndex(x => x.user_id === r.user_id && x.emoji === r.emoji);
+      if (i > -1){ list.splice(i, 1); renderReactions(r.message_id); }
+    })
+    .on("postgres_changes", { event: "INSERT", schema: "public", table: "poll_votes" }, payload => {
+      const v = payload.new;
+      if (!msgStore.has(v.message_id) || v.user_id === me.id) return;
+      const l = pollVotes.get(v.message_id) || []; pollVotes.set(v.message_id, l);
+      if (!l.some(x => x.user_id === v.user_id && x.option_idx === v.option_idx)){ l.push({ user_id: v.user_id, option_idx: v.option_idx }); updatePoll(v.message_id); }
+    })
+    .on("postgres_changes", { event: "DELETE", schema: "public", table: "poll_votes" }, payload => {
+      const v = payload.old || {};
+      if (!msgStore.has(v.message_id) || v.user_id === me.id) return;
+      const l = pollVotes.get(v.message_id) || [];
+      const i = l.findIndex(x => x.user_id === v.user_id && x.option_idx === v.option_idx);
+      if (i > -1){ l.splice(i, 1); updatePoll(v.message_id); }
+    })
+    .on("postgres_changes", { event: "UPDATE", schema: "public", table: "conversation_members" }, payload => {
+      const r = payload.new;
+      if (openConv && r.conversation_id === openConv.conversation_id && r.user_id !== me.id){
+        const t = new Date(r.last_read_at).getTime();
+        if (t > othersRead){ othersRead = t; refreshTicks(); }
+      }
+    })
+    .subscribe();
+}
+
+/* ---------- Поиск по сообщениям в чате ---------- */
+function snippetEl(text, q){
+  const s = el("div","sres-text"); text = text || "";
+  const i = text.toLowerCase().indexOf(q.toLowerCase());
+  const start = Math.max(0, i - 30), part = (start ? "…" : "") + text.slice(start, start + 140);
+  if (i < 0){ s.textContent = part; return s; }
+  const j = part.toLowerCase().indexOf(q.toLowerCase());
+  s.append(document.createTextNode(part.slice(0, j)), el("mark", null, part.slice(j, j + q.length)), document.createTextNode(part.slice(j + q.length)));
+  return s;
+}
+function openChatSearch(){
+  const c = openConv; if (!c) return;
+  let t;
+  openModal("Поиск в чате", body => {
+    const inp = el("input"); inp.placeholder = "Текст сообщения, расшифровки или имени файла";
+    const res = el("div"); res.style.marginTop = "10px";
+    inp.oninput = () => { clearTimeout(t); t = setTimeout(async () => {
+      const q = inp.value.trim(); res.innerHTML = "";
+      if (q.length < 2){ res.appendChild(el("div","empty","Введите хотя бы 2 символа")); return; }
+      const { data } = await sb.rpc("search_messages", { q, conv: c.conversation_id });
+      res.innerHTML = "";
+      if (!data || !data.length){ res.appendChild(el("div","empty","Ничего не найдено")); return; }
+      for (const m of data){
+        const r = el("div","sres");
+        const h = el("div","sres-head"); h.append(el("b", null, m.sender_id === me.id ? "Вы" : (m.sender_name || "")), el("span","muted", fmtDay(m.created_at) + ", " + fmtTime(m.created_at)));
+        r.append(h, snippetEl(m.body || kindPreview(m.kind, m.body), q));
+        r.onclick = () => { closeModal(); jumpTo(m.id); };
+        res.appendChild(r);
+      }
+    }, 300); };
+    body.append(inp, res);
+    res.appendChild(el("div","empty","Введите текст для поиска"));
+    if (!isTouch) setTimeout(() => inp.focus(), 50);
+  }, null, true);
+}
+$("#convSearchBtn").onclick = openChatSearch;
+
+/* ---------- Глобальный поиск: люди, каналы, сообщения ---------- */
+async function runSearch(){
+  if (!me) return;
+  const raw = $("#searchInput").value.trim(), q = raw.replace(/[%_,()\\]/g, "");
+  const seq = ++searchSeq;
+  let req = sb.from("profiles").select(PCOLS).neq("id", me.id).eq("is_system", false).limit(q ? 20 : 12);
+  req = q ? req.or(`username.ilike.%${q}%,display_name.ilike.%${q}%`).order("username") : req.order("created_at",{ascending:false});
+  const [pr, ch, ms] = await Promise.all([req, sb.rpc("search_channels", { q }), raw.length >= 2 ? sb.rpc("search_messages", { q: raw }) : Promise.resolve({ data: [] })]);
+  if (seq !== searchSeq) return;
+  $("#searchLabel").classList.add("hidden");
+  const box = $("#searchResults"); box.innerHTML = "";
+  const people_ = pr.data || [], chans = ch.data || [], msgs = ms.data || [];
+  if (!people_.length && !chans.length && !msgs.length){ box.appendChild(el("div","empty", q ? "Ничего не нашлось" : "Пока здесь только вы. Позовите друзей!")); return; }
+  if (chans.length){
+    box.appendChild(el("div","section-label", q ? "Каналы" : "Популярные каналы"));
+    chans.forEach((c, i) => {
+      const card = el("div","user-card"); card.style.animationDelay = Math.min(i, 10) * 25 + "ms";
+      const av = avatar(el("div","avatar"), c.title, c.title, c.avatar_url, true);
+      const meta = el("div","meta");
+      const n = el("div","name"); n.append(el("span","kind-ic","📢"), document.createTextNode(c.title));
+      meta.append(n, el("div","login", c.subscribers + " " + plural(c.subscribers,"подписчик","подписчика","подписчиков")));
+      if (c.description) meta.appendChild(el("div","bio", c.description));
+      const b = el("button","btn" + (c.joined ? " ghost" : ""), c.joined ? "Открыть" : "Подписаться"); b.type = "button";
+      b.onclick = async () => {
+        if (!c.joined){ b.disabled = true; const r = await sb.rpc("join_by_invite", { code: c.conversation_id }); b.disabled = false; if (r.error) return toast(ruError(r.error)); toast("Вы подписались на канал"); }
+        await openConvById(c.conversation_id);
+      };
+      card.append(av, meta, b); box.appendChild(card);
+    });
+  }
+  if (people_.length){
+    box.appendChild(el("div","section-label", q ? "Люди" : "Новые пользователи"));
+    people_.forEach((p, i) => {
+      people.set(p.id, Object.assign(people.get(p.id) || {}, p));
+      const card = el("div","user-card"); card.style.animationDelay = Math.min(i, 10) * 25 + "ms";
+      const av = avatarFor(p); av.classList.add("clickable"); av.onclick = () => userInfo(p);
+      const meta = el("div","meta clickable"); meta.onclick = () => userInfo(p);
+      meta.append(nameWithRole(p), el("div","login","@" + p.username));
+      if (p.bio) meta.appendChild(el("div","bio", p.bio));
+      const b = el("button","btn","Написать"); b.type = "button"; b.onclick = () => startChat(p, b);
+      card.append(av, meta, b); box.appendChild(card);
+    });
+    loadPresence(people_.map(p => p.id));
+  }
+  if (msgs.length){
+    box.appendChild(el("div","section-label","Сообщения"));
+    for (const m of msgs){
+      const r = el("div","sres card");
+      const h = el("div","sres-head");
+      h.append(el("b", null, m.chat_title || "Чат"), el("span","muted", fmtDay(m.created_at) + ", " + fmtTime(m.created_at)));
+      const who = el("div","sres-who", (m.sender_id === me.id ? "Вы" : (m.sender_name || "")) + ":");
+      r.append(h, who, snippetEl(m.body || kindPreview(m.kind, m.body), raw));
+      r.onclick = async () => { await loadChats(); const c = chats.find(x => x.conversation_id === m.conversation_id); if (c) openChat(c, m.id); };
+      box.appendChild(r);
+    }
+  }
+}
+$("#searchInput").placeholder = "Люди, каналы и сообщения";
+
+/* ---------- Блокировка ---------- */
+async function loadBlocks(){
+  const { data } = await sb.from("user_blocks").select("blocked");
+  myBlocks = new Set((data || []).map(r => r.blocked));
+}
+async function toggleBlock(p, btn){
+  const blocked = myBlocks.has(p.id);
+  if (!blocked && btn && btn.dataset.sure !== "1"){ btn.dataset.sure = "1"; btn.textContent = "Точно заблокировать?"; return; }
+  const { error } = blocked
+    ? await sb.from("user_blocks").delete().eq("blocker", me.id).eq("blocked", p.id)
+    : await sb.from("user_blocks").insert({ blocked: p.id });
+  if (error) return toast(ruError(error));
+  blocked ? myBlocks.delete(p.id) : myBlocks.add(p.id);
+  toast(blocked ? "Пользователь разблокирован" : "Пользователь заблокирован — он больше не сможет вам писать");
+  closeModal(); await loadChats(); if (openConv) renderConvHead();
+}
+
+/* ---------- Профиль пользователя ---------- */
+async function userInfo(p){
+  if (!p || !p.id) return;
+  if (!p.created_at || p.bio === undefined){
+    const { data } = await sb.from("profiles").select(PCOLS).eq("id", p.id).maybeSingle();
+    if (data){ p = Object.assign(people.get(p.id) || {}, data); people.set(p.id, p); }
+  }
+  loadPresence([p.id]);
+  openModal("Профиль", body => {
+    const card = el("div","pcard");
+    card.appendChild(avatarFor(p, "lg"));
+    card.appendChild(nameWithRole(p, "pname"));
+    card.appendChild(el("div","muted","@" + p.username));
+    const st = statusText(p.id); const ps = el("div","pstatus" + (st.online ? " online" : ""), st.text); ps.dataset.uid = p.id; card.appendChild(ps);
+    if (p.banned && isStaff()) card.appendChild(el("span","role banned","Заблокирован администрацией"));
+    if (myBlocks.has(p.id)) card.appendChild(el("span","role owner","Вы заблокировали этого пользователя"));
+    if (p.bio) card.appendChild(el("div","pbio", p.bio));
+    if (p.created_at) card.appendChild(el("div","pmeta","На сайте с " + new Date(p.created_at).toLocaleDateString("ru-RU",{day:"numeric",month:"long",year:"numeric"})));
+    body.appendChild(card);
+  }, foot => {
+    if (p.id !== me.id && !p.is_system){
+      const bl = el("button","btn danger", myBlocks.has(p.id) ? "Разблокировать" : "Заблокировать"); bl.type = "button";
+      bl.onclick = () => toggleBlock(p, bl); foot.appendChild(bl);
+      if (!(openConv && !openConv.is_group && openConv.other_id === p.id && !$("#view-chats").classList.contains("hidden"))){
+        const b = el("button","btn","Написать"); b.type = "button"; b.onclick = () => { closeModal(); startChat(p, b); }; foot.appendChild(b);
+      }
+    }
+    const c = el("button","btn ghost","Закрыть"); c.type = "button"; c.onclick = () => closeModal(); foot.appendChild(c);
+  });
+}
+
+/* ---------- Жалобы ---------- */
+function reportMessage(id){
+  const reasons = ["Спам", "Оскорбления", "Мошенничество", "Угрозы или насилие", "Неприемлемый контент", "Другое"];
+  let chosen = reasons[0], extra;
+  openModal("Пожаловаться", body => {
+    body.appendChild(el("p","muted","Жалоба уйдёт администрации сайта. Автор сообщения не узнает, кто пожаловался."));
+    const list = el("div","bc-mode"); list.style.flexDirection = "column"; list.style.gap = "10px";
+    reasons.forEach((r, i) => {
+      const lab = el("label"); const rb = el("input"); rb.type = "radio"; rb.name = "rep"; rb.checked = i === 0;
+      rb.onchange = () => { chosen = r; }; lab.append(rb, document.createTextNode(r)); list.appendChild(lab);
+    });
+    body.appendChild(list);
+    extra = el("textarea"); extra.rows = 2; extra.maxLength = 300; extra.placeholder = "Подробности (необязательно)"; body.appendChild(extra);
+  }, foot => {
+    const c = el("button","btn ghost","Отмена"); c.type = "button"; c.onclick = () => closeModal();
+    const ok = el("button","btn danger","Отправить жалобу"); ok.type = "button";
+    ok.onclick = async () => {
+      ok.disabled = true;
+      const reason = chosen + (extra.value.trim() ? ": " + extra.value.trim() : "");
+      const { error } = await sb.rpc("report_message", { msg_id: id, p_reason: reason });
+      ok.disabled = false;
+      if (error) return toast(ruError(error));
+      closeModal(); toast("Жалоба отправлена администрации");
+    };
+    foot.append(c, ok);
+  });
+}
+let reportStatus = "open";
+document.querySelectorAll("#reportSeg button").forEach(b => b.onclick = () => {
+  reportStatus = b.dataset.rs;
+  document.querySelectorAll("#reportSeg button").forEach(x => x.classList.toggle("active", x === b));
+  loadReports();
+});
+async function loadReportCount(){
+  const { data } = await sb.rpc("admin_list_reports", { p_status: "open" });
+  const n = (data || []).length, b = $("#reportCount"); b.textContent = n; b.classList.toggle("hidden", !n);
+}
+async function loadReports(){
+  const box = $("#reportList"); box.innerHTML = ""; box.appendChild(el("div","empty","Загрузка…"));
+  const { data, error } = await sb.rpc("admin_list_reports", { p_status: reportStatus });
+  box.innerHTML = "";
+  if (error){ box.appendChild(el("div","empty", ruError(error))); return; }
+  if (reportStatus === "open"){ const b = $("#reportCount"); b.textContent = data.length; b.classList.toggle("hidden", !data.length); }
+  if (!data.length){ box.appendChild(el("div","empty", reportStatus === "open" ? "Новых жалоб нет 👌" : "Пусто")); return; }
+  await signPaths(data.filter(r => r.snapshot_file && r.message_exists).map(r => r.snapshot_file));
+  data.forEach((r, i) => {
+    const card = el("div","req-card"); card.style.animationDelay = Math.min(i, 10) * 25 + "ms";
+    const top = el("div","top");
+    const tp = { id: r.target_id, username: r.target_username || "?", display_name: r.target_name, role: r.target_role };
+    const av = avatarFor(tp); av.classList.add("clickable"); av.onclick = () => userInfo(tp);
+    const meta = el("div","meta");
+    const n = nameWithRole(tp); n.classList.add("clickable"); n.onclick = () => userInfo(tp);
+    meta.append(n, el("div","time", "жалоба от @" + (r.reporter || "?") + " · " + new Date(r.created_at).toLocaleString("ru-RU",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})));
+    top.append(av, meta); card.appendChild(top);
+    card.appendChild(el("div","rep-reason", "Причина: " + r.reason));
+    const q = el("div","quote");
+    if (r.snapshot_kind && r.snapshot_kind !== "text"){
+      const u = r.snapshot_file && urlCache.get(r.snapshot_file);
+      if (r.snapshot_kind === "image" && u){ const im = el("img","photo"); im.src = u; im.style.cssText = "max-width:240px;max-height:180px;border-radius:10px;display:block;cursor:zoom-in"; im.onclick = () => lightbox(u); q.appendChild(im); }
+      else q.appendChild(el("div", null, kindPreview(r.snapshot_kind, r.snapshot)));
+      if (r.snapshot && r.snapshot_kind !== "poll") q.appendChild(el("div", null, r.snapshot));
+    } else q.textContent = r.snapshot || "(пусто)";
+    if (!r.message_exists) q.appendChild(el("div","muted","сообщение уже удалено"));
+    card.appendChild(q);
+    if (r.status === "open"){
+      const acts = el("div","acts");
+      const canBan = r.target_role === "user" || (r.target_role === "admin" && me.role === "founder");
+      const mk = (text, cls, action, ok) => { const b = el("button","btn sm " + cls, text); b.type = "button";
+        b.onclick = async () => { b.disabled = true; const { error } = await sb.rpc("admin_resolve_report", { rep_id: r.id, p_action: action }); b.disabled = false;
+          if (error) return toast(ruError(error)); toast(ok); fadeRemove(card); setTimeout(() => { loadReports(); }, 260); }; return b; };
+      if (r.message_exists) acts.appendChild(mk("Удалить сообщение", "", "delete", "Сообщение удалено"));
+      if (canBan) acts.appendChild(mk("Удалить и забанить", "danger", "ban", "Сообщение удалено, автор заблокирован"));
+      acts.appendChild(mk("Отклонить", "ghost", "dismiss", "Жалоба отклонена"));
+      card.appendChild(acts);
+    } else {
+      const act = { delete: "сообщение удалено", ban: "удалено, автор забанен", dismiss: "отклонено" }[r.action] || r.status;
+      const info = el("div","time", "Решение: " + act + (r.handled_by ? " · @" + r.handled_by : "") + (r.handled_at ? " · " + new Date(r.handled_at).toLocaleDateString("ru-RU") : ""));
+      info.style.marginTop = "8px"; card.appendChild(info);
+    }
+    box.appendChild(card);
+  });
+}
+
+/* ---------- Создание: группа или канал ---------- */
+function createGroupFlow(){
+  let titleInput;
+  pickUsers("Новая группа", new Set(), async ids => {
+    const title = titleInput.value.trim();
+    if (!title){ titleInput.focus(); titleInput.style.borderColor = "var(--danger)"; return; }
+    const { data: convId, error } = await sb.rpc("create_group", { p_title: title, p_members: ids });
+    if (error) return toast(ruError(error));
+    closeModal(); await loadChats();
+    const c = chats.find(x => x.conversation_id === convId); if (c) openChat(c);
+  }, body => {
+    body.appendChild(el("div","section-label","Название группы"));
+    titleInput = el("input"); titleInput.maxLength = 60; titleInput.placeholder = "Например, Группа 965";
+    titleInput.style.marginBottom = "16px"; body.appendChild(titleInput);
+    body.appendChild(el("div","section-label","Участники"));
+    if (!isTouch) setTimeout(() => titleInput.focus(), 50);
+  });
+}
+function createChannelFlow(){
+  let title, desc, pub;
+  openModal("Новый канал", body => {
+    body.appendChild(el("p","muted","В канале публикуют только администраторы, остальные подписываются и читают. Удобно для новостей, расписания и объявлений."));
+    const l1 = el("div","section-label","Название"); l1.style.marginTop = "14px"; body.appendChild(l1);
+    title = el("input"); title.maxLength = 60; title.placeholder = "Например, Новости группы 965"; body.appendChild(title);
+    const l2 = el("div","section-label","Описание"); l2.style.marginTop = "14px"; body.appendChild(l2);
+    desc = el("textarea"); desc.rows = 3; desc.maxLength = 300; desc.placeholder = "О чём канал"; body.appendChild(desc);
+    pub = toggleRow("Публичный канал", "Его можно найти в поиске и подписаться без приглашения", true); body.appendChild(pub.el);
+    if (!isTouch) setTimeout(() => title.focus(), 50);
+  }, foot => {
+    const c = el("button","btn ghost","Отмена"); c.type = "button"; c.onclick = () => closeModal();
+    const ok = el("button","btn","Создать канал"); ok.type = "button";
+    ok.onclick = async () => {
+      if (!title.value.trim()){ title.focus(); return toast("Введите название"); }
+      ok.disabled = true;
+      const { data: convId, error } = await sb.rpc("create_channel", { p_title: title.value, p_description: desc.value, p_public: pub.cb.checked });
+      ok.disabled = false;
+      if (error) return toast(ruError(error));
+      closeModal(); await loadChats();
+      const ch = chats.find(x => x.conversation_id === convId); if (ch) openChat(ch);
+      toast("Канал создан");
+    };
+    foot.append(c, ok);
+  });
+}
+function openCreateMenu(anchor){
+  popMenu(anchor, [
+    { text: "👥  Новая группа", fn: () => { closeMenu(); createGroupFlow(); } },
+    { text: "📢  Новый канал", fn: () => { closeMenu(); createChannelFlow(); } },
+    { text: "🔖  Избранное", fn: () => { closeMenu(); openSaved(); } }
+  ]);
+}
+
+/* ---------- Меню «⋯» в шапке чата ---------- */
+function openConvMenu(anchor){
+  const c = openConv; if (!c) return;
+  const items = [];
+  if (c.is_group) items.push({ text: c.kind === "channel" ? "📢  О канале" : "⚙️  Настройки группы", fn: () => { closeMenu(); groupInfo(c); } });
+  else if (c.kind === "dm") items.push({ text: "👤  Профиль", fn: () => { closeMenu(); $("#convTitle").click(); } });
+  items.push({ text: "🔍  Поиск в чате", fn: () => { closeMenu(); openChatSearch(); } });
+  if (c.kind !== "saved") items.push({ text: c.muted ? "🔔  Включить уведомления" : "🔕  Выключить уведомления", fn: () => { closeMenu(); setMuted(c, !c.muted); } });
+  items.push({ text: c.pinned ? "📌  Открепить чат" : "📌  Закрепить чат", fn: () => { closeMenu(); setMemberFlag(c, "pinned", !c.pinned); } });
+  items.push({ text: c.archived ? "🗄  Вернуть из архива" : "🗄  В архив", fn: () => { closeMenu(); setMemberFlag(c, "archived", !c.archived, c.archived ? "Чат возвращён из архива" : "Чат перенесён в архив"); } });
+  if (c.kind === "dm" && c.other_id && !c.other_is_system){
+    const p = people.get(c.other_id) || { id: c.other_id, username: c.other_username };
+    items.push({ text: c.i_blocked ? "✅  Разблокировать" : "⛔  Заблокировать", danger: !c.i_blocked, fn: b => {
+      if (!c.i_blocked && b.dataset.sure !== "1"){ b.dataset.sure = "1"; b.textContent = "Точно заблокировать?"; return; }
+      closeMenu(); myBlocks[c.i_blocked ? "add" : "delete"](p.id); toggleBlock(p);
+    } });
+  }
+  if (c.is_group) items.push({ text: c.kind === "channel" ? "🚪  Отписаться" : "🚪  Выйти из группы", danger: true, fn: b => {
+    if (b.dataset.sure !== "1"){ b.dataset.sure = "1"; b.textContent = c.kind === "channel" ? "Точно отписаться?" : "Точно выйти?"; return; }
+    closeMenu(); leaveGroupFlow(c);
+  } });
+  popMenu(anchor, items);
+}
+
+/* ---------- Настройки группы / канала ---------- */
+function inviteUrl(code){ return location.origin + location.pathname + "?join=" + code; }
+async function groupInfo(c){
+  const isCh = c.kind === "channel";
+  const { body, foot } = openModal(isCh ? "Канал" : "Группа", b => b.appendChild(el("div","muted","Загрузка…")));
+  const members = await loadMembers(c.conversation_id);
+  groupMemberIds = members.map(m => m.user_id);
+  loadPresence(groupMemberIds);
+  const my = (members.find(m => m.user_id === me.id) || {}).role || "member";
+  const isOwner = my === "owner", isAdm = isOwner || my === "admin";
+  const canAdd = isAdm || (!isCh && !c.only_owner_adds);
+  body.innerHTML = "";
+
+  // шапка
+  let avUrl = c.conv_avatar_url || null;
+  const top = el("div","pcard");
+  const av = avatar(el("div","avatar lg"), c.title, c.title, avUrl, true); top.appendChild(av);
+  if (isAdm){
+    const acts = el("div","av-actions"); acts.style.justifyContent = "center";
+    const ch = el("button","btn sm ghost","Сменить фото"); ch.type = "button";
+    const rmv = el("button","btn sm ghost","Убрать фото"); rmv.type = "button"; rmv.classList.toggle("hidden", !avUrl);
+    const inp = el("input"); inp.type = "file"; inp.accept = "image/*"; inp.className = "hidden";
+    ch.onclick = () => inp.click();
+    inp.onchange = async () => {
+      const f = inp.files[0]; inp.value = ""; if (!f || !f.type.startsWith("image/")) return;
+      ch.disabled = true; ch.textContent = "Загрузка…";
+      try{
+        const blob = await squareImage(f, 400);
+        const path = `${me.id}/group-${c.conversation_id}-${Date.now()}.jpg`;
+        const { error } = await sb.storage.from("avatars").upload(path, blob, { contentType: "image/jpeg", upsert: true });
+        if (error) throw error;
+        avUrl = sb.storage.from("avatars").getPublicUrl(path).data.publicUrl;
+        avatar(av, c.title, c.title, avUrl, true); rmv.classList.remove("hidden");
+        toast("Фото выбрано — нажмите «Сохранить»");
+      } catch(e){ toast("Не удалось загрузить фото"); }
+      ch.disabled = false; ch.textContent = "Сменить фото";
+    };
+    rmv.onclick = () => { avUrl = null; avatar(av, c.title, c.title, null, true); rmv.classList.add("hidden"); };
+    acts.append(ch, rmv, inp); top.appendChild(acts);
+  } else {
+    top.appendChild(el("div","pname", c.title || ""));
+    top.appendChild(el("div","muted", members.length + " " + (isCh ? plural(members.length,"подписчик","подписчика","подписчиков") : plural(members.length,"участник","участника","участников"))));
+    if (c.description) top.appendChild(el("div","pbio", c.description));
+  }
+  body.appendChild(top);
+
+  // настройки для админов
+  if (isAdm){
+    const form = el("div","group-form");
+    form.appendChild(el("label", null, "Название"));
+    const title = el("input"); title.maxLength = 60; title.value = c.title || ""; form.appendChild(title);
+    form.appendChild(el("label", null, "Описание"));
+    const desc = el("textarea"); desc.rows = 3; desc.maxLength = 300; desc.placeholder = isCh ? "О чём канал" : "О чём эта группа"; desc.value = c.description || ""; form.appendChild(desc);
+    let onlyOwner = null, pub = null;
+    if (!isCh){ onlyOwner = toggleRow("Добавлять участников могут только админы", "Иначе приглашать могут все участники", c.only_owner_adds); form.appendChild(onlyOwner.el); }
+    if (isCh && isOwner){ pub = toggleRow("Публичный канал", "Виден в поиске, подписаться может любой", c.is_public); form.appendChild(pub.el); }
+    const save = el("button","btn","Сохранить"); save.type = "button"; save.style.marginTop = "16px";
+    save.onclick = async () => {
+      if (!title.value.trim()){ title.focus(); return toast("Введите название"); }
+      save.disabled = true;
+      const { error } = await sb.rpc("update_group", { conv: c.conversation_id, p_title: title.value, p_description: desc.value, p_avatar_url: avUrl, p_only_owner_adds: onlyOwner ? onlyOwner.cb.checked : false });
+      if (!error && pub && pub.cb.checked !== !!c.is_public) await sb.rpc("set_channel_public", { conv: c.conversation_id, p_public: pub.cb.checked });
+      save.disabled = false;
+      if (error) return toast(ruError(error));
+      Object.assign(c, { title: title.value.trim(), description: desc.value.trim() || null, conv_avatar_url: avUrl, only_owner_adds: onlyOwner ? onlyOwner.cb.checked : c.only_owner_adds, is_public: pub ? pub.cb.checked : c.is_public });
+      toast("Сохранено"); await loadChats(); if (openConv) renderConvHead();
+    };
+    form.appendChild(save);
+    body.appendChild(form);
+
+    // ссылка-приглашение
+    const inv = el("div","invite");
+    inv.appendChild(el("div","section-label","Ссылка-приглашение"));
+    const row = el("div","invite-row"); const lnk = el("input"); lnk.readOnly = true; lnk.value = "Загрузка…";
+    const cp = el("button","btn sm","Копировать"); cp.type = "button";
+    const rg = el("button","btn sm ghost","Сбросить"); rg.type = "button";
+    row.append(lnk, cp, rg); inv.appendChild(row);
+    inv.appendChild(el("div","hint", "Любой, у кого есть ссылка, сможет вступить. «Сбросить» отключит старую ссылку."));
+    sb.rpc("get_invite_code", { conv: c.conversation_id, regenerate: false }).then(({ data }) => { if (data) lnk.value = inviteUrl(data); });
+    cp.onclick = async () => { try { await navigator.clipboard.writeText(lnk.value); toast("Ссылка скопирована"); } catch(e){ lnk.select(); toast("Скопируйте ссылку вручную"); } };
+    rg.onclick = async () => {
+      if (rg.dataset.sure !== "1"){ rg.dataset.sure = "1"; rg.textContent = "Точно?"; return; }
+      const { data, error } = await sb.rpc("get_invite_code", { conv: c.conversation_id, regenerate: true });
+      if (error) return toast(ruError(error));
+      lnk.value = inviteUrl(data); rg.dataset.sure = ""; rg.textContent = "Сбросить"; toast("Создана новая ссылка, старая больше не работает");
+    };
+    body.appendChild(inv);
+  }
+
+  // уведомления
+  const nrow = el("div","setting-row");
+  const nt = toggleRow("Уведомления", isCh ? "Сообщать о новых публикациях" : "Сообщать о новых сообщениях", !c.muted);
+  nt.el.style.marginTop = "0"; nt.el.style.flex = "1"; nt.cb.onchange = () => setMuted(c, !nt.cb.checked);
+  nrow.appendChild(nt.el); body.appendChild(nrow);
+
+  // участники
+  const head = el("div","row1"); head.style.margin = "18px 0 6px";
+  head.appendChild(el("div","section-label", (isCh ? "Подписчики · " : "Участники · ") + members.length));
+  if (canAdd){
+    const add = el("button","btn sm","+ Добавить"); add.type = "button";
+    add.onclick = () => pickUsers(isCh ? "Добавить подписчиков" : "Добавить в группу", new Set(members.map(m => m.user_id)), async ids => {
+      const { error } = await sb.rpc("add_group_members", { conv: c.conversation_id, p_members: ids });
+      if (error) return toast(ruError(error));
+      toast("Добавлено"); await loadChats(); groupInfo(chats.find(x => x.conversation_id === c.conversation_id) || c);
+    });
+    head.appendChild(add);
+  }
+  body.appendChild(head);
+  const order = { owner: 0, admin: 1, member: 2 };
+  members.sort((a, b) => order[a.role] - order[b.role]);
+  for (const m of members.slice(0, 200)){
+    const p = m.profiles || { id: m.user_id, username: "?" };
+    const r = el("div","member");
+    const mav = avatarFor(p, "sm"); mav.classList.add("clickable"); mav.onclick = () => userInfo(p);
+    const meta = el("div","meta"); const n = nameWithRole(p); n.classList.add("clickable"); n.onclick = () => userInfo(p);
+    if (m.role === "owner") n.appendChild(el("span","role owner", isCh ? "владелец" : "создатель"));
+    if (m.role === "admin") n.appendChild(el("span","role owner","админ"));
+    const st = statusText(p.id);
+    meta.append(n, el("div","time","@" + p.username + (p.id === me.id ? " · вы" : (st.text ? " · " + st.text : ""))));
+    r.append(mav, meta);
+    if (m.user_id !== me.id && (isOwner || (my === "admin" && m.role === "member"))){
+      const mb = el("button","conv-more"); mb.type = "button"; mb.innerHTML = SVG.more;
+      mb.onclick = e => {
+        e.stopPropagation();
+        const items = [];
+        if (isOwner) items.push({ text: m.role === "admin" ? "Снять права админа" : "Сделать админом", fn: async () => {
+          closeMenu();
+          const { error } = await sb.rpc("set_member_role", { conv: c.conversation_id, target: m.user_id, p_role: m.role === "admin" ? "member" : "admin" });
+          if (error) return toast(ruError(error));
+          toast(m.role === "admin" ? "Права админа сняты" : "Назначен админом"); groupInfo(c);
+        } });
+        items.push({ text: isCh ? "Удалить из подписчиков" : "Исключить из группы", danger: true, fn: async b => {
+          if (b.dataset.sure !== "1"){ b.dataset.sure = "1"; b.textContent = "Точно?"; return; }
+          closeMenu();
+          const { error } = await sb.rpc("remove_group_member", { conv: c.conversation_id, target: m.user_id });
+          if (error) return toast(ruError(error));
+          fadeRemove(r); loadChats();
+        } });
+        popMenu(mb, items);
+      };
+      r.appendChild(mb);
+    }
+    body.appendChild(r);
+  }
+
+  // низ
+  const leave = el("button","btn danger", isCh ? "Отписаться" : "Выйти из группы"); leave.type = "button";
+  leave.onclick = () => {
+    if (leave.dataset.sure !== "1"){ leave.dataset.sure = "1"; leave.textContent = isOwner ? "Точно? Владельцем станет другой админ или участник" : "Точно?"; return; }
+    leaveGroupFlow(c);
+  };
+  foot.appendChild(leave);
+  if (isOwner){
+    const del = el("button","btn danger", isCh ? "Удалить канал" : "Удалить группу"); del.type = "button";
+    del.onclick = async () => {
+      if (del.dataset.sure !== "1"){ del.dataset.sure = "1"; del.textContent = "Удалить навсегда для всех?"; return; }
+      const { error } = await sb.rpc("delete_group", { conv: c.conversation_id });
+      if (error) return toast(ruError(error));
+      closeModal(); if (openConv && openConv.conversation_id === c.conversation_id) closeConv();
+      loadChats(); toast(isCh ? "Канал удалён" : "Группа удалена");
+    };
+    foot.appendChild(del);
+  }
+  const close = el("button","btn ghost","Закрыть"); close.type = "button"; close.onclick = () => closeModal();
+  foot.appendChild(close);
+  body.parentNode.appendChild(foot);
+}
+
+/* ---------- Вступление по ссылке ---------- */
+(function(){
+  const jp = new URLSearchParams(location.search).get("join");
+  if (jp){ try { sessionStorage.setItem("kc_join", jp); } catch(e){} try { history.replaceState(null, "", location.pathname); } catch(e){} }
+})();
+async function handleJoinParam(){
+  let code = null; try { code = sessionStorage.getItem("kc_join"); sessionStorage.removeItem("kc_join"); } catch(e){}
+  if (!code) return;
+  const { data } = await sb.rpc("invite_info", { code });
+  const info = data && data[0];
+  if (!info){ toast("Ссылка-приглашение недействительна"); return; }
+  if (info.already){ openConvById(info.conversation_id); return; }
+  const isCh = info.kind === "channel";
+  openModal(isCh ? "Канал" : "Приглашение в группу", body => {
+    const card = el("div","pcard");
+    card.appendChild(avatar(el("div","avatar lg"), info.title, info.title, info.avatar_url, true));
+    card.appendChild(el("div","pname", info.title));
+    card.appendChild(el("div","muted", info.member_count + " " + (isCh ? plural(info.member_count,"подписчик","подписчика","подписчиков") : plural(info.member_count,"участник","участника","участников"))));
+    if (info.description) card.appendChild(el("div","pbio", info.description));
+    body.appendChild(card);
+  }, foot => {
+    const c = el("button","btn ghost","Не сейчас"); c.type = "button"; c.onclick = () => closeModal();
+    const ok = el("button","btn", isCh ? "Подписаться" : "Вступить"); ok.type = "button";
+    ok.onclick = async () => {
+      ok.disabled = true;
+      const { data: conv, error } = await sb.rpc("join_by_invite", { code });
+      ok.disabled = false;
+      if (error) return toast(ruError(error));
+      closeModal(); await openConvById(conv); toast(isCh ? "Вы подписались на канал" : "Вы вступили в группу");
+    };
+    foot.append(c, ok);
+  });
+}
 
 /* ================== СТАРТ ================== */
 let currentUserId; // undefined до первого события
