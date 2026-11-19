@@ -2183,7 +2183,7 @@ function kindPreview(kind, body){
   if (kind === "audio") return "🎵 Аудио";
   if (kind === "file") return "📎 Файл";
   if (kind === "poll") return "📊 " + (body || "Опрос");
-  return body || "";
+  return (body || "").replace(/```|\*\*|__|~~|\|\||`/g, "");
 }
 function chatTitle(c){
   if (c.kind === "saved") return "Избранное";
