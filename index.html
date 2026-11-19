@@ -527,6 +527,100 @@
   html[data-wall] .messages{background-attachment:local}
   /* размер текста */
   html[data-font="s"] .bubble{font-size:13.5px} html[data-font="l"] .bubble{font-size:17px}
+  .kcoin{display:inline-flex;align-items:center;justify-content:center;width:1.15em;height:1.15em;border-radius:50%;flex:none;
+    background:radial-gradient(circle at 32% 28%,#fff3a8 0,#ffd23f 38%,#e9a400 75%,#c98500 100%);color:#7a4500;font:800 .66em/1 Manrope,sans-serif;
+    box-shadow:inset 0 -1.5px 0 rgba(120,70,0,.35),0 0 0 1px rgba(170,110,0,.35);vertical-align:-.2em;letter-spacing:0}
+  .kamount{display:inline-flex;align-items:center;gap:.28em;font-weight:700;white-space:nowrap}
+  .kamount.big{font:700 30px Unbounded,sans-serif}
+  .btn .kamount{font-weight:800}
+  .wallet-row{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  .wallet-balance{margin-top:4px}
+  .shop-balance{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:14px;margin:6px 0 12px}
+  .shop-balance.big{font-size:16px;color:var(--text)}
+  .uname-row{display:flex;align-items:center;gap:8px}
+  .uname-row .at{font:700 18px Manrope;color:var(--muted)}
+  .uname-row input{flex:1;min-width:0;margin:0}
+  .gift-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
+  .gift-grid.shop{grid-template-columns:repeat(auto-fill,minmax(128px,1fr))}
+  .gift-cell{position:relative;border:1px solid var(--line);background:var(--panel2);border-radius:16px;padding:8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;
+    font:inherit;color:inherit;animation:fadeUp .25s var(--ease) both;transition:transform .18s var(--ease),border-color .2s}
+  .gift-cell:hover{transform:translateY(-2px);border-color:var(--accent)}
+  .gift-cell.off{opacity:.55}
+  .gift-cell.hidden-gift{opacity:.6}
+  .gift-hidden-ic{position:absolute;top:6px;left:8px;font-size:13px}
+  .gift-cap{font-size:12px;color:var(--muted);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .gift-cap.name{color:var(--text);font-weight:700;font-size:13px}
+  .gift-price{font-size:13px}
+  .gift-left{font-size:11.5px;color:var(--muted)}
+  .gift-art{position:relative;width:100%;aspect-ratio:1;border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+  .gift-art.xl{width:150px;margin:0 auto;border-radius:22px}
+  .gift-art.nft{box-shadow:inset 0 0 0 1px rgba(255,255,255,.25),0 6px 22px rgba(0,0,0,.18)}
+  .gift-art img{width:68%;height:68%;object-fit:contain;position:relative;z-index:1;filter:drop-shadow(0 4px 8px rgba(0,0,0,.25))}
+  .gift-emoji{font-size:clamp(34px,3.2em,46px);line-height:1;position:relative;z-index:1;filter:drop-shadow(0 4px 8px rgba(0,0,0,.25))}
+  .gift-art.xl .gift-emoji{font-size:76px}
+  .gift-pattern{position:absolute;inset:0;pointer-events:none}
+  .gift-pattern span{position:absolute;font-size:14px;opacity:.28}
+  .gift-art.xl .gift-pattern span{font-size:22px}
+  .gift-pattern span:nth-child(1){top:8%;left:10%}.gift-pattern span:nth-child(2){top:6%;right:12%}
+  .gift-pattern span:nth-child(3){top:42%;left:4%}.gift-pattern span:nth-child(4){top:40%;right:4%}
+  .gift-pattern span:nth-child(5){bottom:8%;left:14%}.gift-pattern span:nth-child(6){bottom:6%;right:14%}
+  .gift-pattern span:nth-child(7){top:22%;left:46%;opacity:.16}.gift-pattern span:nth-child(8){bottom:24%;left:44%;opacity:.16}
+  .gift-ribbon{position:absolute;top:7px;right:-26px;transform:rotate(38deg);background:rgba(0,0,0,.42);color:#fff;font:700 9.5px Manrope;padding:2px 26px;z-index:2;letter-spacing:.02em}
+  .gift-ribbon.nft{background:linear-gradient(90deg,#ffd65a,#ff9f43);color:#4a2a00}
+  .gift-art.xl .gift-ribbon{font-size:12px;top:14px;right:-30px;padding:3px 34px}
+  .gift-art.reveal{animation:giftReveal .9s var(--ease)}
+  @keyframes giftReveal{0%{transform:scale(.6) rotate(-8deg);filter:brightness(2)}60%{transform:scale(1.08) rotate(2deg)}100%{transform:none;filter:none}}
+  .gift-view{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding-bottom:6px}
+  .gift-name{font:700 20px Unbounded,sans-serif;margin-top:8px}
+  .gift-tag{font:700 12px Manrope;color:#b77900;background:rgba(255,200,60,.16);padding:4px 10px;border-radius:20px}
+  .gift-tag.lim{color:var(--accent);background:var(--chip-mine)}
+  .gift-desc{font-size:14px;max-width:360px}
+  .ginfo{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:12px}
+  .ginfo-row{display:flex;justify-content:space-between;gap:12px;padding:10px 14px;font-size:14px;border-top:1px solid var(--line)}
+  .ginfo-row:first-child{border-top:0}
+  .ginfo-row span{color:var(--muted)} .ginfo-row b{text-align:right}
+  .gift-msg{margin-top:12px;padding:12px 14px;background:var(--panel2);border-radius:14px;font-style:italic}
+  .gift-shelf{margin-top:10px}
+  .tx-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+  .tx-row:first-child{border-top:0}
+  .tx-meta{min-width:0} .tx-meta .muted{font-size:12.5px;margin-top:2px}
+  .tx-amt{display:flex;align-items:center;gap:5px;font-weight:800;white-space:nowrap}
+  .tx-amt.plus{color:var(--ok)} .tx-amt.minus{color:var(--text)}
+  .quick-amts{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 4px}
+  .chip-btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:20px;padding:5px 12px;font:600 13px Manrope;cursor:pointer}
+  .chip-btn:hover{border-color:var(--accent)}
+  .confetti{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden}
+  .confetti span{position:absolute;top:-40px;animation:confFall 2s cubic-bezier(.3,.6,.4,1) forwards}
+  @keyframes confFall{to{transform:translateY(110vh) rotate(540deg);opacity:.2}}
+  .nft-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+  .nft-head > div{flex:1;min-width:240px}
+  .nft-card{display:flex;align-items:center;gap:14px;padding:12px;border:1px solid var(--line);background:var(--panel);border-radius:16px;margin-bottom:10px;flex-wrap:wrap;animation:fadeUp .25s var(--ease) both}
+  .nft-card.off{opacity:.6}
+  .nft-card > .gift-art{width:70px;flex:none}
+  .nft-card .meta{flex:1;min-width:180px}
+  .nft-card .name{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .nft-card .login{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-top:4px}
+  .nft-card .actions{display:flex;gap:6px;flex-wrap:wrap}
+  .nft-bar{height:6px;background:var(--panel2);border-radius:4px;margin-top:8px;overflow:hidden;max-width:280px}
+  .nft-bar div{height:100%;background:var(--accent);border-radius:4px}
+  .nft-editor{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:20px}
+  @media (max-width:760px){ .nft-editor{grid-template-columns:minmax(0,1fr)} .nft-side{order:-1} }
+  .nft-side{position:sticky;top:0;align-self:start;text-align:center}
+  .nft-preview{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .nft-preview > .gift-art:not(.xl){width:110px;margin-top:4px}
+  .nft-sec{border:1px solid var(--line);border-radius:16px;padding:4px 14px 14px;margin-bottom:12px}
+  .nft-sec .sub-label{margin-top:12px}
+  .row2-inputs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .row2-inputs input[type=color]{height:42px;padding:4px;cursor:pointer}
+  .attr-box{margin-top:10px}
+  .attr-row{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+  .attr-row input{margin:0;min-width:0;padding:8px}
+  .attr-row input.w-name{flex:1} .attr-row input.w-num{width:64px;flex:none} .attr-row input.w-emo{width:62px;flex:none;text-align:center}
+  .attr-row input[type=color]{width:40px;height:36px;padding:3px;flex:none}
+  .attr-pct{width:46px;font-size:12px;color:var(--muted);text-align:right;flex:none}
+  .attr-del{border:0;background:transparent;color:var(--muted);font-size:20px;cursor:pointer;width:26px;flex:none}
+  .attr-del:hover{color:var(--danger)}
   .clean-row:hover{background:var(--panel);color:var(--danger);border-color:var(--danger-line)}
   .invite{margin-top:18px}
   .invite-row{display:flex;gap:6px;align-items:center}
@@ -735,6 +829,32 @@
         <div class="msg" id="pfMsg"></div>
       </form>
 
+      <div class="box wallet-box">
+        <h3>Кошелёк</h3>
+        <div class="wallet-row">
+          <div><div class="muted" style="font-size:13px">Баланс монет</div><div id="walletBalance" class="wallet-balance">—</div></div>
+          <div class="av-actions" style="margin:0">
+            <button class="btn sm" id="walletShop" type="button">🎁 Магазин подарков</button>
+            <button class="btn sm ghost" id="walletSend" type="button">Перевести</button>
+            <button class="btn sm ghost" id="walletHistory" type="button">История</button>
+          </div>
+        </div>
+        <p class="muted" style="font-size:13px;margin-top:10px;line-height:1.5">Монеты K — внутренняя валюта Karacikov. Ими можно оплачивать подарки и NFT, переводить друзьям. Начисляет их администрация.</p>
+      </div>
+
+      <div class="box">
+        <h3>Мои подарки<span class="muted" id="myGiftsCount"></span></h3>
+        <div id="myGifts"><span class="muted">Загрузка…</span></div>
+      </div>
+
+      <form class="box" id="unameForm">
+        <h3>Юзернейм</h3>
+        <label for="unameInput">Он же логин для входа</label>
+        <div class="uname-row"><span class="at">@</span><input id="unameInput" maxlength="32" autocomplete="off" spellcheck="false"><button class="btn sm" type="submit">Сменить</button></div>
+        <div class="hint">3–32 символа: латиница, цифры, _ . -. После смены входите с новым логином, пароль прежний. Менять можно раз в час.</div>
+        <div class="msg" id="unameMsg"></div>
+      </form>
+
       <div class="box">
         <h3>Моя ссылка</h3>
         <p class="muted" style="font-size:14px;margin-bottom:12px">По ссылке откроется ваш профиль с кнопкой «Написать». <span class="me-link" id="meLink"></span></p>
@@ -829,6 +949,7 @@
         <button type="button" data-atab="verif">Верификация<span class="tabcount hidden" id="verifCount"></span></button>
         <button type="button" data-atab="official">Karacikov<span class="tabcount hidden" id="officialCount"></span></button>
         <button type="button" data-atab="bcast">Рассылка</button>
+        <button type="button" data-atab="nft" id="nftTab" class="hidden">NFT</button>
         <button type="button" data-atab="log" id="logTab" class="hidden">Журнал</button>
       </div>
       <div id="atab-users">
@@ -867,6 +988,17 @@
         </div>
         <div class="section-label" id="officialLabel">Чаты официального аккаунта</div>
         <div id="officialList"></div>
+      </div>
+      <div id="atab-nft" class="hidden">
+        <div class="box nft-head">
+          <div>
+            <h3 style="margin-bottom:4px">Выпуск NFT-подарков</h3>
+            <p class="admin-note" style="margin:0">Подарки бывают лимитированные (ограниченный тираж, номер «X из N») и без лимита. Любой подарок можно разрешить улучшать до уникального NFT с номером #, случайным фоном и узором разной редкости. Видит только основатель.</p>
+            <div class="muted" id="nftSummary" style="font-size:13px;margin-top:8px"></div>
+          </div>
+          <button class="btn" id="nftNew" type="button">+ Новый подарок</button>
+        </div>
+        <div id="nftList"></div>
       </div>
       <div id="atab-bcast" class="hidden">
         <div class="box">
@@ -1085,6 +1217,19 @@ function ruError(err){
   if (m.includes("exceeded the maximum") || m.includes("too large") || m.includes("payload")) return "Файл слишком большой (максимум 50 МБ)";
   if (m.includes("founder is protected")) return "Основателя нельзя изменить";
   if (m.includes("only founder")) return "Это может только основатель";
+  if (m.includes("insufficient coins")) return "Недостаточно монет K";
+  if (m.includes("sold out")) return "Подарок распродан";
+  if (m.includes("gift limit")) return "Вы уже купили максимум таких подарков";
+  if (m.includes("gift unavailable")) return "Подарок больше не продаётся";
+  if (m.includes("username taken")) return "Этот юзернейм уже занят";
+  if (m.includes("bad username")) return "Юзернейм: 3–32 символа, латиница, цифры, _ . -";
+  if (m.includes("username cooldown")) return "Юзернейм можно менять не чаще раза в час";
+  if (m.includes("supply below sold")) return "Тираж не может быть меньше уже проданного";
+  if (m.includes("supply required")) return "Укажите тираж лимитированного подарка";
+  if (m.includes("not upgradable")) return "Этот подарок нельзя улучшить";
+  if (m.includes("cannot convert")) return "Этот подарок нельзя обменять";
+  if (m.includes("bad amount")) return "Неверная сумма";
+  if (m.includes("not yourself")) return "Нельзя выбрать себя";
   if (m.includes("dm closed")) return "Пользователь закрыл личные сообщения для новых собеседников";
   if (m.includes("only owner")) return "Это может только владелец";
   if (m.includes("not a channel")) return "Галочку можно выдать только каналу";
@@ -1186,7 +1331,7 @@ function goView(v){
   if (v === "search"){ runSearch(); if (!isTouch) setTimeout(() => $("#searchInput").focus(), 50); }
   if (v === "chats") loadChats();
   if (v === "admin") loadAdmin();
-  if (v === "profile"){ refreshMe(); loadVerif(); refreshNotifUI(); loadMyStats(); }
+  if (v === "profile"){ refreshMe(); loadVerif(); refreshNotifUI(); loadMyStats(); loadWallet(); loadMyGifts(); }
 }
 document.querySelectorAll(".nav button").forEach(b => b.addEventListener("click", () => goView(b.dataset.view)));
 
@@ -1770,6 +1915,7 @@ async function loadAdmin(){
     ? "Вы основатель: назначаете и снимаете администраторов, блокируете пользователей, просматриваете переписки и удаляете сообщения. Все просмотры администрации записываются в журнал."
     : "Вы администратор: можете блокировать пользователей, сбрасывать профили, просматривать переписки и удалять сообщения. Каждый просмотр переписки записывается в журнал основателя.";
   $("#logTab").classList.toggle("hidden", me.role !== "founder");
+  $("#nftTab").classList.toggle("hidden", me.role !== "founder");
   if (!$("#atab-convs").classList.contains("hidden")) loadAdminConvs();
   if (!$("#atab-log").classList.contains("hidden")) loadAdminLog();
   const [st, us] = await Promise.all([sb.rpc("admin_stats"), sb.rpc("admin_list_users")]);
@@ -1805,6 +1951,7 @@ function renderAdminUsers(){
     const cv = el("button","btn sm ghost","Переписки"); cv.type = "button";
     cv.onclick = () => { convFilterUser = u; showAdminTab("convs"); };
     acts.appendChild(cv);
+    if (!u.is_system){ const cn = el("button","btn sm ghost","🪙 Монеты"); cn.type = "button"; cn.onclick = () => openCoinsAdmin(u); acts.appendChild(cn); }
     if (u.is_system){ meta.lastChild.textContent = "@" + u.username + " · служебный аккаунт для рассылок"; card.append(av, meta, acts); box.appendChild(card); continue; }
     if (u.role !== "founder" || me.role === "founder"){
       acts.appendChild(u.verified
@@ -1844,12 +1991,13 @@ function actBtn(text, style, action, okText, confirmFirst){
 let convFilterUser = null, adminConvs = [];
 function showAdminTab(t){
   document.querySelectorAll(".atabs button").forEach(b => b.classList.toggle("active", b.dataset.atab === t));
-  ["users","convs","reports","verif","official","bcast","log"].forEach(n => { const node = $("#atab-" + n); node.classList.toggle("hidden", n !== t); if (n === t){ node.classList.remove("view-anim"); void node.offsetWidth; node.classList.add("view-anim"); } });
+  ["users","convs","reports","verif","official","nft","bcast","log"].forEach(n => { const node = $("#atab-" + n); node.classList.toggle("hidden", n !== t); if (n === t){ node.classList.remove("view-anim"); void node.offsetWidth; node.classList.add("view-anim"); } });
   if (t === "convs") loadAdminConvs();
   if (t === "log") loadAdminLog();
   if (t === "verif") loadVerifList();
   if (t === "reports") loadReports();
   if (t === "official") loadOfficial();
+  if (t === "nft") loadNftAdmin();
 }
 document.querySelectorAll(".atabs button").forEach(b => b.addEventListener("click", () => {
   if (b.dataset.atab === "convs") convFilterUser = null;
@@ -3695,11 +3843,13 @@ async function userInfo(p){
     link.onclick = () => copyText(profileUrl(p.username), "Ссылка на профиль скопирована");
     card.appendChild(link);
     body.appendChild(card);
+    if (!p.is_system){ const shelf = el("div","gift-shelf"); body.appendChild(shelf); loadGiftShelf(shelf, p); }
   }, foot => {
     if (p.id !== me.id){
       if (!p.is_system){
         const bl = el("button","btn danger", myBlocks.has(p.id) ? "Разблокировать" : "Заблокировать"); bl.type = "button";
         bl.onclick = () => toggleBlock(p, bl); foot.appendChild(bl);
+        const gf = el("button","btn ghost","🎁 Подарить"); gf.type = "button"; gf.onclick = () => openGiftShop(p); foot.appendChild(gf);
       }
       if (!(openConv && !openConv.is_group && openConv.other_id === p.id && !$("#view-chats").classList.contains("hidden"))){
         const b = el("button","btn", p.is_system ? "Написать в поддержку" : "Написать"); b.type = "button";
@@ -4001,6 +4151,7 @@ function renderProfileExtras(){
   pfColor = me.profile_color || null; markColor(); markStatusPick();
   $("#dmClosed").checked = me.dm_policy === "nobody";
   $("#meLink").textContent = profileUrl(me.username).replace(/^https?:\/\//, "");
+  if (document.activeElement !== $("#unameInput")) $("#unameInput").value = me.username || "";
 }
 $("#profileForm").addEventListener("submit", async e => {
   e.preventDefault(); e.stopImmediatePropagation();
@@ -4086,6 +4237,564 @@ window.addEventListener("keydown", e => {
   if (e.key === "Escape" && !$(".menu") && !$(".lightbox") && !$("#modalRoot .overlay") && !editing && openConv
       && !$("#view-chats").classList.contains("hidden") && !$("#replyBar:not(.hidden)")) closeConv();
 }, true);
+
+/* ================== v9: юзернейм, монеты K, NFT-подарки ================== */
+
+/* ---------- монетка ---------- */
+function coinEl(){ const s = el("span","kcoin"); s.textContent = "K"; s.setAttribute("aria-label","K"); return s; }
+function coinAmount(n, cls){
+  const w = el("span","kamount" + (cls ? " " + cls : ""));
+  w.append(coinEl(), document.createTextNode(" " + fmtCoins(n)));
+  return w;
+}
+function fmtCoins(n){ return Number(n || 0).toLocaleString("ru-RU"); }
+let myBalance = 0;
+async function loadWallet(){
+  const { data, error } = await sb.rpc("my_wallet");
+  if (error || !data) return null;
+  myBalance = Number(data.balance || 0);
+  const b = $("#walletBalance"); if (b){ b.innerHTML = ""; b.appendChild(coinAmount(myBalance, "big")); }
+  return data;
+}
+
+/* ---------- картинка подарка ---------- */
+function giftArt(g, size){
+  const a = el("div","gift-art" + (size ? " " + size : "") + (g.upgraded ? " nft" : ""));
+  const bd = g.upgraded && g.backdrop ? g.backdrop : null;
+  const c1 = bd ? bd.c1 : g.bg1, c2 = bd ? bd.c2 : g.bg2;
+  a.style.background = g.upgraded
+    ? `radial-gradient(circle at 50% 42%, ${c2} 0%, ${c1} 72%)`
+    : `linear-gradient(145deg, ${c1}, ${c2})`;
+  if (g.upgraded && g.symbol && g.symbol.emoji){
+    const pat = el("div","gift-pattern");
+    for (let i = 0; i < 8; i++) pat.appendChild(el("span", null, g.symbol.emoji));
+    a.appendChild(pat);
+  }
+  if (g.image_url){ const img = el("img"); img.src = g.image_url; img.alt = ""; img.draggable = false; a.appendChild(img); }
+  else a.appendChild(el("div","gift-emoji", g.emoji || "🎁"));
+  if (g.upgraded && g.serial) a.appendChild(el("div","gift-ribbon nft", "#" + g.serial));
+  else if (g.limited && g.total_supply) a.appendChild(el("div","gift-ribbon", g.purchase_no ? g.purchase_no + " из " + g.total_supply : "из " + g.total_supply));
+  return a;
+}
+function giftTitle(g){ return g.name + (g.upgraded && g.serial ? " #" + g.serial : ""); }
+
+/* ---------- витрина подарков в профиле ---------- */
+async function loadGiftShelf(box, p){
+  const { data } = await sb.rpc("list_user_gifts", { target: p.id });
+  const list = data || [];
+  box.innerHTML = "";
+  if (!list.length) return;
+  box.appendChild(el("div","section-label","Подарки · " + list.length));
+  const grid = el("div","gift-grid");
+  list.slice(0, 24).forEach((g, i) => {
+    const it = el("button","gift-cell"); it.type = "button"; it.style.animationDelay = Math.min(i, 12) * 25 + "ms";
+    it.appendChild(giftArt(g));
+    it.appendChild(el("div","gift-cap", g.upgraded ? "#" + g.serial : (g.sender_name ? "от " + g.sender_name : (g.anonymous ? "анонимно" : ""))));
+    it.onclick = () => openGiftView(g, p);
+    grid.appendChild(it);
+  });
+  box.appendChild(grid);
+}
+
+/* ---------- просмотр подарка ---------- */
+function infoRow(k, v){ const r = el("div","ginfo-row"); r.append(el("span", null, k)); if (typeof v === "string") r.append(el("b", null, v)); else r.append(v); return r; }
+function openGiftView(g, owner){
+  const mine = !!g.is_mine;
+  openModal(g.upgraded ? "NFT-подарок" : "Подарок", body => {
+    const top = el("div","gift-view");
+    top.appendChild(giftArt(g, "xl"));
+    top.appendChild(el("div","gift-name", giftTitle(g)));
+    if (g.upgraded) top.appendChild(el("div","gift-tag","Уникальный коллекционный NFT"));
+    else if (g.limited) top.appendChild(el("div","gift-tag lim","Лимитированный · всего " + g.total_supply));
+    if (g.description) top.appendChild(el("div","muted gift-desc", g.description));
+    body.appendChild(top);
+    const info = el("div","ginfo");
+    info.appendChild(infoRow("Владелец", shownName(owner || me)));
+    if (g.sender_name) info.appendChild(infoRow(g.upgraded && !g.purchase_no ? "Получен от" : "От кого", g.sender_name + (g.sender_username ? " (@" + g.sender_username + ")" : "")));
+    else if (g.anonymous) info.appendChild(infoRow("От кого", "Аноним"));
+    info.appendChild(infoRow("Дата", new Date(g.created_at).toLocaleDateString("ru-RU",{day:"numeric",month:"long",year:"numeric"})));
+    if (g.limited && g.purchase_no) info.appendChild(infoRow("Выпуск", "№" + g.purchase_no + " из " + g.total_supply));
+    if (g.upgraded){
+      info.appendChild(infoRow("Номер", "#" + g.serial));
+      if (g.backdrop) info.appendChild(infoRow("Фон", g.backdrop.name + (g.backdrop.rarity != null ? " · " + g.backdrop.rarity + "%" : "")));
+      if (g.symbol) info.appendChild(infoRow("Узор", (g.symbol.emoji || "") + " " + g.symbol.name + (g.symbol.rarity != null ? " · " + g.symbol.rarity + "%" : "")));
+    }
+    body.appendChild(info);
+    if (mine && g.message) body.appendChild(el("div","gift-msg", "«" + g.message + "»"));
+  }, foot => {
+    if (mine){
+      const vis = el("button","btn ghost", g.shown ? "Скрыть из профиля" : "Показать в профиле"); vis.type = "button";
+      vis.onclick = async () => {
+        const { error } = await sb.rpc("gift_set_shown", { gift_id: g.id, v: !g.shown });
+        if (error) return toast(ruError(error));
+        g.shown = !g.shown; toast(g.shown ? "Подарок виден в профиле" : "Подарок скрыт из профиля"); closeModal(); loadMyGifts();
+      };
+      foot.appendChild(vis);
+      if (!g.upgraded && g.convert_value > 0){
+        const cv = el("button","btn ghost"); cv.type = "button"; cv.append(document.createTextNode("Обменять на "), coinAmount(g.convert_value));
+        cv.onclick = async () => {
+          if (cv.dataset.sure !== "1"){ cv.dataset.sure = "1"; cv.textContent = "Подарок исчезнет. Точно?"; return; }
+          const { error } = await sb.rpc("gift_convert", { gift_id: g.id });
+          if (error) return toast(ruError(error));
+          closeModal(); toast("Подарок обменян на " + fmtCoins(g.convert_value) + " K"); loadMyGifts(); loadWallet();
+        };
+        foot.appendChild(cv);
+      }
+      if (!g.upgraded && g.upgradable){
+        const up = el("button","btn"); up.type = "button";
+        up.append(document.createTextNode("✨ Улучшить до NFT" + (g.upgrade_price > 0 ? " за " : "")));
+        if (g.upgrade_price > 0) up.appendChild(coinAmount(g.upgrade_price));
+        up.onclick = async () => {
+          up.disabled = true;
+          const { data, error } = await sb.rpc("gift_upgrade", { gift_id: g.id });
+          up.disabled = false;
+          if (error) return toast(ruError(error));
+          Object.assign(g, { upgraded: true, serial: data.serial, backdrop: data.backdrop, symbol: data.symbol });
+          loadWallet(); loadMyGifts();
+          openGiftView(g, owner);
+          const art = $("#modalRoot .gift-view .gift-art"); if (art) art.classList.add("reveal");
+          toast("🎉 Получен NFT #" + data.serial);
+        };
+        foot.appendChild(up);
+      }
+      if (g.upgraded){
+        const tr = el("button","btn"); tr.type = "button"; tr.textContent = "Передать";
+        tr.onclick = () => {
+          pickUsers("Кому передать NFT", new Set([me.id]), async ids => {
+            if (ids.length !== 1) return toast("Выберите одного человека");
+            const { error } = await sb.rpc("gift_transfer", { gift_id: g.id, target: ids[0] });
+            if (error) return toast(ruError(error));
+            closeModal(); toast("NFT передан"); loadMyGifts();
+          }, body => body.appendChild(el("p","muted","Выберите одного человека. NFT перейдёт к нему насовсем.")));
+          const ok = $("#modalRoot .modal-foot .btn:not(.ghost)"); if (ok) ok.textContent = "Передать";
+        };
+        foot.appendChild(tr);
+      }
+    }
+    const c = el("button","btn ghost","Закрыть"); c.type = "button"; c.onclick = () => closeModal(); foot.appendChild(c);
+  });
+}
+
+/* ---------- магазин и отправка ---------- */
+async function openGiftShop(target){
+  const self = target.id === me.id;
+  const { body } = openModal(self ? "Купить подарок себе" : "Подарок для " + shownName(target), b => b.appendChild(el("div","muted","Загрузка…")), null, true);
+  const [{ data, error }] = await Promise.all([sb.rpc("list_gift_types", { include_all: false }), loadWallet()]);
+  body.innerHTML = "";
+  const bal = el("div","shop-balance"); bal.append(el("span", null, "Ваш баланс: "), coinAmount(myBalance)); body.appendChild(bal);
+  if (error){ body.appendChild(el("div","empty", ruError(error))); return; }
+  const list = data || [];
+  if (!list.length){ body.appendChild(el("div","empty","Подарков пока нет — скоро появятся 🎁")); return; }
+  const grid = el("div","gift-grid shop");
+  list.forEach((t, i) => {
+    const soldOut = t.limited && t.sold >= t.total_supply;
+    const limitHit = t.per_user_limit && t.my_bought >= t.per_user_limit;
+    const it = el("button","gift-cell shop" + (soldOut || limitHit ? " off" : "")); it.type = "button"; it.style.animationDelay = Math.min(i, 12) * 25 + "ms";
+    it.appendChild(giftArt(Object.assign({}, t, { purchase_no: null })));
+    it.appendChild(el("div","gift-cap name", t.name));
+    const pr = el("div","gift-price"); pr.appendChild(t.price > 0 ? coinAmount(t.price) : el("span", null, "Бесплатно")); it.appendChild(pr);
+    if (t.limited) it.appendChild(el("div","gift-left", soldOut ? "Распродано" : "Осталось " + (t.total_supply - t.sold) + " из " + t.total_supply));
+    else if (limitHit) it.appendChild(el("div","gift-left","Лимит исчерпан"));
+    it.onclick = () => { if (soldOut) return toast("Этот подарок распродан"); if (limitHit) return toast("Вы уже купили максимум таких подарков"); openGiftSend(t, target); };
+    grid.appendChild(it);
+  });
+  body.appendChild(grid);
+}
+function openGiftSend(t, target){
+  const self = target.id === me.id;
+  let msg, anon;
+  openModal(self ? "Купить себе" : "Подарить " + shownName(target), body => {
+    const v = el("div","gift-view");
+    v.appendChild(giftArt(Object.assign({}, t, { purchase_no: null }), "xl"));
+    v.appendChild(el("div","gift-name", t.name));
+    if (t.limited) v.appendChild(el("div","gift-tag lim", "Лимитированный · осталось " + (t.total_supply - t.sold) + " из " + t.total_supply));
+    if (t.description) v.appendChild(el("div","muted gift-desc", t.description));
+    const facts = [];
+    if (t.convert_value > 0) facts.push("можно обменять на " + fmtCoins(t.convert_value) + " K");
+    if (t.upgradable) facts.push("можно улучшить до уникального NFT" + (t.upgrade_price > 0 ? " за " + fmtCoins(t.upgrade_price) + " K" : ""));
+    if (t.sale_ends_at) facts.push("продаётся до " + new Date(t.sale_ends_at).toLocaleString("ru-RU",{day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"}));
+    if (facts.length) v.appendChild(el("div","hint", "Получатель " + facts.join(", ") + "."));
+    body.appendChild(v);
+    if (!self){
+      body.appendChild(el("label", null, "Подпись к подарку (видит только получатель)"));
+      msg = el("textarea"); msg.rows = 2; msg.maxLength = 200; msg.placeholder = "Например: С днём рождения!"; body.appendChild(msg);
+      anon = toggleRow("Отправить анонимно", "Получатель и другие не увидят, от кого подарок", false); body.appendChild(anon.el);
+    }
+    const bal = el("div","shop-balance"); bal.append(el("span", null, "Баланс: "), coinAmount(myBalance)); body.appendChild(bal);
+  }, foot => {
+    const c = el("button","btn ghost","Отмена"); c.type = "button"; c.onclick = () => openGiftShop(target);
+    const ok = el("button","btn"); ok.type = "button";
+    ok.append(document.createTextNode((self ? "Купить" : "Подарить") + (t.price > 0 ? " за " : " бесплатно")));
+    if (t.price > 0) ok.appendChild(coinAmount(t.price));
+    if (t.price > myBalance){ ok.disabled = true; foot.appendChild(el("div","hint", "Не хватает " + fmtCoins(t.price - myBalance) + " K")); }
+    ok.onclick = async () => {
+      ok.disabled = true;
+      const { error } = await sb.rpc("send_gift", { type_id: t.id, target: target.id, p_message: msg ? msg.value : null, p_anonymous: anon ? anon.cb.checked : false });
+      ok.disabled = false;
+      if (error) return toast(ruError(error));
+      closeModal(); confettiBurst();
+      toast(self ? "Подарок ваш! Он в «Моих подарках»" : "🎁 Подарок отправлен " + shownName(target));
+      loadWallet(); if (self) loadMyGifts();
+    };
+    foot.append(c, ok);
+  });
+}
+function confettiBurst(){
+  const box = el("div","confetti");
+  const em = ["🎉","✨","🎁","⭐","💫"];
+  for (let i = 0; i < 26; i++){
+    const s = el("span", null, em[i % em.length]);
+    s.style.left = Math.random() * 100 + "%"; s.style.animationDelay = Math.random() * .4 + "s"; s.style.fontSize = 16 + Math.random() * 16 + "px";
+    box.appendChild(s);
+  }
+  document.body.appendChild(box); setTimeout(() => box.remove(), 2400);
+}
+
+/* ---------- кабинет: кошелёк и мои подарки ---------- */
+async function loadMyGifts(){
+  const box = $("#myGifts"); if (!box || !me) return;
+  const { data } = await sb.rpc("list_user_gifts", { target: me.id });
+  const list = data || [];
+  box.innerHTML = "";
+  $("#myGiftsCount").textContent = list.length ? " · " + list.length : "";
+  if (!list.length){ box.appendChild(el("div","muted","Подарков пока нет. Их можно получить от друзей или купить себе.")); return; }
+  const grid = el("div","gift-grid");
+  list.forEach((g, i) => {
+    const it = el("button","gift-cell" + (g.shown ? "" : " hidden-gift")); it.type = "button"; it.style.animationDelay = Math.min(i, 12) * 25 + "ms";
+    it.appendChild(giftArt(g));
+    it.appendChild(el("div","gift-cap", g.upgraded ? "#" + g.serial : (g.sender_name ? "от " + g.sender_name : (g.anonymous ? "анонимно" : ""))));
+    if (!g.shown) it.appendChild(el("div","gift-hidden-ic","🙈"));
+    it.onclick = () => openGiftView(g, me);
+    grid.appendChild(it);
+  });
+  box.appendChild(grid);
+}
+const TX_KIND = { admin_grant: "Начисление от администрации", admin_take: "Списание администрацией", transfer_in: "Перевод от пользователя",
+  transfer_out: "Перевод", gift_buy: "Покупка подарка", gift_convert: "Обмен подарка", gift_upgrade: "Улучшение до NFT" };
+async function openWalletHistory(){
+  const { body } = openModal("История монет", b => b.appendChild(el("div","muted","Загрузка…")));
+  const data = await loadWallet();
+  body.innerHTML = "";
+  const hist = (data && data.history) || [];
+  if (!hist.length){ body.appendChild(el("div","empty","Операций пока не было")); return; }
+  for (const h of hist){
+    const r = el("div","tx-row");
+    const l = el("div","tx-meta");
+    l.append(el("b", null, TX_KIND[h.kind] || h.kind));
+    const sub = [h.note, h.actor && (h.kind === "transfer_in" ? "от " + h.actor : h.kind.startsWith("admin") ? h.actor : null),
+                 new Date(h.created_at).toLocaleString("ru-RU",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})].filter(Boolean).join(" · ");
+    l.append(el("div","muted", sub));
+    const amt = el("div","tx-amt " + (h.amount > 0 ? "plus" : "minus"), (h.amount > 0 ? "+" : "−") + fmtCoins(Math.abs(h.amount)));
+    amt.appendChild(coinEl());
+    r.append(l, amt); body.appendChild(r);
+  }
+}
+function openTransfer(){
+  pickUsers("Кому перевести монеты", new Set([me.id]), async (ids, chosen) => {
+    if (ids.length !== 1) return toast("Выберите одного человека");
+    const p = chosen.get(ids[0]);
+    let amt, note;
+    openModal("Перевод " + shownName(p), body => {
+      const bal = el("div","shop-balance"); bal.append(el("span", null, "Ваш баланс: "), coinAmount(myBalance)); body.appendChild(bal);
+      body.appendChild(el("label", null, "Сколько монет"));
+      amt = el("input"); amt.type = "number"; amt.min = "1"; amt.max = String(myBalance); amt.placeholder = "Например, 50"; body.appendChild(amt);
+      body.appendChild(el("label", null, "Комментарий (необязательно)"));
+      note = el("input"); note.maxLength = 100; body.appendChild(note);
+    }, foot => {
+      const c = el("button","btn ghost","Отмена"); c.type = "button"; c.onclick = () => closeModal();
+      const ok = el("button","btn","Перевести"); ok.type = "button";
+      ok.onclick = async () => {
+        const n = Math.floor(Number(amt.value));
+        if (!n || n < 1) return toast("Введите сумму");
+        if (n > myBalance) return toast("Недостаточно монет");
+        ok.disabled = true;
+        const { error } = await sb.rpc("transfer_coins", { target: p.id, amt: n, p_note: note.value });
+        ok.disabled = false;
+        if (error) return toast(ruError(error));
+        closeModal(); toast("Переведено " + fmtCoins(n) + " K → " + shownName(p)); loadWallet();
+      };
+      foot.append(c, ok);
+    });
+  });
+  const ok = $("#modalRoot .modal-foot .btn:not(.ghost)"); if (ok) ok.textContent = "Дальше";
+}
+$("#walletHistory").onclick = openWalletHistory;
+$("#walletSend").onclick = openTransfer;
+$("#walletShop").onclick = () => openGiftShop(me);
+
+/* ---------- смена юзернейма ---------- */
+$("#unameForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const msg = $("#unameMsg"), v = $("#unameInput").value.trim();
+  if (v === me.username) return show(msg, "Это ваш текущий юзернейм");
+  if (!/^[a-zA-Z0-9_.\-]{3,32}$/.test(v)) return show(msg, "3–32 символа: латиница, цифры, _ . -");
+  const btn = $("#unameForm .btn"); btn.disabled = true;
+  const { data, error } = await sb.rpc("change_username", { new_name: v });
+  btn.disabled = false;
+  if (error) return show(msg, ruError(error));
+  await sb.auth.refreshSession().catch(() => {});
+  me.username = data; people.set(me.id, me); renderProfile();
+  show(msg, "Готово! Теперь входите с логином " + data, "ok");
+  loadChats();
+});
+
+/* ---------- админ: монеты пользователя ---------- */
+async function openCoinsAdmin(u){
+  let amt, note, balEl;
+  const { body } = openModal("Монеты · " + shownName(u), b => {
+    balEl = el("div","shop-balance big"); balEl.textContent = "Загрузка…"; b.appendChild(balEl);
+    b.appendChild(el("label", null, "Количество"));
+    amt = el("input"); amt.type = "number"; amt.min = "1"; amt.placeholder = "Например, 100"; b.appendChild(amt);
+    const quick = el("div","quick-amts");
+    [10, 50, 100, 500, 1000].forEach(n => { const q = el("button","chip-btn", "+" + n); q.type = "button"; q.onclick = () => amt.value = n; quick.appendChild(q); });
+    b.appendChild(quick);
+    b.appendChild(el("label", null, "Причина (увидит пользователь)"));
+    note = el("input"); note.maxLength = 120; note.placeholder = "Например: победа в конкурсе"; b.appendChild(note);
+    b.appendChild(el("div","hint","Пользователь получит сообщение от Karacikov. Операция попадёт в журнал."));
+  }, foot => {
+    const c = el("button","btn ghost","Закрыть"); c.type = "button"; c.onclick = () => closeModal();
+    const take = el("button","btn danger","Списать"); take.type = "button";
+    const give = el("button","btn","Начислить"); give.type = "button";
+    const run = async sign => {
+      const n = Math.floor(Number(amt.value));
+      if (!n || n < 1) return toast("Введите количество");
+      give.disabled = take.disabled = true;
+      const { data, error } = await sb.rpc("admin_adjust_coins", { target: u.id, amt: sign * n, p_note: note.value });
+      give.disabled = take.disabled = false;
+      if (error) return toast(ruError(error));
+      balEl.innerHTML = ""; balEl.append(el("span", null, "Баланс: "), coinAmount(data));
+      toast(sign > 0 ? "Начислено " + fmtCoins(n) + " K" : "Списано " + fmtCoins(n) + " K");
+      amt.value = "";
+    };
+    give.onclick = () => run(1); take.onclick = () => run(-1);
+    foot.append(c, take, give);
+  });
+  const { data, error } = await sb.rpc("admin_get_balance", { target: u.id });
+  balEl.innerHTML = "";
+  if (error) balEl.textContent = ruError(error);
+  else balEl.append(el("span", null, "Баланс: "), coinAmount(data));
+}
+
+/* ================== ОСНОВАТЕЛЬ: выпуск NFT-подарков ================== */
+const DEFAULT_BACKDROPS = [
+  { name: "Сапфир", c1: "#1e3c72", c2: "#4a8fe7", weight: 30 },
+  { name: "Изумруд", c1: "#0b6e4f", c2: "#2ee59d", weight: 25 },
+  { name: "Аметист", c1: "#4b1d7a", c2: "#b07cff", weight: 20 },
+  { name: "Рубин", c1: "#7a0b16", c2: "#ff4d5e", weight: 15 },
+  { name: "Золото", c1: "#a86b00", c2: "#ffd65a", weight: 8 },
+  { name: "Оникс", c1: "#0a0a0a", c2: "#5a5a66", weight: 2 }
+];
+const DEFAULT_SYMBOLS = [
+  { name: "Звезда", emoji: "⭐", weight: 40 },
+  { name: "Сердце", emoji: "❤️", weight: 30 },
+  { name: "Молния", emoji: "⚡", weight: 20 },
+  { name: "Корона", emoji: "👑", weight: 9 },
+  { name: "Алмаз", emoji: "💎", weight: 1 }
+];
+let nftTypes = [];
+async function loadNftAdmin(){
+  const box = $("#nftList"); box.innerHTML = ""; box.appendChild(el("div","empty","Загрузка…"));
+  const { data, error } = await sb.rpc("list_gift_types", { include_all: true });
+  box.innerHTML = "";
+  if (error){ box.appendChild(el("div","empty", ruError(error))); return; }
+  nftTypes = data || [];
+  const totalSold = nftTypes.reduce((s, t) => s + t.sold, 0);
+  $("#nftSummary").textContent = nftTypes.length ? `Подарков: ${nftTypes.length} · продано всего: ${totalSold}` : "";
+  if (!nftTypes.length){ box.appendChild(el("div","empty","Подарков ещё нет. Выпустите первый — нажмите «+ Новый подарок».")); return; }
+  nftTypes.forEach((t, i) => {
+    const card = el("div","nft-card" + (t.active ? "" : " off")); card.style.animationDelay = Math.min(i, 10) * 25 + "ms";
+    card.appendChild(giftArt(Object.assign({}, t, { purchase_no: null })));
+    const meta = el("div","meta");
+    const n = el("div","name", t.name);
+    n.appendChild(el("span","role " + (t.limited ? "founder" : "admin"), t.limited ? "лимит" : "без лимита"));
+    if (!t.active) n.appendChild(el("span","role banned","скрыт"));
+    if (t.upgradable) n.appendChild(el("span","role owner","NFT"));
+    meta.appendChild(n);
+    const line = el("div","login");
+    line.append(t.price > 0 ? coinAmount(t.price) : el("span", null, "бесплатно"),
+      document.createTextNode(" · продано " + t.sold + (t.limited ? " из " + t.total_supply : "") + " · владельцев " + (t.owners || 0)));
+    meta.appendChild(line);
+    if (t.limited){ const bar = el("div","nft-bar"); const f = el("div"); f.style.width = Math.min(100, t.sold * 100 / t.total_supply) + "%"; bar.appendChild(f); meta.appendChild(bar); }
+    const acts = el("div","actions");
+    const ed = el("button","btn sm ghost","Настроить"); ed.type = "button"; ed.onclick = () => openNftEditor(t);
+    const tg = el("button","btn sm ghost", t.active ? "Скрыть" : "Вернуть в продажу"); tg.type = "button";
+    tg.onclick = async () => { const p = nftPayload(t); p.active = !t.active; const { error } = await sb.rpc("founder_save_gift_type", { p }); if (error) return toast(ruError(error)); toast(t.active ? "Снят с продажи" : "Снова в продаже"); loadNftAdmin(); };
+    const del = el("button","btn sm danger", t.sold ? "Убрать" : "Удалить"); del.type = "button";
+    del.onclick = async () => {
+      if (del.dataset.sure !== "1"){ del.dataset.sure = "1"; del.textContent = "Точно?"; return; }
+      const { data, error } = await sb.rpc("founder_delete_gift_type", { gid: t.id });
+      if (error) return toast(ruError(error));
+      toast(data === "deleted" ? "Подарок удалён" : "Уже есть владельцы — подарок снят с продажи, у людей он останется"); loadNftAdmin();
+    };
+    acts.append(ed, tg, del);
+    card.append(meta, acts); box.appendChild(card);
+  });
+}
+function nftPayload(t){
+  return { id: t.id || null, name: t.name, description: t.description || "", emoji: t.emoji || "", image_url: t.image_url || "",
+    bg1: t.bg1, bg2: t.bg2, price: Number(t.price || 0), limited: !!t.limited, total_supply: t.limited ? Number(t.total_supply || 0) || null : null,
+    per_user_limit: t.per_user_limit ? Number(t.per_user_limit) : null, convert_value: Number(t.convert_value || 0), active: t.active !== false,
+    sale_ends_at: t.sale_ends_at || null, upgradable: !!t.upgradable, upgrade_price: Number(t.upgrade_price || 0),
+    backdrops: t.backdrops || [], symbols: t.symbols || [], sort: Number(t.sort || 0) };
+}
+function pngImage(file, size){
+  return new Promise((resolve, reject) => {
+    const img = new Image(); const u = URL.createObjectURL(file);
+    img.onload = () => {
+      const k = Math.min(1, size / Math.max(img.width, img.height)), c = document.createElement("canvas");
+      c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(u); c.toBlob(b => b ? resolve(b) : reject(), "image/png");
+    };
+    img.onerror = () => { URL.revokeObjectURL(u); reject(); };
+    img.src = u;
+  });
+}
+function toLocalInput(iso){ if (!iso) return ""; const d = new Date(iso); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 16); }
+function openNftEditor(src){
+  const t = src ? JSON.parse(JSON.stringify(src)) : { name: "", description: "", emoji: "🎁", image_url: "", bg1: "#3390ec", bg2: "#7ab8ff",
+    price: 50, limited: false, total_supply: 1000, per_user_limit: null, convert_value: 40, active: true, sale_ends_at: null,
+    upgradable: true, upgrade_price: 25, backdrops: DEFAULT_BACKDROPS.map(x => ({ ...x })), symbols: DEFAULT_SYMBOLS.map(x => ({ ...x })), sort: 0, sold: 0 };
+  if (!t.total_supply) t.total_supply = 1000;
+  const f = {};
+  const field = (box, label, node, hint) => { box.appendChild(el("label", null, label)); box.appendChild(node); if (hint) box.appendChild(el("div","hint", hint)); return node; };
+  const num = (v, min) => { const i = el("input"); i.type = "number"; i.min = String(min ?? 0); i.value = v ?? ""; return i; };
+  const preview = el("div","nft-preview");
+  const refresh = () => {
+    t.name = f.name.value; t.emoji = f.emoji.value; t.bg1 = f.bg1.value; t.bg2 = f.bg2.value;
+    t.limited = f.limited.cb.checked; t.total_supply = Number(f.supply.value) || null; t.upgradable = f.upg.cb.checked;
+    f.supplyWrap.classList.toggle("hidden", !t.limited); f.upgWrap.classList.toggle("hidden", !t.upgradable);
+    preview.innerHTML = "";
+    const a = giftArt(Object.assign({}, t, { purchase_no: null })); a.classList.add("xl"); preview.appendChild(a);
+    preview.appendChild(el("div","gift-name", t.name || "Название"));
+    preview.appendChild(el("div","muted", (Number(f.price.value) > 0 ? fmtCoins(f.price.value) + " K" : "бесплатно") + (t.limited ? " · всего " + (t.total_supply || "?") : " · без лимита")));
+    if (t.upgradable && t.backdrops.length){
+      const sample = { ...t, upgraded: true, serial: 1, backdrop: t.backdrops[0], symbol: t.symbols[0] || null, purchase_no: null };
+      const s = giftArt(sample); preview.appendChild(el("div","hint","Так выглядит улучшенный NFT:")); preview.appendChild(s);
+    }
+  };
+  openModal(src ? "Настройка подарка" : "Новый NFT-подарок", body => {
+    const wrap = el("div","nft-editor");
+    const left = el("div","nft-form");
+    const sec = title => { const s = el("div","nft-sec"); s.appendChild(el("div","sub-label", title)); left.appendChild(s); return s; };
+    const s1 = sec("Основное");
+    f.name = field(s1, "Название", el("input")); f.name.maxLength = 40; f.name.value = t.name || ""; f.name.placeholder = "Например: Плюшевый мишка";
+    f.desc = field(s1, "Описание", el("textarea")); f.desc.rows = 2; f.desc.maxLength = 300; f.desc.value = t.description || "";
+    const er = el("div","row2-inputs");
+    const eb = el("div"); f.emoji = field(eb, "Эмодзи", el("input")); f.emoji.maxLength = 16; f.emoji.value = t.emoji || "";
+    const ib = el("div"); ib.appendChild(el("label", null, "или картинка (PNG)"));
+    const ia = el("div","av-actions"); ia.style.margin = "0";
+    const iu = el("button","btn sm ghost", t.image_url ? "Заменить" : "Загрузить"); iu.type = "button";
+    const ir = el("button","btn sm ghost","Убрать"); ir.type = "button"; ir.classList.toggle("hidden", !t.image_url);
+    const inp = el("input"); inp.type = "file"; inp.accept = "image/*"; inp.className = "hidden";
+    iu.onclick = () => inp.click();
+    inp.onchange = async () => {
+      const file = inp.files[0]; inp.value = ""; if (!file) return;
+      iu.disabled = true; iu.textContent = "Загрузка…";
+      try {
+        const blob = await pngImage(file, 320);
+        const path = `${me.id}/gift-${Date.now()}.png`;
+        const { error } = await sb.storage.from("avatars").upload(path, blob, { contentType: "image/png", upsert: true });
+        if (error) throw error;
+        t.image_url = sb.storage.from("avatars").getPublicUrl(path).data.publicUrl; ir.classList.remove("hidden"); refresh();
+      } catch(e){ toast("Не удалось загрузить картинку"); }
+      iu.disabled = false; iu.textContent = "Заменить";
+    };
+    ir.onclick = () => { t.image_url = ""; ir.classList.add("hidden"); refresh(); };
+    ia.append(iu, ir, inp); ib.appendChild(ia);
+    er.append(eb, ib); s1.appendChild(er);
+    const cr = el("div","row2-inputs");
+    const c1b = el("div"); f.bg1 = field(c1b, "Цвет фона 1", el("input")); f.bg1.type = "color"; f.bg1.value = t.bg1;
+    const c2b = el("div"); f.bg2 = field(c2b, "Цвет фона 2", el("input")); f.bg2.type = "color"; f.bg2.value = t.bg2;
+    cr.append(c1b, c2b); s1.appendChild(cr);
+
+    const s2 = sec("Продажа");
+    const pr = el("div","row2-inputs");
+    const pb = el("div"); f.price = field(pb, "Цена, K", num(t.price, 0));
+    const cb = el("div"); f.conv = field(cb, "Обмен обратно на K", num(t.convert_value, 0), "0 — обмен запрещён");
+    pr.append(pb, cb); s2.appendChild(pr);
+    f.limited = toggleRow("Лимитированный выпуск", "Ограниченное количество — как редкие подарки в Telegram", t.limited); s2.appendChild(f.limited.el);
+    f.supplyWrap = el("div");
+    f.supply = field(f.supplyWrap, "Всего экземпляров", num(t.total_supply, Math.max(1, t.sold || 1)), t.sold ? "Уже продано: " + t.sold + " — меньше поставить нельзя" : "");
+    s2.appendChild(f.supplyWrap);
+    const lr = el("div","row2-inputs");
+    const lb = el("div"); f.perUser = field(lb, "Лимит на одного покупателя", num(t.per_user_limit, 1), "Пусто — без ограничений"); f.perUser.placeholder = "без лимита";
+    const db = el("div"); f.ends = field(db, "Продажа до", el("input"), "Пусто — бессрочно"); f.ends.type = "datetime-local"; f.ends.value = toLocalInput(t.sale_ends_at);
+    lr.append(lb, db); s2.appendChild(lr);
+    const sr = el("div","row2-inputs");
+    const sb_ = el("div"); f.sort = field(sb_, "Порядок в магазине", num(t.sort, -999), "Меньше — выше");
+    sr.appendChild(sb_); s2.appendChild(sr);
+    f.active = toggleRow("В продаже", "Если выключить — подарок исчезнет из магазина, у владельцев он останется", t.active !== false); s2.appendChild(f.active.el);
+
+    const s3 = sec("Улучшение до NFT");
+    f.upg = toggleRow("Можно улучшить до уникального NFT", "Владелец получит номер #, случайный фон и узор разной редкости — и сможет передавать его", t.upgradable); s3.appendChild(f.upg.el);
+    f.upgWrap = el("div");
+    f.upPrice = field(f.upgWrap, "Цена улучшения, K", num(t.upgrade_price, 0));
+    const attrEditor = (title, key, cols) => {
+      const box = el("div","attr-box"); box.appendChild(el("div","sub-label", title));
+      const rows = el("div"); box.appendChild(rows);
+      const pcts = [];
+      const updPct = () => {
+        const total = t[key].reduce((s, x) => s + Math.max(0, Number(x.weight) || 0), 0) || 1;
+        pcts.forEach((sp, idx) => { const it = t[key][idx]; if (it) sp.textContent = (Math.max(0, Number(it.weight) || 0) * 100 / total).toFixed(1).replace(".0","") + "%"; });
+      };
+      const draw = () => {
+        rows.innerHTML = ""; pcts.length = 0;
+        t[key].forEach((item, idx) => {
+          const r = el("div","attr-row");
+          cols.forEach(c => {
+            const i = el("input"); i.type = c.type || "text"; i.value = item[c.k] ?? ""; i.placeholder = c.ph || ""; i.title = c.ph || "";
+            if (c.cls) i.className = c.cls;
+            i.oninput = () => { item[c.k] = c.type === "number" ? Number(i.value) : i.value; if (c.k === "weight") updPct(); else refresh(); };
+            r.appendChild(i);
+          });
+          const pc = el("span","attr-pct"); pcts.push(pc); r.appendChild(pc);
+          const x = el("button","attr-del","×"); x.type = "button"; x.onclick = () => { t[key].splice(idx, 1); draw(); refresh(); };
+          r.appendChild(x); rows.appendChild(r);
+        });
+        updPct();
+      };
+      draw();
+      const add = el("button","btn sm ghost","+ Добавить"); add.type = "button";
+      add.onclick = () => { t[key].push(key === "backdrops" ? { name: "Новый", c1: "#333333", c2: "#999999", weight: 10 } : { name: "Новый", emoji: "✨", weight: 10 }); draw(); refresh(); };
+      box.appendChild(add);
+      return box;
+    };
+    f.upgWrap.appendChild(attrEditor("Фоны (редкость = вес)", "backdrops", [
+      { k: "name", ph: "Название", cls: "w-name" }, { k: "c1", type: "color", ph: "Цвет 1" }, { k: "c2", type: "color", ph: "Цвет 2" }, { k: "weight", type: "number", ph: "Вес", cls: "w-num" }]));
+    f.upgWrap.appendChild(attrEditor("Узоры (редкость = вес)", "symbols", [
+      { k: "name", ph: "Название", cls: "w-name" }, { k: "emoji", ph: "Эмодзи", cls: "w-emo" }, { k: "weight", type: "number", ph: "Вес", cls: "w-num" }]));
+    s3.appendChild(f.upgWrap);
+
+    [f.name, f.emoji, f.bg1, f.bg2, f.price, f.supply].forEach(i => i.addEventListener("input", refresh));
+    [f.limited.cb, f.upg.cb].forEach(i => i.addEventListener("change", refresh));
+    const right = el("div","nft-side"); right.appendChild(el("div","sub-label","Предпросмотр")); right.appendChild(preview);
+    wrap.append(left, right); body.appendChild(wrap);
+    refresh();
+  }, foot => {
+    const c = el("button","btn ghost","Отмена"); c.type = "button"; c.onclick = () => closeModal();
+    const ok = el("button","btn", src ? "Сохранить" : "Выпустить подарок"); ok.type = "button";
+    ok.onclick = async () => {
+      refresh();
+      if (!t.name.trim()){ f.name.focus(); return toast("Введите название"); }
+      if (!t.emoji.trim() && !t.image_url) return toast("Добавьте эмодзи или картинку");
+      if (t.limited && !(t.total_supply > 0)) return toast("Укажите количество экземпляров");
+      if (t.upgradable && t.backdrops.some(b => !b.name || !(Number(b.weight) >= 0))) return toast("Проверьте фоны: у каждого нужно название и вес");
+      const p = nftPayload(Object.assign(t, {
+        description: f.desc.value, price: f.price.value, convert_value: f.conv.value, per_user_limit: f.perUser.value || null,
+        sale_ends_at: f.ends.value ? new Date(f.ends.value).toISOString() : null, active: f.active.cb.checked,
+        upgrade_price: f.upPrice.value, sort: f.sort.value
+      }));
+      ok.disabled = true;
+      const { error } = await sb.rpc("founder_save_gift_type", { p });
+      ok.disabled = false;
+      if (error) return toast(ruError(error));
+      closeModal(); toast(src ? "Подарок сохранён" : "🎉 Подарок выпущен и уже в магазине"); loadNftAdmin();
+    };
+    foot.append(c, ok);
+  }, true);
+}
+$("#nftNew").onclick = () => openNftEditor(null);
 
 /* ================== СТАРТ ================== */
 let currentUserId; // undefined до первого события
